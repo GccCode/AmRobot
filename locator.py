@@ -12,6 +12,9 @@ class AmazonPageLocator(object):
     CREATEACCOUNTSUBMIT = (By.ID, 'createAccountSubmit')
     SEARCH = (By.ID, 'twotabsearchtextbox')
     SUBMITKEYWORD = (By.XPATH, '//*[@id=\'nav-search\']/form/div[position()=2]/div/input')
+    PRIME = (By.ID, "nav-link-prime")
+    CART = (By.ID, "nav-cart")
+    ORDERS = (By.ID, "nav-orders")
 
 class AmazonAccountPageLocator(AmazonPageLocator):
     LOGO = 0
@@ -30,7 +33,8 @@ class AmazonSearchPageLocator(AmazonPageLocator):
 
 class AmazonRegisterPageLocator(AmazonPageLocator):
     USERENAME = (By.ID, 'ap_customer_name')
+    PRONUNCIATION = (By.ID, 'ap_customer_name_pronunciation')
     EMAILNAME = (By.ID, 'ap_email')
     PASSWORD = (By.ID, 'ap_password')
-    PASSWORDCHECK = (By.ID, 'app_password_check')
+    PASSWORDCHECK = (By.ID, 'ap_password_check')
     CONTINUESUBMIT = (By.ID, 'continue')

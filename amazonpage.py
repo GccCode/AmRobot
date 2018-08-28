@@ -6,6 +6,7 @@ import random
 from selenium import webdriver
 from baseaction import BaseAction
 from locator import AmazonPageLocator
+import configparser
 
 
 class AmazonPage(BaseAction):
@@ -13,12 +14,14 @@ class AmazonPage(BaseAction):
         self.driver = driver
         self.locator = AmazonPageLocator
 
-    def enter_us_amazon_page(self):
-        self.driver.get('https://www.amazon.com')
-        self.wait_page_loaded(*self.locator.LOGO)
-
-    def enter_jp_amazon_page(self):
-        self.driver.get('https://www.amazon.co.jp')
+    def enter_amazon_page(self):
+        cf = configparser.ConfigParser()
+        cf.read("account.txt")
+        country = cf.get("account", "country")
+        if country == 'us':
+            self.driver.get('https://www.amazon.com')
+        elif country == 'jp':
+            self.driver.get('https://www.amazon.co.jp')
         self.wait_page_loaded(*self.locator.LOGO)
 
     def wait_page_loaded(self, *locator):
@@ -29,36 +32,36 @@ class AmazonPage(BaseAction):
         self.wait_page_loaded(*self.locator.LOGO)
 
     def enter_account_page(self):
-        return False
+        self.click(*self.locator.ACCOUNT)
 
     def enter_wishlist(self):
         return False
 
     def enter_cart(self):
-        return False
+        self.click(*self.locator.CART)
 
     def enter_orders(self):
-        return False
+        self.click(*self.locator.ORDERS)
 
     def enter_prime(self):
-        return
+        self.click(*self.locator.PRIME)
 
     def random_walk(self):
         return
 
-    def is_search_box_displayed(self):
-        return
-
     def enter_register_page(self):
         result = random.randint(1,2)
-        self.hover(*self.locator.ACCOUNT)
-        self.random_sleep(1, 3)
         if result == 1:
-            self.click(*self.locator.SIGNIN)
+            self.hover(*self.locator.ACCOUNT)
             self.random_sleep(1, 3)
-            self.click(*self.locator.CREATEACCOUNTSUBMIT)
+            if result == 1:
+                self.click(*self.locator.SIGNIN)
+                self.random_sleep(1, 3)
+                self.click(*self.locator.CREATEACCOUNTSUBMIT)
+            else:
+                self.click(*self.locator.STARTHERE)
         else:
-            self.click(*self.locator.STARTHERE)
+            self.click(*self.locator.ACCOUNT)
 
     def search_asin(self, keyword):
         self.input("echo dot mount", *self.locator.SEARCH)
@@ -72,7 +75,7 @@ if __name__ == "__main__":
     driver.set_page_load_timeout(30)
     driver.set_script_timeout(30)
     page = AmazonPage(driver)
-    page.enter_us_amazon_page()
+    page.enter_amazon_page()
     time.sleep(5)
     page.search_asin("echo dot")
     time.sleep(5)

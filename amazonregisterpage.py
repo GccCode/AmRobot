@@ -2,35 +2,35 @@
 # -*- coding:utf-8 -*-
 
 import time
-import json
-import os
-import win32api
-import win32con
-import pyautogui
-from win32api import GetSystemMetrics
 import random
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.wait import WebDriverWait
-from baseaction import BaseAction
 from amazonpage import AmazonPage
 from locator import AmazonRegisterPageLocator
+import configparser
 
 
 class AmazonRegisterPage(AmazonPage):
     def __init__(self, driver):
-        self.drvier = driver
+        self.driver = driver
         self.locator = AmazonRegisterPageLocator
 
     def fill_in_form(self, *info):
-        self.input("username", *self.locator.USERENAME)
+        cf = configparser.ConfigParser()
+        cf.read("account.txt")
+        username = cf.get("account", "username")
+        country = cf.get("account", "country")
+        emailname = cf.get("account", "email")
+        password = cf.get("account", "password")
+        self.input(username, *self.locator.USERENAME)
         time.sleep(random.randint(2,5))
-        self.input("username@yahoo.com", *self.locator.EMAILNAME)
+        if country == 'jp':
+            pronunciation = cf.get("account", "pronunciation")
+            self.input(pronunciation, *self.locator.PRONUNCIATION)
+        self.input(emailname, *self.locator.EMAILNAME)
         time.sleep(random.randint(2, 5))
-        self.input("123456789", *self.locator.PASSWORD)
+        self.input(password, *self.locator.PASSWORD)
         time.sleep(random.randint(2, 5))
-        self.input("123456780", *self.locator.PASSWORDCHECK)
+        self.input(password, *self.locator.PASSWORDCHECK)
         time.sleep(random.randint(2, 5))
         self.click(*self.locator.CONTINUESUBMIT)
 
@@ -42,7 +42,7 @@ if __name__ == "__main__":
     driver.set_page_load_timeout(30)
     driver.set_script_timeout(30)
     page = AmazonPage(driver)
-    page.enter_us_amazon_page()
+    page.enter_amazon_page()
     time.sleep(5)
     page.search_asin("echo dot")
     time.sleep(5)
