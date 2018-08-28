@@ -51,10 +51,14 @@ class AmazonPage(BaseAction):
 
     def enter_register_page(self):
         result = random.randint(1,2)
+        self.hover(*self.locator.ACCOUNT)
+        self.random_sleep(1, 3)
         if result == 1:
-            self.hover(*self.locator.ACCOUNT)
-            self.random_sleep(1, 3)
             self.click(*self.locator.SIGNIN)
+            self.random_sleep(1, 3)
+            self.click(*self.locator.CREATEACCOUNTSUBMIT)
+        else:
+            self.click(*self.locator.STARTHERE)
 
     def search_asin(self, keyword):
         try:

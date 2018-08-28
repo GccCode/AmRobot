@@ -9,6 +9,7 @@ class AmazonPageLocator(object):
     ACCOUNT = (By.ID, 'nav-link-accountList')
     SIGNIN = (By.XPATH, '//*[@id=\'nav-flyout-ya-signin\']/a[position()=1]')
     STARTHERE = (By.XPATH, '//*[@id=\'nav-flyout-ya-newCust\']/a')
+    CREATEACCOUNTSUBMIT = (By.ID, 'createAccountSubmit')
     SEARCH = (By.ID, 'twotabsearchtextbox')
     SUBMITKEYWORD = (By.XPATH, '//*[@id=\'nav-search\']/form/div[position()=2]/div/input')
 
