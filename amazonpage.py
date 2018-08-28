@@ -61,43 +61,16 @@ class AmazonPage(BaseAction):
             self.click(*self.locator.STARTHERE)
 
     def search_asin(self, keyword):
-        try:
-            time.sleep(random.randint(3, 6))
-            # browser.execute_script('window.stop()')
-            input_box = self.driver.find_element(self.locator.SEARCH)
-        except Exception as e:
-            print(type(e))
-            print("找不到输入框")
-        else:
-            if input_box.is_displayed():
-                print("找到输入框")
-                self.driver.set_page_load_timeout(1)
-                self.driver.set_script_timeout(1)
-                for character in keyword:
-                    try:
-                        input_box.send_keys(character)
-                        time.sleep(random.randint(300, 800) / 1000)  # pause for 0.3 seconds
-                    except Exception as e:
-                        print(type(e))
-                        try:
-                            input_box.send_keys(character)
-                            time.sleep(random.randint(300, 800) / 1000)  # pause for 0.3 seconds
-                        except Exception as e:
-                            print(type(e))
-                            pass
-                        finally:
-                            pass
-                self.click(*self.locator.SUBMITKEYWORD)
-                self.driver.set_page_load_timeout(15)
-                self.driver.set_script_timeout(15)
+        self.input("echo dot mount", *self.locator.SEARCH)
+        self.click(*self.locator.SUBMITKEYWORD)
 
 if __name__ == "__main__":
     #option = webdriver.ChromeOptions()
     #option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
     #driver = webdriver.Chrome(chrome_options=option)
     driver = webdriver.Chrome()
-    driver.set_page_load_timeout(15)
-    driver.set_script_timeout(15)
+    driver.set_page_load_timeout(30)
+    driver.set_script_timeout(30)
     page = AmazonPage(driver)
     page.enter_us_amazon_page()
     time.sleep(5)
