@@ -1,8 +1,15 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+from selenium.webdriver.common.by import By
+
+
 class AmazonPageLocator(object):
-    LOGO = 0
+    LOGO = (By.ID, 'nav-logo')
+    ACCOUNT = (By.ID, 'nav-link-accountList')
+    SIGNIN = (By.XPATH, '//*[@id=\'nav-flyout-ya-signin\']/a[position()=1]')
+    STARTHERE = (By.XPATH, '//*[@id=\'nav-flyout-ya-newCust\']/a')
+    SEARCH = (By.ID, 'twotabsearchtextbox')
 
 class AmazonAccountPageLocator(AmazonPageLocator):
     LOGO = 0

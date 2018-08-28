@@ -3,6 +3,7 @@
 
 import time
 import os
+import sys
 import win32api
 import win32con
 import pyautogui
@@ -19,10 +20,19 @@ class BaseAction(object):
         self.screen_width = GetSystemMetrics(0)
         self.screen_heigth = GetSystemMetrics(1)
 
+    def log_location(self):
+        print(sys._getframe().f_code.co_filename + " : " + sys._getframe().f_code.co_name + " : " + sys._getframe().f_lineno)
+
     def hover(self, *locator):
-        element = self.find_element(*locator)
+        element = self.drivier.find_element(*locator)
         hover = ActionChains(self.driver).move_to_element(element)
         hover.perform()
+
+    def click(self, *locator):
+        self.driver.find_element(*locator).click()
+
+    def random_sleep(self, begin, end):
+        time.sleep(random.randint(begin, end) + random.randint(100,1000) / 1000)
 
     def mouse_move(self, x, y):
         move_time = random.randint(1, 20) * 1000 / 10000
