@@ -15,13 +15,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from baseaction import BaseAction
 from amazonpage import AmazonPage
-from locator import AmazonSignInPageLocator
+from locator import AmazonRegisterPageLocator
 
 
-class AmazonSignInPage(AmazonPage):
+class AmazonRegisterPage(AmazonPage):
     def __init__(self, driver):
         self.drvier = driver
-        self.locator = AmazonSignInPageLocator
+        self.locator = AmazonRegisterPageLocator
 
     def fill_in_form(self, *info):
         return

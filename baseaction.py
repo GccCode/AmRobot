@@ -24,7 +24,7 @@ class BaseAction(object):
         print(sys._getframe().f_code.co_filename + " : " + sys._getframe().f_code.co_name + " : " + sys._getframe().f_lineno)
 
     def hover(self, *locator):
-        element = self.drivier.find_element(*locator)
+        element = self.driver.find_element(*locator)
         hover = ActionChains(self.driver).move_to_element(element)
         hover.perform()
 

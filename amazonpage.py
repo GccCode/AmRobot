@@ -49,24 +49,26 @@ class AmazonPage(BaseAction):
     def is_search_box_displayed(self):
         return
 
-    def enter_sign_in_page(self):
-        self.hover(self.locator.ACCOUNT)
-        self.random_sleep(1, 3)
-        self.click(self.locator.SIGNIN)
+    def enter_register_page(self):
+        result = random.randint(1,2)
+        if result == 1:
+            self.hover(*self.locator.ACCOUNT)
+            self.random_sleep(1, 3)
+            self.click(*self.locator.SIGNIN)
 
     def search_asin(self, keyword):
         try:
             time.sleep(random.randint(3, 6))
             # browser.execute_script('window.stop()')
-            input_box = driver.find_element_by_id('twotabsearchtextbox')
+            input_box = self.driver.find_element(self.locator.SEARCH)
         except Exception as e:
             print(type(e))
             print("找不到输入框")
         else:
             if input_box.is_displayed():
                 print("找到输入框")
-                driver.set_page_load_timeout(1)
-                driver.set_script_timeout(1)
+                self.driver.set_page_load_timeout(1)
+                self.driver.set_script_timeout(1)
                 for character in keyword:
                     try:
                         input_box.send_keys(character)
@@ -81,17 +83,21 @@ class AmazonPage(BaseAction):
                             pass
                         finally:
                             pass
-                driver.set_page_load_timeout(15)
-                driver.set_script_timeout(15)
+                self.click(*self.locator.SUBMITKEYWORD)
+                self.driver.set_page_load_timeout(15)
+                self.driver.set_script_timeout(15)
 
 if __name__ == "__main__":
-    option = webdriver.ChromeOptions()
-    option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-    driver = webdriver.Chrome(chrome_options=option)
+    #option = webdriver.ChromeOptions()
+    #option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+    #driver = webdriver.Chrome(chrome_options=option)
+    driver = webdriver.Chrome()
     driver.set_page_load_timeout(15)
     driver.set_script_timeout(15)
     page = AmazonPage(driver)
     page.enter_us_amazon_page()
     time.sleep(5)
     page.search_asin("echo dot")
+    time.sleep(5)
+    page.enter_register_page()
     driver.quit()

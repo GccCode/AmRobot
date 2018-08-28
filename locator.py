@@ -10,6 +10,7 @@ class AmazonPageLocator(object):
     SIGNIN = (By.XPATH, '//*[@id=\'nav-flyout-ya-signin\']/a[position()=1]')
     STARTHERE = (By.XPATH, '//*[@id=\'nav-flyout-ya-newCust\']/a')
     SEARCH = (By.ID, 'twotabsearchtextbox')
+    SUBMITKEYWORD = (By.XPATH, '//*[@id=\'nav-search\']/form/div[position()=2]/div/input')
 
 class AmazonAccountPageLocator(AmazonPageLocator):
     LOGO = 0
@@ -26,5 +27,5 @@ class AmazonPaymentLocator(AmazonPageLocator):
 class AmazonSearchPageLocator(AmazonPageLocator):
     LOGO = 0
 
-class AmazonSignInPageLocator(AmazonPageLocator):
+class AmazonRegisterPageLocator(AmazonPageLocator):
     LOGO = 0
