@@ -2,20 +2,10 @@
 # -*- coding:utf-8 -*-
 
 import time
-import json
-import os
-import win32api
-import win32con
-import pyautogui
-from win32api import GetSystemMetrics
 import random
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.wait import WebDriverWait
 from baseaction import BaseAction
 from locator import AmazonPageLocator
-from amazonsigninpage import AmazonSignInPage
 
 
 class AmazonPage(BaseAction):
@@ -63,7 +53,6 @@ class AmazonPage(BaseAction):
         self.hover(self.locator.ACCOUNT)
         self.random_sleep(1, 3)
         self.click(self.locator.SIGNIN)
-        return AmazonSignInPage(self.driver)
 
     def search_asin(self, keyword):
         try:
@@ -104,4 +93,5 @@ if __name__ == "__main__":
     page = AmazonPage(driver)
     page.enter_us_amazon_page()
     time.sleep(5)
+    page.search_asin("echo dot")
     driver.quit()
