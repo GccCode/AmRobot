@@ -29,4 +29,8 @@ class AmazonSearchPageLocator(AmazonPageLocator):
     LOGO = 0
 
 class AmazonRegisterPageLocator(AmazonPageLocator):
-    LOGO = 0
+    USERENAME = (By.ID, 'ap_customer_name')
+    EMAILNAME = (By.ID, 'ap_email')
+    PASSWORD = (By.ID, 'ap_password')
+    PASSWORDCHECK = (By.ID, 'app_password_check')
+    CONTINUESUBMIT = (By.ID, 'continue')

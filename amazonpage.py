@@ -22,7 +22,7 @@ class AmazonPage(BaseAction):
         self.wait_page_loaded(*self.locator.LOGO)
 
     def wait_page_loaded(self, *locator):
-        return self.driver.find_element(*locator)
+        self.driver.find_element(*locator)
 
     def goto_top(self):
         self.scoll_to_top()
