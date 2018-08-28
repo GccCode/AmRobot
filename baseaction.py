@@ -60,10 +60,10 @@ class BaseAction(object):
                 self.driver.set_script_timeout(30)
 
     def random_sleep(self, begin, end):
-        time.sleep(random.randint(begin, end) + random.randint(100,1000) / 1000)
+        time.sleep(random.randint(begin, end) / 1000)
 
     def mouse_move(self, x, y):
-        move_time = random.randint(1, 20) * 1000 / 10000
+        move_time = random.randint(100, 1500) / 1000
         pyautogui.moveTo(x, y, move_time)
 
     def random_mouse_move(self, count):

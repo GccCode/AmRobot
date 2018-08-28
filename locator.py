@@ -15,6 +15,7 @@ class AmazonPageLocator(object):
     PRIME = (By.ID, "nav-link-prime")
     CART = (By.ID, "nav-cart")
     ORDERS = (By.ID, "nav-orders")
+    WISHLIST = (By.XPATH, '//*[@id=\'nav-flyout-wl-items\']/div/a[position()=1]/span')
 
 class AmazonAccountPageLocator(AmazonPageLocator):
     LOGO = 0

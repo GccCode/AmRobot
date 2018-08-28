@@ -35,7 +35,9 @@ class AmazonPage(BaseAction):
         self.click(*self.locator.ACCOUNT)
 
     def enter_wishlist(self):
-        return False
+        self.hover(*self.locator.ACCOUNT)
+        self.random_sleep(random.randint(1000, 2000) / 1000)
+        self.click(*self.locator.WISHLIST)
 
     def enter_cart(self):
         self.click(*self.locator.CART)
@@ -53,15 +55,18 @@ class AmazonPage(BaseAction):
         result = random.randint(1,2)
         if result == 1:
             self.hover(*self.locator.ACCOUNT)
-            self.random_sleep(1, 3)
+            self.random_sleep(random.randint(1000, 2000) / 1000)
+            result = random.randint(1, 2)
             if result == 1:
                 self.click(*self.locator.SIGNIN)
-                self.random_sleep(1, 3)
+                self.random_sleep(random.randint(1000, 2000) / 1000)
                 self.click(*self.locator.CREATEACCOUNTSUBMIT)
             else:
                 self.click(*self.locator.STARTHERE)
         else:
             self.click(*self.locator.ACCOUNT)
+            self.random_sleep(random.randint(1000, 2000) / 1000)
+            self.click(*self.locator.CREATEACCOUNTSUBMIT)
 
     def search_asin(self, keyword):
         self.input("echo dot mount", *self.locator.SEARCH)
