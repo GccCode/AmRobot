@@ -39,6 +39,8 @@ class AmazonPaymentPage(AmazonPage):
         self.click(*self.locator.ADDCARD_US)
         self.random_sleep(2000, 4000)
         self.wait_page_loaded(*self.locator.PAYMENTADDED)
+        self.random_sleep(2000, 4000)
+        self.click(*self.locator.USETHISADDRESS_US)
 
 
 if __name__ == "__main__":
