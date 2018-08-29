@@ -46,8 +46,7 @@ class AmazonPaymentPageLocator(AmazonPageLocator):
     VALIDYEAR_JP = (By.XPATH, '//select[contains(@id, \'-27\')]')
     ADDCARD_US = (By.XPATH, '//span[contains(@id, \'-32\')]/span/input[position()=1] ')
     ADDCARD_JP = (By.XPATH, '//span[contains(@id, \'-30\')]/span/input[position()=1] ')
-    USETHISADDRESS = (By.XPATH, '//div[contains(@id, \'-21\']/div/div[position()=2]/form/div/div/div/div/div/span[position()=2]/span/input[position()=1]')
-    PAYMENTADDED = (By.XPATH, '//*[@id=\'cpefront-mpo-widget\']/div[position()=1]/div[position()=2]/div/div/span')
+    USETHISADDRESS_US = (By.XPATH, '//div[contains(@id, \'-21\')]/div/div[position()=2]/form/div/div/div/div/div/span[position()=2]/span/input[position()=1]')
 
 
 class AmazonSearchPageLocator(AmazonPageLocator):
