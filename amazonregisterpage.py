@@ -4,7 +4,6 @@
 from selenium import webdriver
 from amazonpage import AmazonPage
 from locator import AmazonRegisterPageLocator
-import configparser
 
 
 class AmazonRegisterPage(AmazonPage):
@@ -12,19 +11,21 @@ class AmazonRegisterPage(AmazonPage):
         self.driver = driver
         self.locator = AmazonRegisterPageLocator
 
-    def fill_in_form(self, *info):
-        cf = configparser.ConfigParser()
-        cf.read("info.txt")
-        username = cf.get("account", "username")
-        country = cf.get("account", "country")
-        emailname = cf.get("account", "email")
-        password = cf.get("account", "password")
+    def sign_in(self, begin, end):
+        self.fill_in_form()
+        self.random_sleep(begin, end)
+
+    def fill_in_form(self):
+        username = self.cf.get("account", "username")
+        country = self.cf.get("account", "country")
+        emailname = self.cf.get("account", "email")
+        password = self.cf.get("account", "password")
         self.click(*self.locator.USERENAME)
         self.random_sleep(1000, 2000)
         self.input(username, *self.locator.USERENAME)
         self.random_sleep(1000, 3000)
         if country == 'jp':
-            pronunciation = cf.get("account", "pronunciation")
+            pronunciation = self.cf.get("account", "pronunciation")
             self.click(*self.locator.PRONUNCIATION)
             self.random_sleep(1000, 2000)
             self.input(pronunciation, *self.locator.PRONUNCIATION)
