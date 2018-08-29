@@ -57,14 +57,14 @@ class AmazonAddressPage(AmazonPage):
             self.random_sleep(1000, 2000)
 
         if country == "us":
-            self.click(*self.locator.ADDRESSSTATE)
-            self.random_sleep(1000, 2000)
-            self.input(state, *self.locator.ADDRESSSTATE)
-            self.random_sleep(1000, 2000)
-
             self.click(*self.locator.ADDRESSCITY)
             self.random_sleep(1000, 2000)
             self.input(city, *self.locator.ADDRESSCITY)
+            self.random_sleep(1000, 2000)
+
+            self.click(*self.locator.ADDRESSSTATE)
+            self.random_sleep(1000, 2000)
+            self.input(state, *self.locator.ADDRESSSTATE)
             self.random_sleep(1000, 2000)
 
             self.click(*self.locator.ADDRESSPOSTALCODE)
@@ -87,8 +87,8 @@ class AmazonAddressPage(AmazonPage):
         self.input(phonenumber, *self.locator.ADDRESSPHONE)
         self.random_sleep(1000, 2000)
 
-        # self.click(*self.locator.ADDADDRESSSUBMIT)
-        # self.wait_page_loaded(*self.locator.ADDADDRESS)
+        self.click(*self.locator.ADDADDRESSSUBMIT)
+        self.wait_page_loaded(*self.locator.ADDADDRESS)
 
 
 if __name__ == "__main__":
@@ -108,5 +108,12 @@ if __name__ == "__main__":
     page.random_sleep(3000, 5000)
     addresspage = AmazonAddressPage(driver)
     addresspage.add_address("bill")
+    page.random_sleep(3000, 5000)
+
+    page.enter_account_page()
+    page.random_sleep(3000, 5000)
+    accountpage.enter_address_page()
+    page.random_sleep(3000, 5000)
+    addresspage.add_address("fba")
     page.random_sleep(3000, 5000)
     driver.quit()
