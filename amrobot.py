@@ -62,9 +62,9 @@ if __name__ == "__main__":
                 accountpage = AmazonAccountPage(driver)
                 accountpage.enter_address_page(3000, 5000)
                 addresspage = AmazonAddressPage(driver)
-                if addresspage == "1":
+                if addressoption == "1":
                     addresspage.add_address("bill", 3000, 5000)
-                elif addresspage == "2":
+                elif addressoption == "2":
                     addresspage.add_address("fba", 3000, 5000)
             except Exception as err:
                 print(str(err))
