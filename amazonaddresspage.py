@@ -41,7 +41,7 @@ class AmazonAddressPage(AmazonPage):
                 self.fill_in_form_jp("bill", begin, end)
             elif country == "us":
                 self.fill_in_form_us("bill", begin, end)
-        elif country == "fba":
+        elif addresstype == "fba":
             if country == "jp":
                 self.fill_in_form_jp("fba", begin, end)
             elif country == "us":
