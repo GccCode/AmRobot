@@ -24,7 +24,9 @@ class AmazonAccountPage(AmazonPage):
         self.locator = AmazonAccountPageLocator
 
     def enter_address_page(self):
-        return
+        self.click(*self.locator.YOURADDRESS_US)
+        self.wait_page_loaded(self.locator.ADDADDRESS)
 
     def enter_payment_page(self):
-        return
+        self.click(*self.locator.PAYMENTOPTIONS_US)
+        self.wait_page_loaded(*self.locator.WALLETTITLE)

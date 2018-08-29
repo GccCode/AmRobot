@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import time
-import random
 from selenium import webdriver
 from amazonpage import AmazonPage
 from locator import AmazonRegisterPageLocator
@@ -16,7 +14,7 @@ class AmazonRegisterPage(AmazonPage):
 
     def fill_in_form(self, *info):
         cf = configparser.ConfigParser()
-        cf.read("account.txt")
+        cf.read("info.txt")
         username = cf.get("account", "username")
         country = cf.get("account", "country")
         emailname = cf.get("account", "email")
@@ -45,20 +43,20 @@ class AmazonRegisterPage(AmazonPage):
         self.click(*self.locator.CONTINUESUBMIT)
 
 if __name__ == "__main__":
-    #option = webdriver.ChromeOptions()
-    #option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-    #driver = webdriver.Chrome(chrome_options=option)
-    driver = webdriver.Chrome()
+    option = webdriver.ChromeOptions()
+    option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+    driver = webdriver.Chrome(chrome_options=option)
+    #driver = webdriver.Chrome()
     driver.set_page_load_timeout(30)
     driver.set_script_timeout(30)
     page = AmazonPage(driver)
     page.enter_amazon_page()
-    time.sleep(5)
+    page.random_sleep(3000, 5000)
     page.search_asin("echo dot")
-    time.sleep(5)
+    page.random_sleep(3000, 5000)
     page.enter_register_page()
-    time.sleep(5)
+    page.random_sleep(3000, 5000)
     registerpage = AmazonRegisterPage(driver)
     registerpage.fill_in_form()
-    time.sleep(5)
+    page.random_sleep(3000, 5000)
     driver.quit()

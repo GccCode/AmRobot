@@ -9,8 +9,6 @@ import win32con
 import pyautogui
 from win32api import GetSystemMetrics
 import random
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 
 
@@ -30,6 +28,11 @@ class BaseAction(object):
 
     def click(self, *locator):
         self.driver.find_element(*locator).click()
+
+    def select(self, index, *locator):
+        element = self.driver.find_element(*locator)
+        self.random_sleep(1000, 2000)
+        element.find_elements_by_tag_name("option")[index].click()
 
     def input(self, content, *locator):
         try:

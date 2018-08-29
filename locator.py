@@ -17,20 +17,42 @@ class AmazonPageLocator(object):
     ORDERS = (By.ID, "nav-orders")
     WISHLIST = (By.XPATH, '//*[@id=\'nav-flyout-wl-items\']/div/a[position()=1]/span')
 
+
 class AmazonAccountPageLocator(AmazonPageLocator):
-    LOGO = 0
+    YOURADDRESS_US = (By.XPATH, '//*[@id=\'a-page\']/div[position()=3]/div/div[position()=2]/div[position()=1]/a/div/div/div')
+    YOURADDRESS_JP = (By.XPATH, '//*[@id=\'a-page\']/div[position()=2]/div/div[position()=3]/div[position()=1]/a/div/div/div')
+    PAYMENTOPTIONS_US = (By.XPATH, '//*[@id=\'a-page\']/div[position()=3]/div/div[position()=2]/div[position()=2]/a/div/div/div')
+    PAYMENTOPTIONS_JP = (By.XPATH, '//*[@id=\'a-page\']/div[position()=2]/div/div[position()=3]/div[position()=2]/a/div/div/div')
+    ADDADDRESS = (By.ID, 'ya-myab-plug-address-icon')
+    WALLETTITLE = (By.ID, 'walletTitleRow')
+
 
 class AmazonAsinPageLocator(AmazonPageLocator):
     LOGO = 0
 
+
 class AmazonCartPageLocator(AmazonPageLocator):
     LOGO = 0
 
-class AmazonPaymentLocator(AmazonPageLocator):
-    LOGO = 0
+
+class AmazonPaymentPageLocator(AmazonPageLocator):
+    CARDHOLDER_US = (By.XPATH, '//input[contains(@id, \'-24\')]')
+    CARDHOLDER_JP = (By.XPATH, '//input[contains(@id, \'-22\')]')
+    CARDNUMBER_US = (By.XPATH, '//input[contains(@id, \'-25\')]')
+    CARDNUMBER_JP = (By.XPATH, '//input[contains(@id, \'-23\')]')
+    VALIDMON_US = (By.XPATH, '//select[contains(@id, \'-27\')]')
+    VALIDMON_JP = (By.XPATH, '//select[contains(@id, \'-25\')]')
+    VALIDYEAR_US = (By.XPATH, '//select[contains(@id, \'-29\')]')
+    VALIDYEAR_JP = (By.XPATH, '//select[contains(@id, \'-27\')]')
+    ADDCARD_US = (By.XPATH, '//span[contains(@id, \'-32\')]/span/input[position()=1] ')
+    ADDCARD_JP = (By.XPATH, '//span[contains(@id, \'-30\')]/span/input[position()=1] ')
+    USETHISADDRESS = (By.XPATH, '//div[contains(@id, \'-21\']/div/div[position()=2]/form/div/div/div/div/div/span[position()=2]/span/input[position()=1]')
+    PAYMENTADDED = (By.XPATH, '//*[@id=\'cpefront-mpo-widget\']/div[position()=1]/div[position()=2]/div/div/span')
+
 
 class AmazonSearchPageLocator(AmazonPageLocator):
     LOGO = 0
+
 
 class AmazonRegisterPageLocator(AmazonPageLocator):
     USERENAME = (By.ID, 'ap_customer_name')
@@ -39,3 +61,30 @@ class AmazonRegisterPageLocator(AmazonPageLocator):
     PASSWORD = (By.ID, 'ap_password')
     PASSWORDCHECK = (By.ID, 'ap_password_check')
     CONTINUESUBMIT = (By.ID, 'continue')
+
+
+class AmazonAddressPageLocator(AmazonPageLocator):
+    ADDADDRESS = (By.ID, 'ya-myab-plug-address-icon')
+    FULLNAME = (By.ID, 'address-ui-widgets-enterAddressFullName')
+    ADDRESSPHONE = (By.ID, 'address-ui-widgets-enterAddressPhoneNumber')
+    ADDRESSLINE1 = (By.ID, 'address-ui-widgets-enterAddressLine1')
+    ADDRESSLINE2 = (By.ID, 'address-ui-widgets-enterAddressLine2')
+    ADDADDRESSSUBMIT = (By.XPATH, '//*[@id=\'address-ui-widgets-enterAddressFormContainer\']/span[position()=1]/span/input[position()=1]')
+    ## US
+    ADDRESSCITY = (By.ID, 'address-ui-widgets-enterAddressCity')
+    ADDRESSSTATE = (By.ID, 'address-ui-widgets-enterAddressStateOrRegion')
+    ADDRESSPOSTALCODE = (By.ID, 'address-ui-widgets-enterAddressPostalCode')
+    ## JP
+    ADDRESSPOSTALCODEONE = (By.ID, 'address-ui-widgets-enterAddressPostalCodeOne')
+    ADDRESSPOSTALCODETWO = (By.ID, 'address-ui-widgets-enterAddressPostalCodeTwo')
+    ADDRESSSTATESELECT = (By.ID, 'address-ui-widgets-enterAddressStateOrRegion-dropdown-nativeId')
+    ADDRESSSTATEOPTIONS_ZH = ['北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '茨城県', '栃木県', '群馬県', \
+                              '埼玉県', '千葉県', '東京都', '神奈川県', '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', \
+                              '岐阜県', '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県', \
+                              '鳥取県', '島根県', '岡山県', '広島県', '山口県', '徳島県', '香川県', '愛媛県', '高知県', '福岡県', \
+                              '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県']
+    ADDRESSSTATEOPTIONS_JP = ['Hokkaido', 'Aomori', 'Iwate', 'Miyagi', 'Akita', 'Yamagata', 'Fukushima', 'Ibaraki', 'Tochigi', 'Gunma', \
+                              'Saitama', 'Chiba', 'Tokyo', 'Kanagawa', 'Niigata', 'Toyama', 'Ishikawa', 'Fukui', 'Yamanashi', 'Nagano', \
+                              'Gifu', 'Shizuoka', 'Aichi', 'Mie', 'Shiga', 'Kyoto', 'Osaka', 'Hyogo', 'Nara', 'Wakayama', \
+                              'Tottori', 'Shimane', 'Okayama', 'Hiroshima', 'Yamaguchi', 'Tokushima', 'Kagawa', 'Ehime', 'Kochi', 'Fukuoka', \
+                              'Saga', 'Nagasaki', 'Kumamoto', 'Oita', 'Miyazaki', 'Kagoshima', 'Okinawas']
