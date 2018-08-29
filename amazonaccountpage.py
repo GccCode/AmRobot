@@ -12,7 +12,13 @@ class AmazonAccountPage(AmazonPage):
         self.locator = AmazonAccountPageLocator
 
     def enter_address_page(self):
-        self.click(*self.locator.YOURADDRESS_US)
+        cf = configparser.ConfigParser()
+        cf.read("info.txt")
+        country = cf.get("account", "country")
+        if country == "us":
+            self.click(*self.locator.YOURADDRESS_US)
+        elif country == "jp":
+            self.click(*self.locator.YOURADDRESS_JP)
         self.random_sleep(3000, 5000)
         self.wait_page_loaded(*self.locator.ADDADDRESS)
 
