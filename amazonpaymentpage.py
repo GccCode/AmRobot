@@ -20,25 +20,46 @@ class AmazonPaymentPage(AmazonPage):
         cardnum = cf.get("cardinfo", "cardnumber")
         validmonth = cf.get("cardinfo", "month")
         validyear = cf.get("cardinfo", "year")
+        country = cf.get("account", "country")
 
-        self.click(*self.locator.CARDHOLDER_US)
-        self.random_sleep(1000, 2000)
-        self.input(fullname, *self.locator.CARDHOLDER_US)
-        self.random_sleep(1000, 2000)
+        if country == "us":
+            self.click(*self.locator.CARDHOLDER_US)
+            self.random_sleep(1000, 2000)
+            self.input(fullname, *self.locator.CARDHOLDER_US)
+            self.random_sleep(1000, 2000)
 
-        self.click(*self.locator.CARDNUMBER_US)
-        self.random_sleep(1000, 2000)
-        self.input(cardnum, *self.locator.CARDNUMBER_US)
-        self.random_sleep(1000, 2000)
+            self.click(*self.locator.CARDNUMBER_US)
+            self.random_sleep(1000, 2000)
+            self.input(cardnum, *self.locator.CARDNUMBER_US)
+            self.random_sleep(1000, 2000)
 
-        self.select((int(validmonth) - 1), *self.locator.VALIDMON_US)
-        self.random_sleep(1000, 2000)
-        self.select((int(validyear) - 2018), *self.locator.VALIDYEAR_US)
-        self.random_sleep(1000, 2000)
+            self.select((int(validmonth) - 1), *self.locator.VALIDMON_US)
+            self.random_sleep(1000, 2000)
+            self.select((int(validyear) - 2018), *self.locator.VALIDYEAR_US)
+            self.random_sleep(1000, 2000)
 
-        self.click(*self.locator.ADDCARD_US)
-        self.random_sleep(2000, 4000)
-        self.click(*self.locator.USETHISADDRESS_US)
+            self.click(*self.locator.ADDCARD_US)
+            self.random_sleep(2000, 4000)
+            self.click(*self.locator.USETHISADDRESS_US)
+        elif country == "jp":
+            self.click(*self.locator.CARDHOLDER_JP)
+            self.random_sleep(1000, 2000)
+            self.input(fullname, *self.locator.CARDHOLDER_JP)
+            self.random_sleep(1000, 2000)
+
+            self.click(*self.locator.CARDNUMBER_JP)
+            self.random_sleep(1000, 2000)
+            self.input(cardnum, *self.locator.CARDNUMBER_JP)
+            self.random_sleep(1000, 2000)
+
+            self.select((int(validmonth) - 1), *self.locator.VALIDMON_JP)
+            self.random_sleep(1000, 2000)
+            self.select((int(validyear) - 2018), *self.locator.VALIDYEAR_JP)
+            self.random_sleep(1000, 2000)
+
+            self.click(*self.locator.ADDCARD_JP)
+            self.random_sleep(2000, 4000)
+            self.click(*self.locator.USETHISADDRESS_JP)
 
 
 if __name__ == "__main__":
