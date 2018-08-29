@@ -36,7 +36,7 @@ class AmazonPaymentPage(AmazonPage):
         self.select((int(validyear) - 2018), *self.locator.VALIDYEAR_US)
         self.random_sleep(1000, 2000)
 
-        self.click(*self.locator.ADDCARD)
+        self.click(*self.locator.ADDCARD_US)
         self.random_sleep(2000, 4000)
         self.wait_page_loaded(*self.locator.PAYMENTADDED)
 
