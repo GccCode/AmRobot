@@ -21,6 +21,7 @@ if __name__ == "__main__":
         print("2 - 自动登陆账号")
         print("3 - 自动添加物流地址")
         print("4 - 自动添加信用卡\n")
+        print("5 - 打开浏览器")
 
         options = input("请输入你的选择： ")
         if options == "0":
@@ -89,5 +90,11 @@ if __name__ == "__main__":
                 print(str(err))
             finally:
                 driver.quit()
+        elif options == "5":
+            option = webdriver.ChromeOptions()
+            option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+            driver = webdriver.Chrome(chrome_options=option)
+            input("输入任意内容关闭浏览器!!!")
+            driver.quit()
         else:
             print("你的输入有误，请重新输入对应测试项的数字号码！！！！")
