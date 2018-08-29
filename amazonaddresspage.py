@@ -15,7 +15,7 @@ class AmazonAddressPage(AmazonPage):
     def add_address(self, addresstype):
         self.click(*self.locator.ADDADDRESS)
         self.random_sleep(1000, 2000)
-        self.fill_in_form(self, addresstype)
+        self.fill_in_form(addresstype)
 
     def fill_in_form(self, addresstype):
         cf = configparser.ConfigParser()
@@ -57,14 +57,14 @@ class AmazonAddressPage(AmazonPage):
             self.random_sleep(1000, 2000)
 
         if country == "us":
-            self.click(*self.locator.ADDRESSCITY)
-            self.random_sleep(1000, 2000)
-            self.input((city, *self.locator.ADDRESSCITY))
-            self.random_sleep(1000, 2000)
-
             self.click(*self.locator.ADDRESSSTATE)
             self.random_sleep(1000, 2000)
             self.input(state, *self.locator.ADDRESSSTATE)
+            self.random_sleep(1000, 2000)
+
+            self.click(*self.locator.ADDRESSCITY)
+            self.random_sleep(1000, 2000)
+            self.input(city, *self.locator.ADDRESSCITY)
             self.random_sleep(1000, 2000)
 
             self.click(*self.locator.ADDRESSPOSTALCODE)
@@ -72,11 +72,6 @@ class AmazonAddressPage(AmazonPage):
             self.input(postalcode, *self.locator.ADDRESSPOSTALCODE)
             self.random_sleep(1000, 2000)
         elif country == "jp":
-            self.click(*self.locator.ADDRESSCITY)
-            self.random_sleep(1000, 2000)
-            self.input((city, *self.locator.ADDRESSCITY))
-            self.random_sleep(1000, 2000)
-
             self.click(*self.locator.ADDRESSSTATE)
             self.random_sleep(1000, 2000)
             self.input(state, *self.locator.ADDRESSSTATE)

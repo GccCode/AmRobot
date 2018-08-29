@@ -25,7 +25,8 @@ class AmazonAccountPage(AmazonPage):
 
     def enter_address_page(self):
         self.click(*self.locator.YOURADDRESS_US)
-        self.wait_page_loaded(self.locator.ADDADDRESS)
+        self.random_sleep(3000, 5000)
+        self.wait_page_loaded(*self.locator.ADDADDRESS)
 
     def enter_payment_page(self):
         self.click(*self.locator.PAYMENTOPTIONS_US)
