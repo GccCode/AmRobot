@@ -12,6 +12,21 @@ class AmazonAddressPage(AmazonPage):
         self.driver = driver
         self.locator = AmazonAddressPageLocator
 
+    def locator_state_jp(self, state):
+        index = 1
+        if state.encode('UTF-8').isalpha():
+            for s in self.locator.ADDRESSSTATEOPTIONS_EN:
+                if state == s:
+                    print(state + " : " + str(index))
+                    return index
+                index = index + 1
+        else:
+            for s in self.locator.ADDRESSSTATEOPTIONS_ZH:
+                if state == s:
+                    return index
+                index = index + 1
+        return 0
+
     def add_address(self, addresstype):
         self.click(*self.locator.ADDADDRESS)
         self.random_sleep(1000, 2000)
@@ -24,21 +39,31 @@ class AmazonAddressPage(AmazonPage):
         if addresstype == "bill":
             fullname = cf.get("bill_address", "fullname")
             line1 = cf.get("bill_address", "addressline1")
-            line2 = cf.get("bill_address", "addressline2")
             phonenumber = cf.get("bill_address", "phone")
             if country == "us":
                 city = cf.get("bill_address", "city")
                 state = cf.get("bill_address", "state")
                 postalcode = cf.get("bill_address", "postalcode")
+            elif country == "jp":
+                state = cf.get("bill_address", "state")
+                state_index = self.locator_state_jp(state)
+                line2 = cf.get("bill_address", "addressline2")
+                postalcode1 = cf.get("bill_address", "postalcode1")
+                postalcode2 = cf.get("bill_address", "postalcode2")
         elif addresstype == "fba":
             fullname = cf.get("fba_address", "fullname")
             line1 = cf.get("fba_address", "addressline1")
-            line2 = cf.get("fba_address", "addressline2")
             phonenumber = cf.get("fba_address", "phone")
             if country == "us":
                 city = cf.get("fba_address", "city")
                 state = cf.get("fba_address", "state")
                 postalcode = cf.get("fba_address", "postalcode")
+            elif country == "jp":
+                state = cf.get("fba_address", "state")
+                state_index = self.locator_state_jp(state)
+                line2 = cf.get("fba_address", "addressline2")
+                postalcode1 = cf.get("fba_address", "postalcode1")
+                postalcode2 = cf.get("fba_address", "postalcode2")
 
         self.click(*self.locator.FULLNAME)
         self.random_sleep(1000, 2000)
@@ -72,14 +97,17 @@ class AmazonAddressPage(AmazonPage):
             self.input(postalcode, *self.locator.ADDRESSPOSTALCODE)
             self.random_sleep(1000, 2000)
         elif country == "jp":
-            self.click(*self.locator.ADDRESSSTATE)
+            self.click(*self.locator.ADDRESSPOSTALCODEONE)
             self.random_sleep(1000, 2000)
-            self.input(state, *self.locator.ADDRESSSTATE)
+            self.input(postalcode1, *self.locator.ADDRESSPOSTALCODEONE)
             self.random_sleep(1000, 2000)
 
-            self.click(*self.locator.ADDRESSPOSTALCODE)
+            self.click(*self.locator.ADDRESSPOSTALCODETWO)
             self.random_sleep(1000, 2000)
-            self.input(postalcode, *self.locator.ADDRESSPOSTALCODE)
+            self.input(postalcode2, *self.locator.ADDRESSPOSTALCODETWO)
+            self.random_sleep(1000, 2000)
+
+            self.select(state_index, *self.locator.ADDRESSSTATESELECT)
             self.random_sleep(1000, 2000)
 
         self.click(*self.locator.ADDRESSPHONE)
