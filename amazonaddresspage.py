@@ -69,20 +69,6 @@ class AmazonAddressPage(AmazonPage):
         self.input(fullname, *self.locator.FULLNAME)
         self.random_sleep(1000, 2000)
 
-        if country == "jp":
-            self.click(*self.locator.ADDRESSPOSTALCODEONE)
-            self.random_sleep(1000, 2000)
-            self.input(postalcode1, *self.locator.ADDRESSPOSTALCODEONE)
-            self.random_sleep(1000, 2000)
-
-            self.click(*self.locator.ADDRESSPOSTALCODETWO)
-            self.random_sleep(1000, 2000)
-            self.input(postalcode2, *self.locator.ADDRESSPOSTALCODETWO)
-            self.random_sleep(1000, 2000)
-
-            self.select(state_index, *self.locator.ADDRESSSTATESELECT)
-            self.random_sleep(1000, 2000)
-
         self.click(*self.locator.ADDRESSLINE1)
         self.random_sleep(1000, 2000)
         self.input(line1, *self.locator.ADDRESSLINE1)
@@ -108,6 +94,19 @@ class AmazonAddressPage(AmazonPage):
             self.click(*self.locator.ADDRESSPOSTALCODE)
             self.random_sleep(1000, 2000)
             self.input(postalcode, *self.locator.ADDRESSPOSTALCODE)
+            self.random_sleep(1000, 2000)
+        elif country == "jp":
+            self.click(*self.locator.ADDRESSPOSTALCODEONE)
+            self.random_sleep(1000, 2000)
+            self.input(postalcode1, *self.locator.ADDRESSPOSTALCODEONE)
+            self.random_sleep(1000, 2000)
+
+            self.click(*self.locator.ADDRESSPOSTALCODETWO)
+            self.random_sleep(1000, 2000)
+            self.input(postalcode2, *self.locator.ADDRESSPOSTALCODETWO)
+            self.random_sleep(1000, 2000)
+
+            self.select(state_index, *self.locator.ADDRESSSTATESELECT)
             self.random_sleep(1000, 2000)
 
         self.click(*self.locator.ADDRESSPHONE)
