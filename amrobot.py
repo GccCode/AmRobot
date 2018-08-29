@@ -26,12 +26,12 @@ if __name__ == "__main__":
         if options == "0":
             status = 0
         elif options == "1":
-            option = webdriver.ChromeOptions()
-            option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-            driver = webdriver.Chrome(chrome_options=option)
+            # option = webdriver.ChromeOptions()
+            # option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+            # driver = webdriver.Chrome(chrome_options=option)
+            driver = webdriver.Chrome()
             driver.set_page_load_timeout(30)
             driver.set_script_timeout(30)
-            # driver = webdriver.Chrome()
             try:
                 page = AmazonPage(driver)
                 page.enter_amazon_page(3000, 5000)
