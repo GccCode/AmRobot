@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
+from selenium import webdriver
 from amazonpage import AmazonPage
 from locator import AmazonPaymentPageLocator
+from amazonaccountpage import AmazonAccountPage
 import configparser
 
 
@@ -37,3 +39,24 @@ class AmazonPaymentPage(AmazonPage):
         self.click(*self.locator.ADDCARD)
         self.random_sleep(2000, 4000)
         self.wait_page_loaded(*self.locator.PAYMENTADDED)
+
+
+if __name__ == "__main__":
+    option = webdriver.ChromeOptions()
+    option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+    driver = webdriver.Chrome(chrome_options=option)
+    #driver = webdriver.Chrome()
+    driver.set_page_load_timeout(30)
+    driver.set_script_timeout(30)
+    page = AmazonPage(driver)
+    page.enter_amazon_page()
+    page.random_sleep(3000, 5000)
+    page.enter_account_page()
+    page.random_sleep(3000, 5000)
+    accountpage = AmazonAccountPage(driver)
+    accountpage.enter_address_page()
+    page.random_sleep(3000, 5000)
+    paymentpage = AmazonPaymentPage(driver)
+    paymentpage.add_new_payment()
+    page.random_sleep(3000, 5000)
+    driver.quit()
