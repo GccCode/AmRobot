@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+# -*- encoding: utf-8 -*-
 
+import  sys
+import io
 from selenium import webdriver
 from amazonpage import AmazonPage
 from amazonregisterpage import AmazonRegisterPage
@@ -9,6 +12,7 @@ from amazonaddresspage import AmazonAddressPage
 from amazonpaymentpage import AmazonPaymentPage
 
 if __name__ == "__main__":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     status = 1
     while status == 1:
         print("本程序支持的测试路程如下：")
