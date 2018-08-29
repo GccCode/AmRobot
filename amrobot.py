@@ -15,13 +15,13 @@ if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     status = 1
     while status == 1:
-        print("本程序支持的测试路程如下：")
+        print("==========本程序支持的测试路程如下==========")
         print("0 - 退出测试")
         print("1 - 自动注册账号")
         print("2 - 自动登陆账号")
         print("3 - 自动添加物流地址")
-        print("4 - 自动添加信用卡\n")
-        print("5 - 打开浏览器")
+        print("4 - 自动添加信用卡")
+        print("5 - 打开浏览器\n")
 
         options = input("请输入你的选择： ")
         if options == "0":
@@ -94,7 +94,7 @@ if __name__ == "__main__":
             option = webdriver.ChromeOptions()
             option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
             driver = webdriver.Chrome(chrome_options=option)
-            input("输入任意内容关闭浏览器!!!")
+            input("按下回车键关闭浏览器....\n")
             driver.quit()
         else:
             print("你的输入有误，请重新输入对应测试项的数字号码！！！！")
