@@ -54,7 +54,7 @@ if __name__ == "__main__":
     page.enter_account_page()
     page.random_sleep(3000, 5000)
     accountpage = AmazonAccountPage(driver)
-    accountpage.enter_address_page()
+    accountpage.enter_payment_page()
     page.random_sleep(3000, 5000)
     paymentpage = AmazonPaymentPage(driver)
     paymentpage.add_new_payment()

@@ -30,4 +30,5 @@ class AmazonAccountPage(AmazonPage):
 
     def enter_payment_page(self):
         self.click(*self.locator.PAYMENTOPTIONS_US)
+        self.random_sleep(3000, 5000)
         self.wait_page_loaded(*self.locator.WALLETTITLE)
