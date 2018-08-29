@@ -1,19 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import time
-import json
-import os
-import win32api
-import win32con
-import pyautogui
-from win32api import GetSystemMetrics
-import random
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.wait import WebDriverWait
-from baseaction import BaseAction
+import configparser
 from amazonpage import AmazonPage
 from locator import AmazonAccountPageLocator
 
@@ -29,6 +17,12 @@ class AmazonAccountPage(AmazonPage):
         self.wait_page_loaded(*self.locator.ADDADDRESS)
 
     def enter_payment_page(self):
-        self.click(*self.locator.PAYMENTOPTIONS_US)
+        cf = configparser.ConfigParser()
+        cf.read("info.txt")
+        country = cf.get("account", "country")
+        if country == "us":
+            self.click(*self.locator.PAYMENTOPTIONS_US)
+        elif country == "jp":
+            self.click(*self.locator.PAYMENTOPTIONS_JP)
         self.random_sleep(3000, 5000)
         self.wait_page_loaded(*self.locator.WALLETTITLE)
