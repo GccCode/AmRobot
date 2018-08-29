@@ -5,11 +5,15 @@ from selenium import webdriver
 from amazonpage import AmazonPage
 from amazonaccountpage import AmazonAccountPage
 from locator import AmazonAddressPageLocator
+import configparser
+
 
 class AmazonAddressPage(AmazonPage):
     def __init__(self, driver):
         self.driver = driver
         self.locator = AmazonAddressPageLocator
+        self.cf = configparser.ConfigParser()
+        self.cf.read("info.txt")
 
     def locator_state_jp(self, state):
         index = 1

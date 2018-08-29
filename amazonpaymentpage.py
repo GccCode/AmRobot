@@ -5,12 +5,15 @@ from selenium import webdriver
 from amazonpage import AmazonPage
 from locator import AmazonPaymentPageLocator
 from amazonaccountpage import AmazonAccountPage
+import configparser
 
 
 class AmazonPaymentPage(AmazonPage):
     def __init__(self, driver):
         self.driver = driver
         self.locator = AmazonPaymentPageLocator
+        self.cf = configparser.ConfigParser()
+        self.cf.read("info.txt")
 
     def add_new_payment(self, begin, end):
         fullname = self.cf.get("bill_address", "fullname")

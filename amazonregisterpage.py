@@ -4,12 +4,14 @@
 from selenium import webdriver
 from amazonpage import AmazonPage
 from locator import AmazonRegisterPageLocator
-
+import configparser
 
 class AmazonRegisterPage(AmazonPage):
     def __init__(self, driver):
         self.driver = driver
         self.locator = AmazonRegisterPageLocator
+        self.cf = configparser.ConfigParser()
+        self.cf.read("info.txt")
 
     def sign_in(self, begin, end):
         self.fill_in_form()

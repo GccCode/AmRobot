@@ -13,8 +13,8 @@ class AmazonPage(BaseAction):
     def __init__(self, driver):
         self.driver = driver
         self.locator = AmazonPageLocator
-        self.cf = cf = configparser.ConfigParser()
-        cf.read("info.txt")
+        self.cf = configparser.ConfigParser()
+        self.cf.read("info.txt")
 
     def enter_amazon_page(self, begin, end):
         country = self.cf.get("account", "country")
