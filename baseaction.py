@@ -36,7 +36,7 @@ class BaseAction(object):
 
     def input(self, content, *locator):
         try:
-            time.sleep(random.randint(3, 6))
+            time.sleep(random.randint(1, 3))
             # browser.execute_script('window.stop()')
             input_box = self.driver.find_element(*locator)
         except Exception as e:
@@ -48,12 +48,12 @@ class BaseAction(object):
                 for character in content:
                     try:
                         input_box.send_keys(character)
-                        time.sleep(random.randint(300, 800) / 1000)  # pause for 0.3 seconds
+                        time.sleep(random.randint(100, 800) / 1000)  # pause for 0.3 seconds
                     except Exception as e:
                         print(type(e))
                         try:
                             input_box.send_keys(character)
-                            time.sleep(random.randint(300, 800) / 1000)  # pause for 0.3 seconds
+                            time.sleep(random.randint(100, 800) / 1000)  # pause for 0.3 seconds
                         except Exception as e:
                             print(type(e))
                             pass
