@@ -16,7 +16,7 @@ class AmazonPage(BaseAction):
 
     def enter_amazon_page(self):
         cf = configparser.ConfigParser()
-        cf.read("account.txt")
+        cf.read("info.txt")
         country = cf.get("account", "country")
         if country == 'us':
             self.driver.get('https://www.amazon.com')
