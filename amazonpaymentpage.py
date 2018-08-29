@@ -16,7 +16,7 @@ class AmazonPaymentPage(AmazonPage):
     def add_new_payment(self):
         cf = configparser.ConfigParser()
         cf.read("info.txt")
-        fullname = cf.get("address", "username")
+        fullname = cf.get("bill_address", "username")
         cardnum = cf.get("cardinfo", "cardnumer")
         validmonth = cf.get("cardinfo", "month")
         validyear = cf.get("cardinfo", "year")
