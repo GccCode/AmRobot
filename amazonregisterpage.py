@@ -52,8 +52,6 @@ if __name__ == "__main__":
     page = AmazonPage(driver)
     page.enter_amazon_page()
     page.random_sleep(3000, 5000)
-    page.search_asin("echo dot")
-    page.random_sleep(3000, 5000)
     page.enter_register_page()
     page.random_sleep(3000, 5000)
     registerpage = AmazonRegisterPage(driver)
