@@ -93,6 +93,7 @@ class BaseAction(object):
         while scroll_count < count:
             self.mouse_scoll(direction)
             self.random_sleep(1, 5)
+            scroll_count += 1
 
     def mouse_scoll(self, direction):
         scroll_count = random.randint(300, 800)
