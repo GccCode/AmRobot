@@ -7,6 +7,7 @@ from selenium import webdriver
 from baseaction import BaseAction
 from locator import AmazonPageLocator
 import configparser
+from selenium.common.exceptions import NoSuchElementException
 
 
 class AmazonPage(BaseAction):
@@ -57,7 +58,12 @@ class AmazonPage(BaseAction):
     def enter_signin_page(self, begin, end):
         self.hover(*self.locator.ACCOUNT)
         self.random_sleep(1000, 2000)
-        self.click(*self.locator.SIGNOUT)
+
+        try:
+            self.click(*self.locator.SIGNOUT)
+        except NoSuchElementException as msg:
+            self.click(*self.locator.SIGNIN)
+
         self.random_sleep(begin, end)
 
     def enter_register_page(self, begin, end):

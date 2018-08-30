@@ -5,6 +5,8 @@ from selenium import webdriver
 from amazonpage import AmazonPage
 from locator import AmazonSignInPageLocator
 import configparser
+from selenium.common.exceptions import NoSuchElementException
+
 
 class AmazonSignInPage(AmazonPage):
     def __init__(self, driver):
@@ -20,14 +22,25 @@ class AmazonSignInPage(AmazonPage):
     def fill_in_form(self):
         emailname = self.cf.get("account", "email")
         password = self.cf.get("account", "password")
-        self.click(*self.locator.EMAILNAME)
-        self.random_sleep(1000, 2000)
-        self.input(emailname, *self.locator.EMAILNAME)
-        self.random_sleep(1000, 2000)
-        self.click(*self.locator.CONTINUE)
-        self.random_sleep(1000, 2000)
-        self.click(*self.locator.PASSWORD)
-        self.random_sleep(1000, 2000)
-        self.input(password, *self.locator.PASSWORD)
-        self.random_sleep(1000, 2000)
-        self.click(*self.locator.SIGNINSUBMIT)
+        try:
+            self.click(*self.locator.ACCOUNTIMG)
+            self.random_sleep(1000, 2000)
+        except NoSuchElementException as msg:
+            self.click(*self.locator.EMAILNAME)
+            self.random_sleep(1000, 2000)
+            self.input(emailname, *self.locator.EMAILNAME)
+            self.random_sleep(1000, 2000)
+            self.click(*self.locator.CONTINUE)
+            self.random_sleep(1000, 2000)
+            self.click(*self.locator.PASSWORD)
+            self.random_sleep(1000, 2000)
+            self.input(password, *self.locator.PASSWORD)
+            self.random_sleep(1000, 2000)
+            self.click(*self.locator.SIGNINSUBMIT)
+        else:
+            self.click(*self.locator.PASSWORD)
+            self.random_sleep(1000, 2000)
+            self.input(password, *self.locator.PASSWORD)
+            self.random_sleep(1000, 2000)
+            self.click(*self.locator.SIGNINSUBMIT)
+
