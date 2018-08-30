@@ -46,6 +46,7 @@ if __name__ == "__main__":
             except Exception as err:
                 print(str(err))
             finally:
+                driver.close()
                 driver.quit()
         elif options == "2":
             option = webdriver.ChromeOptions()
@@ -62,6 +63,7 @@ if __name__ == "__main__":
             except Exception as err:
                 print(str(err))
             finally:
+                driver.close()
                 driver.quit()
 
         elif options == "3":
@@ -89,6 +91,7 @@ if __name__ == "__main__":
             except Exception as err:
                 print(str(err))
             finally:
+                driver.close()
                 driver.quit()
         elif options == "4":
             option = webdriver.ChromeOptions()
@@ -108,6 +111,7 @@ if __name__ == "__main__":
             except Exception as err:
                 print(str(err))
             finally:
+                driver.close()
                 driver.quit()
         elif options == "5":
             option = webdriver.ChromeOptions()
@@ -143,10 +147,16 @@ if __name__ == "__main__":
                         print("the item is sponsored..\n")
                     if searchpage.is_asin_amazon_choice(asinresult, asin):
                         print("the item is amazon choice..\n")
+                    currenthandle = searchpage.save_page()
                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                    page.close_page()
+                    searchpage.restore_page(currenthandle, 3000, 5000)
+                    searchpage.enter_next_page(3000, 5000)
+
             except Exception as err:
                 print(str(err))
             finally:
+                driver.close()
                 driver.quit()
         else:
             print("你的输入有误，请重新输入对应测试项的数字号码！！！！")

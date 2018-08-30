@@ -67,6 +67,8 @@ class AmazonSearchPageLocator(AmazonPageLocator):
     ASINTITLE_SP_JP = (By.XPATH, './/div/div[position()=4]/div[position()=1]/a/h2')
     ASINTITLE_JP = (By.XPATH, './/div/div[position()=3]/div[position()=1]/a/h2')
 
+    PAGENEXTSTRING = (By.ID, 'pagnNextString')
+
 
 
 class AmazonRegisterPageLocator(AmazonPageLocator):

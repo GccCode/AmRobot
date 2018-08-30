@@ -103,11 +103,20 @@ class AmazonSearchPage(AmazonPage):
     def enter_asin_ads(self, asin):
         return
 
-    def save_page(self, asin):
-        return
+    def save_page(self):
+        return self.driver.current_window_handle
 
-    def restore_page(self, asin):
-        return
+    def switch_to_new_page(self, currenthandle):
+        handles = self.driver.window_handles  # 获取当前窗口句柄集合（列表类型）
+        for handle in handles:  # 切换窗口（切换到搜狗）
+            if handle != currenthandle:
+                self.driver.switch_to_window(handle)
+                break
 
-    def next_page(self, asin):
-        return
+    def restore_page(self, handle, begin, end):
+        self.driver.switch_to_window(handle)
+        self.random_sleep(begin, end)
+
+    def enter_next_page(self, begin, end):
+        self.click(*self.locator.PAGENEXTSTRING)
+        self.random_sleep(begin, end)

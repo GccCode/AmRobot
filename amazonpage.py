@@ -57,6 +57,9 @@ class AmazonPage(BaseAction):
     def random_walk(self):
         return
 
+    def close_page(self):
+        self.driver.close()
+
     def enter_signin_page(self, begin, end):
         self.hover(*self.locator.ACCOUNT)
         self.random_sleep(1000, 2000)
