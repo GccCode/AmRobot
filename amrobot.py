@@ -115,7 +115,7 @@ if __name__ == "__main__":
             driver = webdriver.Chrome(chrome_options=option)
             input("按下回车键关闭浏览器....\n")
             driver.quit()
-        elif options == "2":
+        elif options == "6":
             option = webdriver.ChromeOptions()
             option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
             driver = webdriver.Chrome(chrome_options=option)
