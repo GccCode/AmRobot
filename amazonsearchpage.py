@@ -13,6 +13,8 @@ class AmazonSearchPage(AmazonPage):
     def __init__(self, driver):
         self.driver = driver
         self.locator = AmazonSearchPageLocator
+        self.cf = configparser.ConfigParser()
+        self.cf.read("info.txt")
         self.cf_kw = configparser.ConfigParser()
         self.cf_kw.read("keywords.txt")
 
@@ -32,6 +34,15 @@ class AmazonSearchPage(AmazonPage):
         finally:
             return status
 
+    def is_asin_bestseller(self, asinresult, asin):
+        status = True
+        try:
+            asinresult.find_element_by_id("BESTSELLER_" + asin + "-supplementary")
+        except NoSuchElementException as msg:
+            status = False
+        finally:
+            return status
+
     def is_asin_sponsored(self, asinresult, asin):
         status =True
         try:
@@ -41,9 +52,20 @@ class AmazonSearchPage(AmazonPage):
         finally:
             return status
 
+    def click_asin_by_img_jp(self, asinresult, asin):
+        asinresult.find_element(*self.locator.ASINIMAGE_JP).click()
+
+    def click_asin_by_title_jp(self, asinresult, asin):
+        if self.is_asin_sponsored(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_SP_JP).click()
+        else:
+            asinresult.find_element(*self.locator.ASINTITLE_JP).click()
+
     def click_asin_by_img(self, asinresult, asin):
         if self.is_asin_amazon_choice(asinresult, asin):
             asinresult.find_element(*self.locator.ASINIMAGE_AC).click()
+        elif self.is_asin_bestseller(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINIMAGE_BS).click()
         else:
             asinresult.find_element(*self.locator.ASINIMAGE).click()
 
@@ -52,34 +74,28 @@ class AmazonSearchPage(AmazonPage):
             asinresult.find_element(*self.locator.ASINTITLE_AC).click()
         elif self.is_asin_sponsored(asinresult, asin):
             asinresult.find_element(*self.locator.ASINTITLE_SP).click()
+        elif self.is_asin_bestseller(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_BS).click()
         else:
             asinresult.find_element(*self.locator.ASINTITLE).click()
 
     def enter_asin_page(self, asinresult, asin, begin, end):
+        country = self.cf.get("account", "country")
         option = random.randint(1, 2)
         if option == 1:
             print("enter by image link..\n")
-            self.click_asin_by_img(asinresult, asin)
+            if country == 'us':
+                self.click_asin_by_img(asinresult, asin)
+            elif country == "jp":
+                self.click_asin_by_img_jp(asinresult, asin)
         else:
             print("enter by title link..\n")
-            self.click_asin_by_title(asinresult, asin)
+            if country == 'us':
+                self.click_asin_by_title(asinresult, asin)
+            elif country == "jp":
+                self.click_asin_by_title_jp(asinresult, asin)
 
         self.random_sleep(begin, end)
-
-    def enter_target_asin(self, asin):
-        return
-
-    def find_prev_asin(self, asin):
-        return
-
-    def enter_prev_asin(self, asin):
-        return
-
-    def find_next_asin(self, asin):
-        return
-
-    def enter_next_asin(self, asin):
-        return
 
     def find_asin_ads(self, asin):
         return
