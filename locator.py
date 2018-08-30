@@ -55,6 +55,7 @@ class AmazonSearchPageLocator(AmazonPageLocator):
     ASINIMAGE_AC = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
     ASINIMAGE = (By.XPATH, './/div/div/div/div[position()=1]/div/div')
     ASINTITLE_AC = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
+    ASINTITLE_SP = (By.XPATH, './/div/div/div/div[position()=2]/div[position()=2]/div[position()=1]/a/h2')
     ASINTITLE = (By.XPATH, './/div/div/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
 
 

@@ -50,6 +50,8 @@ class AmazonSearchPage(AmazonPage):
     def click_asin_by_title(self, asinresult, asin):
         if self.is_asin_amazon_choice(asinresult, asin):
             asinresult.find_element(*self.locator.ASINTITLE_AC).click()
+        elif self.is_asin_sponsored(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_SP).click()
         else:
             asinresult.find_element(*self.locator.ASINTITLE).click()
 
