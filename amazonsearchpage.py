@@ -56,8 +56,10 @@ class AmazonSearchPage(AmazonPage):
     def enter_asin_page(self, asinresult, asin, begin, end):
         option = random.randint(1, 2)
         if option == 1:
+            print("enter by image link..\n")
             self.click_asin_by_img(asinresult, asin)
         else:
+            print("enter by title link..\n")
             self.click_asin_by_title(asinresult, asin)
 
         self.random_sleep(begin, end)
