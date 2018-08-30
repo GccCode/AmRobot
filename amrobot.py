@@ -134,6 +134,7 @@ if __name__ == "__main__":
                         print("the item is sponsored..\n")
                     if searchpage.is_asin_amazon_choice(asinresult, asin):
                         print("the item is amazon choice..\n")
+                    searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
             except Exception as err:
                 print(str(err))
             finally:
