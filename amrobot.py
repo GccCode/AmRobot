@@ -122,11 +122,11 @@ if __name__ == "__main__":
             driver.set_page_load_timeout(30)
             driver.set_script_timeout(30)
             try:
-                keyword = "echo dot mount"
-                asin = "B075JS85K2"
-                # asin = "B07DQM97QM"
-                #asin = "B078H7VY19"
-                #asin = "B01MZ92KID"
+                keyword = "gold plastic cups"
+                asin = "B07G2R3Y5J"
+                # asin = "B07CQYCJ7B"
+                #asin = "B004UUK2ZY"
+                #asin = "B079YY714G"
                 page = AmazonPage(driver)
                 page.enter_amazon_page(3000, 5000)
                 page.search_asin(keyword, 3000, 5000)
