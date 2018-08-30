@@ -97,4 +97,4 @@ class AmazonSignInPageLocator(AmazonPageLocator):
                         /form/div/div/div/div[position()=2]/span[position()=1]/span/input[position()=1]')
     PASSWORD = (By.ID, 'ap_password')
     SIGNINSUBMIT = (By.ID, 'signInSubmit')
-    ACCOUNTIMG = (By.CLASS_NAME, 'cvf-account-switcher-profile-image')
+    ACCOUNTSWITCHER = (By.XPATH, '//*[@id="ap-account-switcher-container"]/div[1]/div/div/div[2]/div[1]/div[2]/a/div')

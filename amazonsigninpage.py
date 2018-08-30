@@ -23,7 +23,7 @@ class AmazonSignInPage(AmazonPage):
         emailname = self.cf.get("account", "email")
         password = self.cf.get("account", "password")
         try:
-            self.click(*self.locator.ACCOUNTIMG)
+            self.click(*self.locator.ACCOUNTSWITCHER)
             self.random_sleep(1000, 2000)
         except NoSuchElementException as msg:
             self.click(*self.locator.EMAILNAME)
