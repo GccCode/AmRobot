@@ -149,7 +149,8 @@ if __name__ == "__main__":
                         print("the item is amazon choice..\n")
                     currenthandle = searchpage.save_page()
                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
-                    page.close_page()
+                    searchpage.switch_to_new_page(currenthandle)
+                    searchpage.close_page()
                     searchpage.restore_page(currenthandle, 3000, 5000)
                     searchpage.enter_next_page(3000, 5000)
 

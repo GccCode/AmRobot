@@ -103,6 +103,9 @@ class AmazonSearchPage(AmazonPage):
     def enter_asin_ads(self, asin):
         return
 
+    def close_page(self):
+        self.driver.close()
+
     def save_page(self):
         return self.driver.current_window_handle
 
