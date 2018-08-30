@@ -11,6 +11,7 @@ from amazonaccountpage import AmazonAccountPage
 from amazonaddresspage import AmazonAddressPage
 from amazonpaymentpage import AmazonPaymentPage
 from amazonsigninpage import AmazonSignInPage
+from amazonsearchpage import  AmazonSearchPage
 
 
 if __name__ == "__main__":
@@ -23,7 +24,8 @@ if __name__ == "__main__":
         print("2 - 自动登陆账号")
         print("3 - 自动添加物流地址")
         print("4 - 自动添加信用卡")
-        print("5 - 打开浏览器\n")
+        print("5 - 打开浏览器")
+        print("6 - 搜索关键词\n")
 
         options = input("请输入你的选择： ")
         if options == "0":
@@ -113,5 +115,28 @@ if __name__ == "__main__":
             driver = webdriver.Chrome(chrome_options=option)
             input("按下回车键关闭浏览器....\n")
             driver.quit()
+        elif options == "2":
+            option = webdriver.ChromeOptions()
+            option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+            driver = webdriver.Chrome(chrome_options=option)
+            driver.set_page_load_timeout(30)
+            driver.set_script_timeout(30)
+            try:
+                keyword = "echo dot mount"
+                asin = "B078H7VY19"
+                page = AmazonPage(driver)
+                page.enter_amazon_page(3000, 5000)
+                page.search_asin(keyword, 3000, 5000)
+                searchpage = AmazonSearchPage(driver)
+                asinresult = searchpage.find_target_asin(asin)
+                if asinresult != False:
+                    if searchpage.is_asin_sponsored(asinresult, asin):
+                        print("the item is sponsored..\n")
+                    if searchpage.is_asin_amazon_choice(asinresult, asin):
+                        print("the item is amazon choice..\n")
+            except Exception as err:
+                print(str(err))
+            finally:
+                driver.quit()
         else:
             print("你的输入有误，请重新输入对应测试项的数字号码！！！！")

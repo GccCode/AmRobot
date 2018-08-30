@@ -16,6 +16,8 @@ class AmazonPage(BaseAction):
         self.locator = AmazonPageLocator
         self.cf = configparser.ConfigParser()
         self.cf.read("info.txt")
+        self.cf_kw = configparser.ConfigParser()
+        self.cf_kw.read("keywords.txt")
 
     def enter_amazon_page(self, begin, end):
         country = self.cf.get("account", "country")
@@ -85,8 +87,8 @@ class AmazonPage(BaseAction):
 
         self.random_sleep(begin, end)
 
-    def search_asin(self, keyword):
-        self.input("echo dot mount", *self.locator.SEARCH)
+    def search_asin(self, keyword, begin, end):
+        self.input(keyword, *self.locator.SEARCH)
         self.click(*self.locator.SUBMITKEYWORD)
 
 # if __name__ == "__main__":

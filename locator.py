@@ -51,7 +51,11 @@ class AmazonPaymentPageLocator(AmazonPageLocator):
     USETHISADDRESS_JP = (By.XPATH, '//div[contains(@id, \'-19\')]/div/div[position()=2]/form/div/div/div/div/div/span[position()=2]/span/input[position()=1]')
 
 class AmazonSearchPageLocator(AmazonPageLocator):
-    LOGO = 0
+    ASINRESULTS = (By.XPATH, '//li[contains(@id, \'result_\')]')
+    ASINIMAGE_AC = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
+    ASINIMAGE = (By.XPATH, './/div/div/div/div[position()=1]/div/div')
+    ASINTITLE_AC = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
+    ASINTITLE = (By.XPATH, './/div/div/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
 
 
 class AmazonRegisterPageLocator(AmazonPageLocator):

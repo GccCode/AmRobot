@@ -1,30 +1,66 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import time
-import json
-import os
-import win32api
-import win32con
-import pyautogui
-from win32api import GetSystemMetrics
-import random
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.wait import WebDriverWait
-from baseaction import BaseAction
+
 from amazonpage import AmazonPage
-from locator import AmazonSearchPage
+from locator import AmazonSearchPageLocator
+import configparser
+from selenium.common.exceptions import NoSuchElementException
+import random
 
 
 class AmazonSearchPage(AmazonPage):
     def __init__(self, driver):
         self.driver = driver
-        self.locator = AmazonSearchPage
+        self.locator = AmazonSearchPageLocator
+        self.cf_kw = configparser.ConfigParser()
+        self.cf_kw.read("keywords.txt")
 
     def find_target_asin(self, asin):
-        return
+        asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
+        for asinresult in asinresults:
+            if asinresult.get_attribute('data-asin') == asin:
+                return asinresult
+        return False
+
+    def is_asin_amazon_choice(self, asinresult, asin):
+        status = True
+        try:
+            asinresult.find_element_by_id("AMAZONS_CHOICE_"+ asin + "-supplementary")
+        except NoSuchElementException as msg:
+            status = False
+        finally:
+            return status
+
+    def is_asin_sponsored(self, asinresult, asin):
+        status =True
+        try:
+            asinresult.find_element_by_id("a-popover-sponsored-header-" + asin)
+        except NoSuchElementException as msg:
+            status = False
+        finally:
+            return status
+
+    def click_asin_by_img(self, asinresult, asin):
+        if self.is_asin_amazon_choice(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINIMAGE_AC).click()
+        else:
+            asinresult.find_element(*self.locator.ASINIMAGE).click()
+
+    def click_asin_by_title(self, asinresult, asin):
+        if self.is_asin_amazon_choice(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_AC).click()
+        else:
+            asinresult.find_element(*self.locator.ASINTITLE).click()
+
+    def enter_asin_page(self, asinresult, asin, begin, end):
+        option = random.randint(1, 2)
+        if option == 1:
+            self.click_asin_by_img(asinresult, asin)
+        else:
+            self.click_asin_by_title(asinresult, asin)
+
+        self.random_sleep(begin, end)
 
     def enter_target_asin(self, asin):
         return
