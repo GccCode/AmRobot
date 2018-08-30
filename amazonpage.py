@@ -54,8 +54,12 @@ class AmazonPage(BaseAction):
     def enter_prime(self):
         self.click(*self.locator.PRIME)
 
-    def random_walk(self):
-        return
+    def random_walk(self, count):
+        i = 0
+        while i < count:
+            self.random_mouse_move()
+            self.random_mouse_scoll()
+            i += 1
 
     def enter_signin_page(self, begin, end):
         self.hover(*self.locator.ACCOUNT)

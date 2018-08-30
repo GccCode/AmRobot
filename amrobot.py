@@ -153,6 +153,7 @@ if __name__ == "__main__":
                     searchpage.close_page()
                     searchpage.restore_page(currenthandle, 3000, 5000)
                     searchpage.enter_next_page(3000, 5000)
+                    searchpage.random_walk(15)
 
             except Exception as err:
                 print(str(err))
