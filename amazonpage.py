@@ -6,6 +6,7 @@ import random
 from selenium import webdriver
 from baseaction import BaseAction
 from locator import AmazonPageLocator
+from win32api import GetSystemMetrics
 import configparser
 from selenium.common.exceptions import NoSuchElementException
 
@@ -18,6 +19,8 @@ class AmazonPage(BaseAction):
         self.cf.read("info.txt")
         self.cf_kw = configparser.ConfigParser()
         self.cf_kw.read("keywords.txt")
+        self.screen_width = GetSystemMetrics(0)
+        self.screen_heigth = GetSystemMetrics(1)
 
     def enter_amazon_page(self, begin, end):
         country = self.cf.get("account", "country")
