@@ -13,7 +13,7 @@ class AmazonRegisterPage(AmazonPage):
         self.cf = configparser.ConfigParser()
         self.cf.read("info.txt")
 
-    def sign_in(self, begin, end):
+    def register(self, begin, end):
         self.fill_in_form()
         self.random_sleep(begin, end)
 
@@ -44,20 +44,20 @@ class AmazonRegisterPage(AmazonPage):
         self.input(password, *self.locator.PASSWORDCHECK)
         self.random_sleep(1000, 3000)
         self.click(*self.locator.CONTINUESUBMIT)
-
-if __name__ == "__main__":
-    option = webdriver.ChromeOptions()
-    option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-    driver = webdriver.Chrome(chrome_options=option)
-    #driver = webdriver.Chrome()
-    driver.set_page_load_timeout(30)
-    driver.set_script_timeout(30)
-    page = AmazonPage(driver)
-    page.enter_amazon_page()
-    page.random_sleep(3000, 5000)
-    page.enter_register_page()
-    page.random_sleep(3000, 5000)
-    registerpage = AmazonRegisterPage(driver)
-    registerpage.fill_in_form()
-    page.random_sleep(3000, 5000)
-    driver.quit()
+#
+# if __name__ == "__main__":
+#     option = webdriver.ChromeOptions()
+#     option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+#     driver = webdriver.Chrome(chrome_options=option)
+#     #driver = webdriver.Chrome()
+#     driver.set_page_load_timeout(30)
+#     driver.set_script_timeout(30)
+#     page = AmazonPage(driver)
+#     page.enter_amazon_page()
+#     page.random_sleep(3000, 5000)
+#     page.enter_register_page()
+#     page.random_sleep(3000, 5000)
+#     registerpage = AmazonRegisterPage(driver)
+#     registerpage.fill_in_form()
+#     page.random_sleep(3000, 5000)
+#     driver.quit()

@@ -54,6 +54,12 @@ class AmazonPage(BaseAction):
     def random_walk(self):
         return
 
+    def enter_signin_page(self, begin, end):
+        self.hover(*self.locator.ACCOUNT)
+        self.random_sleep(1000, 2000)
+        self.click(*self.locator.SIGNOUT)
+        self.random_sleep(begin, end)
+
     def enter_register_page(self, begin, end):
         result = random.randint(1,2)
         if result == 1:

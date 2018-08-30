@@ -8,6 +8,7 @@ class AmazonPageLocator(object):
     LOGO = (By.ID, 'nav-logo')
     ACCOUNT = (By.ID, 'nav-link-accountList')
     SIGNIN = (By.XPATH, '//*[@id=\'nav-flyout-ya-signin\']/a[position()=1]')
+    SIGNOUT = (By.ID, 'nav-item-signout-sa')
     STARTHERE = (By.XPATH, '//*[@id=\'nav-flyout-ya-newCust\']/a')
     CREATEACCOUNTSUBMIT = (By.ID, 'createAccountSubmit')
     SEARCH = (By.ID, 'twotabsearchtextbox')
@@ -89,3 +90,10 @@ class AmazonAddressPageLocator(AmazonPageLocator):
                               'Gifu', 'Shizuoka', 'Aichi', 'Mie', 'Shiga', 'Kyoto', 'Osaka', 'Hyogo', 'Nara', 'Wakayama', \
                               'Tottori', 'Shimane', 'Okayama', 'Hiroshima', 'Yamaguchi', 'Tokushima', 'Kagawa', 'Ehime', 'Kochi', 'Fukuoka', \
                               'Saga', 'Nagasaki', 'Kumamoto', 'Oita', 'Miyazaki', 'Kagoshima', 'Okinawas']
+
+class AmazonSignInPageLocator(AmazonPageLocator):
+    EMAILNAME = (By.ID, 'ap_email')
+    CONTINUE = (By.XPATH, '//div[@id=\'authportal-main-section\']/div[position()=2]/div/div[position()=1]\
+                        /form/div/div/div/div[position()=2]/span[position()=1]/span/input[position()=1]')
+    PASSWORD = (By.ID, 'ap_password')
+    SIGNINSUBMIT = (By.ID, 'signInSubmit')

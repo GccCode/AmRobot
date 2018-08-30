@@ -10,6 +10,8 @@ from amazonregisterpage import AmazonRegisterPage
 from amazonaccountpage import AmazonAccountPage
 from amazonaddresspage import AmazonAddressPage
 from amazonpaymentpage import AmazonPaymentPage
+from amazonsigninpage import AmazonSignInPage
+
 
 if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
@@ -38,13 +40,28 @@ if __name__ == "__main__":
                 page.enter_amazon_page(3000, 5000)
                 page.enter_register_page(3000, 5000)
                 registerpage = AmazonRegisterPage(driver)
-                registerpage.sign_in(3000, 5000)
+                registerpage.register(3000, 5000)
             except Exception as err:
                 print(str(err))
             finally:
                 driver.quit()
         elif options == "2":
-            pass
+            option = webdriver.ChromeOptions()
+            option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+            driver = webdriver.Chrome(chrome_options=option)
+            driver.set_page_load_timeout(30)
+            driver.set_script_timeout(30)
+            try:
+                page = AmazonPage(driver)
+                page.enter_amazon_page(3000, 5000)
+                page.enter_signin_page(3000, 5000)
+                signinpage = AmazonSignInPage(driver)
+                signinpage.sign_in(3000, 5000)
+            except Exception as err:
+                print(str(err))
+            finally:
+                driver.quit()
+
         elif options == "3":
             option = webdriver.ChromeOptions()
             option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
