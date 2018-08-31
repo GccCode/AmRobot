@@ -261,6 +261,7 @@ if __name__ == "__main__":
             keyword = input("请输入想要搜索的关键词： ")
             asin = input("请输入搜索产品的ASIN： ")
             typestr = input("请输入目标产品类型对应数字（广告-0 or 普通-1）：")
+            content = input("请输入要提交的QA内容：")
             type = ""
             if typestr == "0":
                 type = "sponsored"
@@ -284,7 +285,7 @@ if __name__ == "__main__":
                     if asinresult != False:
                         currenthandle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                         asinpage = AmazonAsinPage(driver)
-                        asinpage.ask_qa("is this new?", 3000, 5000)
+                        asinpage.ask_qa(content, 3000, 5000)
 
                 except Exception as err:
                     print(str(err))
