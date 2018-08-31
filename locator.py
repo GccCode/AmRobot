@@ -14,6 +14,8 @@ class AmazonPageLocator(object):
     SEARCH = (By.ID, 'twotabsearchtextbox')
     SUBMITKEYWORD = (By.XPATH, '//*[@id=\'nav-search\']/form/div[position()=2]/div/input')
     PRIME = (By.ID, "nav-link-prime")
+    PRIMEFREETRIAL = (By.ID, 'prime-header-CTA')
+    PRIMESTARTTRIAL = (By.ID, 'a-autoid-0')
     CART = (By.ID, "nav-cart")
     ORDERS = (By.ID, "nav-orders")
     WISHLIST = (By.XPATH, '//*[@id=\'nav-flyout-wl-items\']/div/a[position()=1]/span')
