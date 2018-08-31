@@ -22,6 +22,7 @@ class AmazonSearchPage(AmazonPage):
         for page in range(1, 5):
             asinresult = self.find_target_asin(asin, type)
             if asinresult != False:
+                print("page - " + str(page) + "\n")
                 return asinresult
             else:
                 self.random_walk(random.randint(1, 3))

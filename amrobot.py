@@ -143,8 +143,8 @@ if __name__ == "__main__":
                 page.enter_amazon_page(3000, 5000)
                 page.search_asin(keyword, 3000, 5000)
                 searchpage = AmazonSearchPage(driver)
-                asinresult = searchpage.find_target_asin(asin, "sponsored")
-                #asinresult = searchpage.find_target_asin(asin, "normal")
+                #asinresult = searchpage.find_target_asin(asin, "sponsored")
+                asinresult = searchpage.find_target_product(asin, "normal")
                 if asinresult != False:
                     if searchpage.is_asin_sponsored(asinresult, asin):
                         print("the item is sponsored..\n")
@@ -152,7 +152,7 @@ if __name__ == "__main__":
                         print("the item is amazon choice..\n")
                     searchpage.enter_random_product(asin, 3000, 5000)
                     searchpage.enter_random_product(asin, 3000, 5000)
-                    asinresult = searchpage.find_target_asin(asin, "sponsored")
+                    asinresult = searchpage.find_target_product(asin, "normal")
                     # asinresult = searchpage.find_target_asin(asin, "normal")
                     if asinresult != False:
                         currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
