@@ -253,6 +253,7 @@ if __name__ == "__main__":
                     if asinresult != False:
                         currenthandle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                         asinpage = AmazonAsinPage(driver)
+                        searchpage.switch_to_new_page(currenthandle)
                         asinpage.add_cart(3000, 5000)
 
                 except Exception as err:
@@ -288,6 +289,7 @@ if __name__ == "__main__":
                     if asinresult != False:
                         currenthandle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                         asinpage = AmazonAsinPage(driver)
+                        searchpage.switch_to_new_page(currenthandle)
                         asinpage.ask_qa(content, 3000, 5000)
 
                 except Exception as err:
