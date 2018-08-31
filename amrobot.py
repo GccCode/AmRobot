@@ -16,7 +16,6 @@ from amazonsearchpage import  AmazonSearchPage
 
 if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    sys.stdout.flush()
     status = 1
     while status == 1:
         print("==========本程序支持的测试路程如下==========")
@@ -33,9 +32,6 @@ if __name__ == "__main__":
         if options == "0":
             status = 0
         elif options == "1":
-            # option = webdriver.ChromeOptions()
-            # option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-            # driver = webdriver.Chrome(chrome_options=option)
             driver = webdriver.Chrome()
             driver.set_page_load_timeout(30)
             driver.set_script_timeout(30)
@@ -69,17 +65,16 @@ if __name__ == "__main__":
                 driver.quit()
 
         elif options == "3":
+            print("支持收货地址类型如下：")
+            print("1 - 账单地址")
+            print("2 - FBA地址")
+            addressoption = input("请输入你的选择： ")
             option = webdriver.ChromeOptions()
             option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
             driver = webdriver.Chrome(chrome_options=option)
             driver.set_page_load_timeout(30)
             driver.set_script_timeout(30)
             try:
-                print("支持收货地址类型如下：")
-                print("1 - 账单地址")
-                print("2 - FBA地址")
-                addressoption = input("请输入你的选择： ")
-
                 page = AmazonPage(driver)
                 page.enter_amazon_page(3000, 5000)
                 page.enter_account_page(3000,5000)
@@ -129,23 +124,31 @@ if __name__ == "__main__":
             driver.set_page_load_timeout(30)
             driver.set_script_timeout(30)
             try:
+                keyword = input("请输入想要搜索的关键词： ")
+                asin = input("请输入搜索产品的ASIN： ")
+                typestr = input("请输入目标产品类型对应数字（广告-0 or 普通-1）：")
+                type = ""
+                if typestr == "0":
+                    type = "sponsored"
+                else:
+                    type = "normal"
+
                 # keyword = "echo dot 壁掛け"
                 # asin = "B07BBL5T2P"
                 # asin = "B07CQYCJ7B"
                 # asin = "B07BGXF6KF"
                 # asin = "B072B5BTLK"
 
-                keyword = "gold plastic cups"
+                # keyword = "gold plastic cups"
                 #asin = "B07G2R3Y5J"
-                asin = "B07CGMVGNG"
+                # asin = "B07CGMVGNG"
                 #asin = "B004UUK2ZY"
                 #asin = "B079YY714G"
                 page = AmazonPage(driver)
                 page.enter_amazon_page(3000, 5000)
                 page.search_asin(keyword, 3000, 5000)
                 searchpage = AmazonSearchPage(driver)
-                asinresult = searchpage.find_target_product(asin, "sponsored")
-                #asinresult = searchpage.find_target_product(asin, "normal")
+                asinresult = searchpage.find_target_product(asin, type)
                 if asinresult != False:
                     if searchpage.is_asin_sponsored(asinresult, asin):
                         print("the item is sponsored..\n")
@@ -153,8 +156,7 @@ if __name__ == "__main__":
                         print("the item is amazon choice..\n")
                     searchpage.enter_random_product(asin, 3000, 5000)
                     searchpage.enter_random_product(asin, 3000, 5000)
-                    asinresult = searchpage.find_target_product(asin, "normal")
-                    # asinresult = searchpage.find_target_asin(asin, "normal")
+                    asinresult = searchpage.find_target_product(asin, type)
                     if asinresult != False:
                         currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                         searchpage.back_prev_page(currenthandle, 3000, 5000)

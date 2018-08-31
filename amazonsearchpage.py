@@ -34,7 +34,7 @@ class AmazonSearchPage(AmazonPage):
 
     def enter_random_products(self, count, begin, end):
         print("访问当前页面任意产品，数量为：" + str(count) + "\n")
-        for i in range(1, count):
+        for i in range(0, count):
             self.enter_random_product(False, begin, end)
 
     def enter_random_product(self, asin, begin, end):
@@ -54,7 +54,7 @@ class AmazonSearchPage(AmazonPage):
                     while tmp == index:
                         tmp = random.randint(0, (len(asinresults) - 1))
 
-                    currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 8000)
+                    currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 10000)
                     self.back_prev_page(currenthandle, begin, end)
                     break
                 else:
@@ -63,7 +63,6 @@ class AmazonSearchPage(AmazonPage):
             print("访问当前页面除目标产品以外的任意产品。。。。\n")
 
     def find_target_asin(self, asin, type):
-        self.log_location()
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         for asinresult in asinresults:
             if asinresult.get_attribute('data-asin') == asin:
