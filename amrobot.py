@@ -31,7 +31,8 @@ if __name__ == "__main__":
         print("7 - 自动注册会员")
         print("8 - 添加心愿卡")
         print("9 - 添加购物车")
-        print("10 - 添加QA内容\n")
+        print("10 - 添加QA内容")
+        print("11 - 代理测试\n")
 
         options = input("请输入你的选择： ")
         if options == "0":
@@ -153,7 +154,7 @@ if __name__ == "__main__":
                     #asin = "B079YY714G"
                     page = AmazonPage(driver)
                     page.enter_amazon_page(3000, 5000)
-                    page.search_asin(keyword, 3000, 5000)
+                    page.search_asin(keyword, 5000, 8000)
                     searchpage = AmazonSearchPage(driver)
                     asinresult = searchpage.find_target_product(asin, type)
                     if asinresult != False:
@@ -255,6 +256,7 @@ if __name__ == "__main__":
                         asinpage = AmazonAsinPage(driver)
                         searchpage.switch_to_new_page(currenthandle)
                         asinpage.add_cart(3000, 5000)
+                        searchpage.back_prev_page(currenthandle, 3000, 5000)
 
                 except Exception as err:
                     print(str(err))
@@ -291,11 +293,24 @@ if __name__ == "__main__":
                         asinpage = AmazonAsinPage(driver)
                         searchpage.switch_to_new_page(currenthandle)
                         asinpage.ask_qa(content, 3000, 5000)
+                        searchpage.back_prev_page(currenthandle, 3000, 5000)
 
                 except Exception as err:
                     print(str(err))
                 finally:
                     driver.close()
                     driver.quit()
+        elif options == "11":
+            #proxy_socks_argument = '--proxy-server=socks5://{ip}:{port}'.format(ip=mimvp_proxy['ip'], port=mimvp_proxy['port_socks']
+            host = input("请输入ip：")
+            port = input("请输入端口：")
+            proxy_socks_argument = '--proxy-server = "socks5://' + host + ":" + port
+            option = webdriver.ChromeOptions()
+            option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+            option.add_argument(proxy_socks_argument)
+            driver = webdriver.Chrome(chrome_options=option)
+            input("按下回车键关闭浏览器....\n")
+            driver.close()
+            driver.quit()
         else:
             print("你的输入有误，请重新输入对应测试项的数字号码！！！！")
