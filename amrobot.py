@@ -304,7 +304,7 @@ if __name__ == "__main__":
             #proxy_socks_argument = '--proxy-server=socks5://{ip}:{port}'.format(ip=mimvp_proxy['ip'], port=mimvp_proxy['port_socks']
             host = input("请输入ip：")
             port = input("请输入端口：")
-            proxy_socks_argument = '--proxy-server = \"socks5://' + host + ":" + port + "\""
+            proxy_socks_argument = '--proxy-server=\"socks5://' + host + ":" + port + "\""
             print(proxy_socks_argument)
             option = webdriver.ChromeOptions()
             option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
