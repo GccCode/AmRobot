@@ -33,10 +33,12 @@ class AmazonSearchPage(AmazonPage):
         return False
 
     def enter_random_products(self, count, begin, end):
+        self.log_location()
         for i in range(1, count):
             self.enter_random_product(False, begin, end)
 
     def enter_random_product(self, asin, begin, end):
+        self.log_location()
         index = 0
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         if asin == False:
@@ -59,6 +61,7 @@ class AmazonSearchPage(AmazonPage):
                     index += 1
 
     def find_target_asin(self, asin, type):
+        self.log_location()
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         for asinresult in asinresults:
             if asinresult.get_attribute('data-asin') == asin:
@@ -125,6 +128,7 @@ class AmazonSearchPage(AmazonPage):
             asinresult.find_element(*self.locator.ASINTITLE).click()
 
     def enter_asin_page(self, asinresult, asin, begin, end):
+        self.log_location()
         country = self.cf.get("account", "country")
         option = random.randint(1, 2)
         if option == 1:
@@ -172,5 +176,6 @@ class AmazonSearchPage(AmazonPage):
             self.driver.switch_to_window(handle)
 
     def enter_next_page(self, begin, end):
+        self.log_location()
         self.click(*self.locator.PAGENEXTSTRING)
         self.random_sleep(begin, end)

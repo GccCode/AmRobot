@@ -135,16 +135,16 @@ if __name__ == "__main__":
                 # asin = "B072B5BTLK"
 
                 keyword = "gold plastic cups"
-                asin = "B07G2R3Y5J"
-                # asin = "B07CQYCJ7B"
+                #asin = "B07G2R3Y5J"
+                asin = "B07CGMVGNG"
                 #asin = "B004UUK2ZY"
                 #asin = "B079YY714G"
                 page = AmazonPage(driver)
                 page.enter_amazon_page(3000, 5000)
                 page.search_asin(keyword, 3000, 5000)
                 searchpage = AmazonSearchPage(driver)
-                #asinresult = searchpage.find_target_asin(asin, "sponsored")
-                asinresult = searchpage.find_target_product(asin, "normal")
+                asinresult = searchpage.find_target_product(asin, "sponsored")
+                #asinresult = searchpage.find_target_product(asin, "normal")
                 if asinresult != False:
                     if searchpage.is_asin_sponsored(asinresult, asin):
                         print("the item is sponsored..\n")
