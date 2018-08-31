@@ -44,11 +44,13 @@ class AmazonAsinPage(AmazonPage):
         print("提交QA： " + content + "\n")
 
     def add_wishlist(self, begin, end):
+        country = self.cf.get("account", "country")
         self.click(*self.locator.ADDWISHLISTSUBMITBUTTON)
         self.random_sleep(1000, 2000)
         if self.is_element_exsist(*self.locator.CREATELISTBUTTON):
-            self.click(*self.locator.WISHLISTSELETE)
-            self.random_sleep(1000, 2000)
+            if country == "us":
+                self.click(*self.locator.WISHLISTSELETE)
+                self.random_sleep(1000, 2000)
             self.click(*self.locator.CREATELISTBUTTON)
 
         print("添加心愿卡。。。。\n")
