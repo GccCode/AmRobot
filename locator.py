@@ -31,7 +31,15 @@ class AmazonAccountPageLocator(AmazonPageLocator):
 
 
 class AmazonAsinPageLocator(AmazonPageLocator):
-    LOGO = 0
+    ADDCARTBUTTON = (By.ID, 'add-to-cart-button')
+    ADDWISHLISTSUBMITBUTTON = (By.ID, 'add-to-wishlist-button-submit')
+    CREATELISTBUTTON = (By.CSS_SELECTOR, 'span[data-action=\'reg-create-submit\']')
+    WISHLISTSELETE = (By.XPATH, '//*[@id=\'WLNEW_list_type_WL\']/../i')
+    QATEXT = (By.XPATH, '//*[@id=\'ask-dp-search_feature_div\']/div/div/div/div/form/span[position()=1]/span/span/span/span/span/div/input')
+    QAENTRYBUTTON = (By.CLASS_NAME, '//*[@class=\'a-button askDetailPageSearchSubmitQuestionButton\']')
+    QAPOSTBUTTON = (By.CLASS_NAME, '//*[@class=\'a-button a-button-span1 a-button-primary\']')
+    IMAGES = (By.ID, '//*[@id=\'altImages\']')
+    LOADINGIMAGE = (By.ID, '//*[@id=\'landingImage\']')
 
 
 class AmazonCartPageLocator(AmazonPageLocator):

@@ -16,8 +16,6 @@ class AmazonSearchPage(AmazonPage):
         self.locator = AmazonSearchPageLocator
         self.cf = configparser.ConfigParser()
         self.cf.read("info.txt")
-        self.cf_kw = configparser.ConfigParser()
-        self.cf_kw.read("keywords.txt")
         self.screen_width = GetSystemMetrics(0)
         self.screen_heigth = GetSystemMetrics(1)
 
@@ -25,7 +23,7 @@ class AmazonSearchPage(AmazonPage):
         for page in range(1, 5):
             asinresult = self.find_target_asin(asin, type)
             if asinresult != False:
-                print("page no. = " + str(page) + "\n")
+                print("目标产品被找到的页数：" + str(page) + "\n")
                 return asinresult
             else:
                 self.random_walk(random.randint(1, 3))
@@ -59,7 +57,6 @@ class AmazonSearchPage(AmazonPage):
                     break
                 else:
                     index += 1
-
             print("访问当前页面除目标产品以外的任意产品。。。。\n")
 
     def find_target_asin(self, asin, type):

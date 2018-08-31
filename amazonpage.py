@@ -17,8 +17,6 @@ class AmazonPage(BaseAction):
         self.locator = AmazonPageLocator
         self.cf = configparser.ConfigParser()
         self.cf.read("info.txt")
-        self.cf_kw = configparser.ConfigParser()
-        self.cf_kw.read("keywords.txt")
         self.screen_width = GetSystemMetrics(0)
         self.screen_heigth = GetSystemMetrics(1)
 

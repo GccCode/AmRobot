@@ -12,6 +12,7 @@ from amazonaddresspage import AmazonAddressPage
 from amazonpaymentpage import AmazonPaymentPage
 from amazonsigninpage import AmazonSignInPage
 from amazonsearchpage import  AmazonSearchPage
+from amazonasinpage import  AmazonAsinPage
 
 
 if __name__ == "__main__":
@@ -26,7 +27,10 @@ if __name__ == "__main__":
         print("4 - 自动添加信用卡")
         print("5 - 打开浏览器")
         print("6 - 搜索关键词")
-        print("7 - 自动注册会员\n")
+        print("7 - 自动注册会员")
+        print("8 - 添加心愿卡")
+        print("9 - 添加购物车")
+        print("10 - 添加QA内容\n")
 
         options = input("请输入你的选择： ")
         if options == "0":
@@ -186,5 +190,109 @@ if __name__ == "__main__":
             finally:
                 driver.close()
                 driver.quit()
+        elif options == "8":
+            keyword = input("请输入想要搜索的关键词： ")
+            asin = input("请输入搜索产品的ASIN： ")
+            typestr = input("请输入目标产品类型对应数字（广告-0 or 普通-1）：")
+            type = ""
+            if typestr == "0":
+                type = "sponsored"
+            elif typestr == "1":
+                type = "normal"
+            else:
+                print("你的输入有误！！！！\n")
+            if typestr == "0" or typestr == "1":
+                option = webdriver.ChromeOptions()
+                option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+                driver = webdriver.Chrome(chrome_options=option)
+                driver.set_page_load_timeout(30)
+                driver.set_script_timeout(30)
+                try:
+                    page = AmazonPage(driver)
+                    page.enter_amazon_page(3000, 5000)
+                    page.search_asin(keyword, 3000, 5000)
+                    searchpage = AmazonSearchPage(driver)
+                    asinresult = searchpage.find_target_product(asin, type)
+                    if asinresult != False:
+                        currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                        asinpage = AmazonAsinPage(driver)
+                        asinpage.view_random_image(3000, 5000)
+                        asinpage.add_wishlist(5000, 8000)
+
+                except Exception as err:
+                    print(str(err))
+                finally:
+                    driver.close()
+                    driver.quit()
+        elif options == "9":
+            keyword = input("请输入想要搜索的关键词： ")
+            asin = input("请输入搜索产品的ASIN： ")
+            typestr = input("请输入目标产品类型对应数字（广告-0 or 普通-1）：")
+            type = ""
+            if typestr == "0":
+                type = "sponsored"
+            elif typestr == "1":
+                type = "normal"
+            else:
+                print("你的输入有误！！！！\n")
+            if typestr == "0" or typestr == "1":
+                option = webdriver.ChromeOptions()
+                option.add_argument(
+                    r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+                driver = webdriver.Chrome(chrome_options=option)
+                driver.set_page_load_timeout(30)
+                driver.set_script_timeout(30)
+                try:
+                    page = AmazonPage(driver)
+                    page.enter_amazon_page(3000, 5000)
+                    page.search_asin(keyword, 3000, 5000)
+                    searchpage = AmazonSearchPage(driver)
+                    asinresult = searchpage.find_target_product(asin, type)
+                    if asinresult != False:
+                        currenthandle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                        asinpage = AmazonAsinPage(driver)
+                        asinpage.view_random_image(3000, 5000)
+                        asinpage.add_cart(3000, 5000)
+
+                except Exception as err:
+                    print(str(err))
+                finally:
+                    driver.close()
+                    driver.quit()
+        elif options == "10":
+            keyword = input("请输入想要搜索的关键词： ")
+            asin = input("请输入搜索产品的ASIN： ")
+            typestr = input("请输入目标产品类型对应数字（广告-0 or 普通-1）：")
+            type = ""
+            if typestr == "0":
+                type = "sponsored"
+            elif typestr == "1":
+                type = "normal"
+            else:
+                print("你的输入有误！！！！\n")
+            if typestr == "0" or typestr == "1":
+                option = webdriver.ChromeOptions()
+                option.add_argument(
+                    r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+                driver = webdriver.Chrome(chrome_options=option)
+                driver.set_page_load_timeout(30)
+                driver.set_script_timeout(30)
+                try:
+                    page = AmazonPage(driver)
+                    page.enter_amazon_page(3000, 5000)
+                    page.search_asin(keyword, 3000, 5000)
+                    searchpage = AmazonSearchPage(driver)
+                    asinresult = searchpage.find_target_product(asin, type)
+                    if asinresult != False:
+                        currenthandle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                        asinpage = AmazonAsinPage(driver)
+                        asinpage.view_random_image(3000, 5000)
+                        asinpage.ask_qa("is this new?", 3000, 5000)
+
+                except Exception as err:
+                    print(str(err))
+                finally:
+                    driver.close()
+                    driver.quit()
         else:
             print("你的输入有误，请重新输入对应测试项的数字号码！！！！")

@@ -10,6 +10,7 @@ import pyautogui
 from win32api import GetSystemMetrics
 import random
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.common.exceptions import NoSuchElementException
 
 
 class BaseAction(object):
@@ -20,6 +21,15 @@ class BaseAction(object):
 
     def log_location(self):
         print(sys._getframe().f_code.co_filename + " : " + sys._getframe().f_code.co_name + " : " + str(sys._getframe().f_lineno))
+
+    def is_element_exsist(self, *locator):
+        status = True
+        try:
+            self.driver.find_element(*locator)
+        except NoSuchElementException as msg:
+            status = False
+        finally:
+            return status
 
     def hover(self, *locator):
         element = self.driver.find_element(*locator)
