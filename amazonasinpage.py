@@ -68,6 +68,8 @@ class AmazonAsinPage(AmazonPage):
                 print("0000000000000\n")
             if self.is_element_exsist(*self.locator.WISHLISTSELETE):
                 print("sdfds\n")
+            if self.is_element_exsist("//*[@id=\'WLNEW_cancel\']"):
+                print("sdfsdsdds\n")
             print("zzzzzzzzzzz\n")
 
         print("添加心愿卡。。。。\n")
