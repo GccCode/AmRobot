@@ -5,6 +5,7 @@
 from amazonpage import AmazonPage
 from locator import AmazonSearchPageLocator
 import configparser
+from win32api import GetSystemMetrics
 from selenium.common.exceptions import NoSuchElementException
 import random
 
@@ -17,6 +18,8 @@ class AmazonSearchPage(AmazonPage):
         self.cf.read("info.txt")
         self.cf_kw = configparser.ConfigParser()
         self.cf_kw.read("keywords.txt")
+        self.screen_width = GetSystemMetrics(0)
+        self.screen_heigth = GetSystemMetrics(1)
 
     def find_target_product(self, asin, type):
         for page in range(1, 5):
