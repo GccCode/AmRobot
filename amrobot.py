@@ -156,13 +156,10 @@ if __name__ == "__main__":
                     # asinresult = searchpage.find_target_asin(asin, "normal")
                     if asinresult != False:
                         currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
-                        print("xxxx")
                         searchpage.back_prev_page(currenthandle, 3000, 5000)
-                        print("yyyy")
                         searchpage.enter_next_page(3000, 5000)
-                        print("zzzz")
-                        page.random_walk(2)
-                        print("0000")
+                        searchpage.enter_random_products(3, 3000, 5000)
+                        page.random_walk(5)
 
             except Exception as err:
                 print(str(err))

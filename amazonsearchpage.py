@@ -18,9 +18,9 @@ class AmazonSearchPage(AmazonPage):
         self.cf_kw = configparser.ConfigParser()
         self.cf_kw.read("keywords.txt")
 
-    def find_target_product(self, asin):
+    def find_target_product(self, asin, type):
         for page in range(1, 5):
-            asinresult = self.find_target_asin(asin)
+            asinresult = self.find_target_asin(asin, type)
             if asinresult != False:
                 return asinresult
             else:
@@ -28,22 +28,31 @@ class AmazonSearchPage(AmazonPage):
                 self.enter_next_page(3000, 5000)
         return False
 
+    def enter_random_products(self, count, begin, end):
+        for i in range(1, count):
+            self.enter_random_product(False, begin, end)
+
     def enter_random_product(self, asin, begin, end):
         index = 0
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
-        for asinresult in asinresults:
-            if asinresult.get_attribute('data-asin') == asin:
-                tmp = random.randint(0, (len(asinresults) - 1))
-                print("tmp = " + str(tmp) + "\n")
-                print("index = " + str(index) + "\n")
-                while tmp == index:
+        if asin == False:
+            tmp = random.randint(0, (len(asinresults) - 1))
+            currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 10000)
+            self.back_prev_page(currenthandle, begin, end)
+        else:
+            for asinresult in asinresults:
+                if asinresult.get_attribute('data-asin') == asin:
                     tmp = random.randint(0, (len(asinresults) - 1))
+                    print("tmp = " + str(tmp) + "\n")
+                    print("index = " + str(index) + "\n")
+                    while tmp == index:
+                        tmp = random.randint(0, (len(asinresults) - 1))
 
-                currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 8000)
-                self.back_prev_page(currenthandle, begin, end)
-                break
-            else:
-                index += 1
+                    currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 8000)
+                    self.back_prev_page(currenthandle, begin, end)
+                    break
+                else:
+                    index += 1
 
     def find_target_asin(self, asin, type):
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
