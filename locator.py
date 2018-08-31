@@ -34,7 +34,7 @@ class AmazonAsinPageLocator(AmazonPageLocator):
     ADDCARTBUTTON = (By.ID, 'add-to-cart-button')
     ADDWISHLISTSUBMITBUTTON = (By.ID, 'add-to-wishlist-button-submit')
     #CREATELISTBUTTON = (By.CSS_SELECTOR, 'span[data-action=\'reg-create-submit\']')
-    CREATELISTBUTTON = (By.XPATH, '//*[@id=\'WLNEW_cancel\']/../../span[3]')
+    CREATELISTBUTTON = (By.XPATH, '//*[@id=\'WLNEW_cancel\']/../../span[3]/span/span')
     #WISHLISTSELETE = (By.XPATH, '//*[@id=\'WLNEW_list_type_WL\']/../i')
     WISHLISTSELETE = (By.XPATH, '//*[@id=\'WLNEW_list_type_WL\']/../span')
     QATEXT = (By.XPATH, '//*[@id=\'ask-dp-search_feature_div\']/div/div/div/div/form/span[position()=1]/span/span/span/span/span/div/input')
