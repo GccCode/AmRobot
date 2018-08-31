@@ -62,8 +62,7 @@ class AmazonPaymentPageLocator(AmazonPageLocator):
 
 class AmazonSearchPageLocator(AmazonPageLocator):
     ASINRESULTS = (By.XPATH, '//li[contains(@id, \'result_\')]')
-    #ASINIMAGE_BS = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div/div[position()=1]/div[position()=1]')
-    ASINIMAGE_BS = (By.CLASS_NAME, '//*[@class=\'s-access-image cfMarker\']')
+    ASINIMAGE_BS = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
     ASINIMAGE_AC = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
     ASINIMAGE = (By.XPATH, './/div/div/div/div[position()=1]/div/div')
     ASINTITLE_BS = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
