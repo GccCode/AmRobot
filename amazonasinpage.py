@@ -65,20 +65,6 @@ class AmazonAsinPage(AmazonPage):
             self.click(*self.locator.WISHLISTSELETE)
             self.random_sleep(1000, 2000)
             # self.click(*self.locator.CREATELISTBUTTON)
-        else:
-            if self.is_element_exsist("//*[@id=\'a-popover-3\']"):
-                print("0000000000000\n")
-            if self.is_element_exsist(*self.locator.WISHLISTSELETE):
-                print("sdfds\n")
-            if self.is_element_exsist("//*[@id=\'WLNEW_cancel\']"):
-                element = self.driver.find_element_by_id("//*[@id=\'WLNEW_cancel\']")
-                try:
-                    element.find_elememt_by_xpath("./../../span[3]")
-                except NoSuchElementException as msg:
-                    print("sdfsdjfjdsllll\n")
-                else:
-                    print("0998888\n")
-            print("zzzzzzzzzzz\n")
 
         print("添加心愿卡。。。。\n")
         self.random_sleep(begin, end)
