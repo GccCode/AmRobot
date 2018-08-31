@@ -41,6 +41,7 @@ class AmazonSearchPage(AmazonPage):
 
                 currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 8000)
                 self.back_prev_page(currenthandle, begin, end)
+                break
             else:
                 index += 1
 
