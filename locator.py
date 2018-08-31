@@ -41,6 +41,7 @@ class AmazonAsinPageLocator(AmazonPageLocator):
     QAENTRYBUTTON = (By.CLASS_NAME, '//*[@class=\'a-button askDetailPageSearchSubmitQuestionButton\']')
     QAPOSTBUTTON = (By.CLASS_NAME, '//*[@class=\'a-button a-button-span1 a-button-primary\']')
     IMAGES = (By.ID, '//*[@id=\'altImages\']')
+    TESTIMAGES = (By.ID, '//*[@id=\'imageBlock\']')
     LOADINGIMAGE = (By.ID, '//*[@id=\'landingImage\']')
 
 

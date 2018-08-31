@@ -29,7 +29,10 @@ class AmazonAsinPage(AmazonPage):
         if self.is_element_exsist(*self.locator.IMAGES):
             print("xxxxxxxxx")
         else:
-            print("yyyyyyyy")
+            if self.is_element_exsist(*self.locator.TESTIMAGES):
+                print("90illkj\n")
+            else:
+                print("yyyyyyyy\n")
         # imageresults = self.driver.find_element(*self.locator.IMAGES).find_elements(".//[contains(@id, \'a-autoid-\')]")
         # count = random.randint(1, len(imageresults))
         # for i in range(1, count):
