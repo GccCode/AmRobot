@@ -118,57 +118,59 @@ if __name__ == "__main__":
             driver.close()
             driver.quit()
         elif options == "6":
-            option = webdriver.ChromeOptions()
-            option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-            driver = webdriver.Chrome(chrome_options=option)
-            driver.set_page_load_timeout(30)
-            driver.set_script_timeout(30)
-            try:
-                keyword = input("请输入想要搜索的关键词： ")
-                asin = input("请输入搜索产品的ASIN： ")
-                typestr = input("请输入目标产品类型对应数字（广告-0 or 普通-1）：")
-                type = ""
-                if typestr == "0":
-                    type = "sponsored"
-                else:
-                    type = "normal"
+            keyword = input("请输入想要搜索的关键词： ")
+            asin = input("请输入搜索产品的ASIN： ")
+            typestr = input("请输入目标产品类型对应数字（广告-0 or 普通-1）：")
+            type = ""
+            if typestr == "0":
+                type = "sponsored"
+            elif typestr == "1":
+                type = "normal"
+            else:
+                print("你的输入有误！！！！\n")
+            if typestr == "0" or typestr == "1":
+                option = webdriver.ChromeOptions()
+                option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+                driver = webdriver.Chrome(chrome_options=option)
+                driver.set_page_load_timeout(30)
+                driver.set_script_timeout(30)
+                try:
+                    # keyword = "echo dot 壁掛け"
+                    # asin = "B07BBL5T2P"
+                    # asin = "B07CQYCJ7B"
+                    # asin = "B07BGXF6KF"
+                    # asin = "B072B5BTLK"
 
-                # keyword = "echo dot 壁掛け"
-                # asin = "B07BBL5T2P"
-                # asin = "B07CQYCJ7B"
-                # asin = "B07BGXF6KF"
-                # asin = "B072B5BTLK"
-
-                # keyword = "gold plastic cups"
-                #asin = "B07G2R3Y5J"
-                # asin = "B07CGMVGNG"
-                #asin = "B004UUK2ZY"
-                #asin = "B079YY714G"
-                page = AmazonPage(driver)
-                page.enter_amazon_page(3000, 5000)
-                page.search_asin(keyword, 3000, 5000)
-                searchpage = AmazonSearchPage(driver)
-                asinresult = searchpage.find_target_product(asin, type)
-                if asinresult != False:
-                    if searchpage.is_asin_sponsored(asinresult, asin):
-                        print("the item is sponsored..\n")
-                    if searchpage.is_asin_amazon_choice(asinresult, asin):
-                        print("the item is amazon choice..\n")
-                    searchpage.enter_random_product(asin, 3000, 5000)
-                    searchpage.enter_random_product(asin, 3000, 5000)
+                    # keyword = "gold plastic cups"
+                    #asin = "B07G2R3Y5J"
+                    # asin = "B07CGMVGNG"
+                    #asin = "B004UUK2ZY"
+                    #asin = "B079YY714G"
+                    page = AmazonPage(driver)
+                    page.enter_amazon_page(3000, 5000)
+                    page.search_asin(keyword, 3000, 5000)
+                    searchpage = AmazonSearchPage(driver)
                     asinresult = searchpage.find_target_product(asin, type)
                     if asinresult != False:
-                        currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
-                        searchpage.back_prev_page(currenthandle, 3000, 5000)
-                        searchpage.enter_next_page(3000, 5000)
-                        searchpage.enter_random_products(3, 3000, 5000)
-                        page.random_walk(5)
+                        if searchpage.is_asin_sponsored(asinresult, asin):
+                            print("the item is sponsored..\n")
+                        if searchpage.is_asin_amazon_choice(asinresult, asin):
+                            print("the item is amazon choice..\n")
+                        searchpage.enter_random_product(asin, 3000, 5000)
+                        searchpage.enter_random_product(asin, 3000, 5000)
+                        asinresult = searchpage.find_target_product(asin, type)
+                        if asinresult != False:
+                            currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                            searchpage.back_prev_page(currenthandle, 3000, 5000)
+                            searchpage.enter_next_page(3000, 5000)
+                            searchpage.enter_random_products(3, 3000, 5000)
+                            page.random_walk(5)
 
-            except Exception as err:
-                print(str(err))
-            finally:
-                driver.close()
-                driver.quit()
+                except Exception as err:
+                    print(str(err))
+                finally:
+                    driver.close()
+                    driver.quit()
         elif options == "7":
             option = webdriver.ChromeOptions()
             option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
