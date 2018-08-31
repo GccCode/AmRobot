@@ -16,6 +16,7 @@ from amazonsearchpage import  AmazonSearchPage
 
 if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stdout.flush()
     status = 1
     while status == 1:
         print("==========本程序支持的测试路程如下==========")
