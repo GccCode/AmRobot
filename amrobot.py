@@ -216,7 +216,6 @@ if __name__ == "__main__":
                     if asinresult != False:
                         currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                         asinpage = AmazonAsinPage(driver)
-                        searchpage.switch_to_new_page(currenthandle)
                         asinpage.view_random_image(3000, 5000)
                         asinpage.add_wishlist(5000, 8000)
 
