@@ -54,12 +54,13 @@ class AmazonPage(BaseAction):
     def enter_orders(self):
         self.click(*self.locator.ORDERS)
 
-    def enter_prime(self, begin, end):
+    def register_prime(self, begin, end):
         self.click(*self.locator.PRIME)
         self.random_sleep(1000, 2000)
         self.click(*self.locator.PRIMEFREETRIAL)
         self.random_sleep(1000, 2000)
         self.click(*self.locator.PRIMESTARTTRIAL)
+
         self.random_sleep(begin, end)
 
     def random_walk(self, count):

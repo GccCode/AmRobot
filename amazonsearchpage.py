@@ -18,11 +18,26 @@ class AmazonSearchPage(AmazonPage):
         self.cf_kw = configparser.ConfigParser()
         self.cf_kw.read("keywords.txt")
 
-    def find_target_asin(self, asin):
+    def find_target_product(self, asin):
+        for page in range(1, 5):
+            asinresult = self.find_target_asin(asin)
+            if asinresult != False:
+                return asinresult
+            else:
+                self.random_walk(random.randint(1, 3))
+                self.enter_next_page(3000, 5000)
+        return False
+
+    def find_target_asin(self, asin, type):
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         for asinresult in asinresults:
             if asinresult.get_attribute('data-asin') == asin:
-                return asinresult
+                if type == "normal":
+                    if self.is_asin_sponsored(asinresult, asin) != True:
+                        return asinresult
+                elif type == "sponsored":
+                    if self.is_asin_sponsored(asinresult, asin):
+                        return asinresult
         return False
 
     def is_asin_amazon_choice(self, asinresult, asin):

@@ -119,6 +119,7 @@ if __name__ == "__main__":
             option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
             driver = webdriver.Chrome(chrome_options=option)
             input("按下回车键关闭浏览器....\n")
+            driver.close()
             driver.quit()
         elif options == "6":
             option = webdriver.ChromeOptions()
@@ -142,7 +143,8 @@ if __name__ == "__main__":
                 page.enter_amazon_page(3000, 5000)
                 page.search_asin(keyword, 3000, 5000)
                 searchpage = AmazonSearchPage(driver)
-                asinresult = searchpage.find_target_asin(asin)
+                asinresult = searchpage.find_target_asin(asin, "sponsored")
+                #asinresult = searchpage.find_target_asin(asin, "normal")
                 if asinresult != False:
                     if searchpage.is_asin_sponsored(asinresult, asin):
                         print("the item is sponsored..\n")
@@ -170,7 +172,7 @@ if __name__ == "__main__":
             try:
                 page = AmazonPage(driver)
                 page.enter_amazon_page(3000, 5000)
-                page.enter_prime(3000, 5000)
+                page.register_prime(3000, 5000)
             except Exception as err:
                 print(str(err))
             finally:
