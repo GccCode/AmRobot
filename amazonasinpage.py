@@ -16,6 +16,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from baseaction import BaseAction
 from amazonpage import AmazonPage
 from locator import AmazonAsinPageLocator
+from selenium.common.exceptions import NoSuchElementException
 
 
 
@@ -69,7 +70,13 @@ class AmazonAsinPage(AmazonPage):
             if self.is_element_exsist(*self.locator.WISHLISTSELETE):
                 print("sdfds\n")
             if self.is_element_exsist("//*[@id=\'WLNEW_cancel\']"):
-                print("sdfsdsdds\n")
+                element = self.driver.find_element_by_id("//*[@id=\'WLNEW_cancel\']")
+                try:
+                    element.find_elememt_by_xpath("./../../span[3]")
+                except NoSuchElementException as msg:
+                    print("sdfsdjfjdsllll\n")
+                else:
+                    print("0998888\n")
             print("zzzzzzzzzzz\n")
 
         print("添加心愿卡。。。。\n")

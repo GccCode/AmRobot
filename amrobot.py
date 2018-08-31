@@ -201,6 +201,7 @@ if __name__ == "__main__":
                 type = "normal"
             else:
                 print("你的输入有误！！！！\n")
+            asin = "B078H7VY19"
             if typestr == "0" or typestr == "1":
                 option = webdriver.ChromeOptions()
                 option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
