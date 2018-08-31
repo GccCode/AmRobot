@@ -25,7 +25,8 @@ if __name__ == "__main__":
         print("3 - 自动添加物流地址")
         print("4 - 自动添加信用卡")
         print("5 - 打开浏览器")
-        print("6 - 搜索关键词\n")
+        print("6 - 搜索关键词")
+        print("7 - 自动注册会员\n")
 
         options = input("请输入你的选择： ")
         if options == "0":
@@ -155,6 +156,21 @@ if __name__ == "__main__":
                     searchpage.enter_next_page(3000, 5000)
                     page.random_walk(15)
 
+            except Exception as err:
+                print(str(err))
+            finally:
+                driver.close()
+                driver.quit()
+        elif options == "7":
+            option = webdriver.ChromeOptions()
+            option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+            driver = webdriver.Chrome(chrome_options=option)
+            driver.set_page_load_timeout(30)
+            driver.set_script_timeout(30)
+            try:
+                page = AmazonPage(driver)
+                page.enter_amazon_page(3000, 5000)
+                page.enter_prime(3000, 5000)
             except Exception as err:
                 print(str(err))
             finally:
