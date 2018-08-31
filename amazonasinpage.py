@@ -37,9 +37,9 @@ class AmazonAsinPage(AmazonPage):
         self.random_sleep(3000, 6000)
         self.click(*self.locator.QAENTRYBUTTON)
         self.random_sleep(2000, 3000)
-        if self.is_element_exsist(*self.locator.QAPOSTBUTTON):
-            print("QA post button is ready!\n")
-        # self.click(*self.locator.QAPOSTBUTTON)
+        # if self.is_element_exsist(*self.locator.QAPOSTBUTTON):
+        #     print("QA post button is ready!\n")
+        self.click(*self.locator.QAPOSTBUTTON)
         self.random_sleep(begin, end)
         print("提交QA： " + content + "\n")
 
@@ -49,7 +49,7 @@ class AmazonAsinPage(AmazonPage):
         if self.is_element_exsist(*self.locator.CREATELISTBUTTON):
             self.click(*self.locator.WISHLISTSELETE)
             self.random_sleep(1000, 2000)
-            # self.click(*self.locator.CREATELISTBUTTON)
+            self.click(*self.locator.CREATELISTBUTTON)
 
         print("添加心愿卡。。。。\n")
         self.random_sleep(begin, end)
