@@ -128,14 +128,14 @@ if __name__ == "__main__":
             driver.set_page_load_timeout(30)
             driver.set_script_timeout(30)
             try:
-                keyword = "echo dot 壁掛け"
-                asin = "B07BBL5T2P"
+                # keyword = "echo dot 壁掛け"
+                # asin = "B07BBL5T2P"
                 # asin = "B07CQYCJ7B"
                 # asin = "B07BGXF6KF"
                 # asin = "B072B5BTLK"
 
-                # keyword = "gold plastic cups"
-                # asin = "B07G2R3Y5J"
+                keyword = "gold plastic cups"
+                asin = "B07G2R3Y5J"
                 # asin = "B07CQYCJ7B"
                 #asin = "B004UUK2ZY"
                 #asin = "B079YY714G"

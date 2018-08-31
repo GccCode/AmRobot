@@ -154,7 +154,9 @@ class AmazonSearchPage(AmazonPage):
             self.driver.switch_to_window(handle)
             self.random_sleep(begin, end)
         elif country == "us":
+            self.switch_to_new_page(handle)
             self.navigation_back(begin, end)
+            self.driver.switch_to_window(handle)
 
     def enter_next_page(self, begin, end):
         self.click(*self.locator.PAGENEXTSTRING)
