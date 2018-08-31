@@ -19,7 +19,7 @@ class BaseAction(object):
         self.screen_heigth = GetSystemMetrics(1)
 
     def log_location(self):
-        print(sys._getframe().f_code.co_filename + " : " + sys._getframe().f_code.co_name + " : " + sys._getframe().f_lineno)
+        print(sys._getframe().f_code.co_filename + " : " + sys._getframe().f_code.co_name + " : " + str(sys._getframe().f_lineno))
 
     def hover(self, *locator):
         element = self.driver.find_element(*locator)
