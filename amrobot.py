@@ -301,13 +301,21 @@ if __name__ == "__main__":
                     driver.close()
                     driver.quit()
         elif options == "11":
-            #proxy_socks_argument = '--proxy-server=socks5://{ip}:{port}'.format(ip=mimvp_proxy['ip'], port=mimvp_proxy['port_socks']
             host = input("请输入ip：")
             port = input("请输入端口：")
+            ua = input("请选择UserAgent：")
             proxy_socks_argument = '--proxy-server=socks5://' + host + ":" + port
             print(proxy_socks_argument)
             option = webdriver.ChromeOptions()
             option.add_argument(proxy_socks_argument)
+            if ua == "1":
+                option.add_argument('--user-agent=Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3')
+            elif ua == "2":
+                option.add_argument('--user-agent=Mozilla/5.0 (iPhone; CPU iPhone OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A334 Safari/7534.48.3')
+            elif ua == "3":
+                option.add_argument('--user-agent=Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; Nexus S Build/GRK39F) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1')
+            elif ua == "4":
+                option.add_argument('--user-agent=Mozilla/5.0 (Linux; U; Android 4.0.2; en-us; Galaxy Nexus Build/ICL53F) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30')
             driver = webdriver.Chrome(chrome_options=option)
             input("按下回车键关闭浏览器....\n")
             driver.close()
