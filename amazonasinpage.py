@@ -25,25 +25,6 @@ class AmazonAsinPage(AmazonPage):
         self.driver = driver
         self.locator = AmazonAsinPageLocator
 
-    def view_random_image(self, begin, end):
-        if self.is_element_exsist(*self.locator.IMAGES):
-            print("xxxxxxxxx")
-        else:
-            self.random_sleep(15000, 20000)
-            if self.is_element_exsist(*self.locator.TESTIMAGES):
-                print("90illkj\n")
-            else:
-                print("yyyyyyyy\n")
-        # imageresults = self.driver.find_element(*self.locator.IMAGES).find_elements(".//[contains(@id, \'a-autoid-\')]")
-        # count = random.randint(1, len(imageresults))
-        # for i in range(1, count):
-        #     index = random.randint(1, len(imageresults))
-        #     imageresults[index].click()
-        #     self.random_sleep(1000, 2000)
-        #     self.hover(*self.locator.LOADINGIMAGE)
-        #     self.random_sleep(begin, end)
-        #print("随机浏览产品图片，数量：" + str(count), + "\n")
-
     def add_cart(self, begin, end):
         self.click(*self.locator.ADDCARTBUTTON)
         self.random_sleep(begin, end)

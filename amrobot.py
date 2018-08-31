@@ -217,7 +217,6 @@ if __name__ == "__main__":
                     if asinresult != False:
                         currenthandle= searchpage.enter_asin_page(asinresult, asin, 5000, 10000)
                         asinpage = AmazonAsinPage(driver)
-                        asinpage.view_random_image(3000, 5000)
                         asinpage.add_wishlist(5000, 8000)
 
                 except Exception as err:
@@ -252,7 +251,6 @@ if __name__ == "__main__":
                     if asinresult != False:
                         currenthandle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                         asinpage = AmazonAsinPage(driver)
-                        asinpage.view_random_image(3000, 5000)
                         asinpage.add_cart(3000, 5000)
 
                 except Exception as err:
@@ -287,7 +285,6 @@ if __name__ == "__main__":
                     if asinresult != False:
                         currenthandle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                         asinpage = AmazonAsinPage(driver)
-                        asinpage.view_random_image(3000, 5000)
                         asinpage.ask_qa("is this new?", 3000, 5000)
 
                 except Exception as err:

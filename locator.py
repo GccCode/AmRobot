@@ -33,16 +33,12 @@ class AmazonAccountPageLocator(AmazonPageLocator):
 class AmazonAsinPageLocator(AmazonPageLocator):
     ADDCARTBUTTON = (By.ID, 'add-to-cart-button')
     ADDWISHLISTSUBMITBUTTON = (By.ID, 'add-to-wishlist-button-submit')
-    #CREATELISTBUTTON = (By.CSS_SELECTOR, 'span[data-action=\'reg-create-submit\']')
     CREATELISTBUTTON = (By.XPATH, '//*[@id=\'WLNEW_cancel\']/../../span[3]/span/span')
-    #WISHLISTSELETE = (By.XPATH, '//*[@id=\'WLNEW_list_type_WL\']/../i')
     WISHLISTSELETE = (By.XPATH, '//*[@id=\'WLNEW_list_type_WL\']/../span')
     QATEXT = (By.XPATH, '//*[@id=\'ask-dp-search_feature_div\']/div/div/div/div/form/span[position()=1]/span/span/span/span/span/div/input')
-    QAENTRYBUTTON = (By.CLASS_NAME, '//*[@class=\'a-button askDetailPageSearchSubmitQuestionButton\']')
+    #QAENTRYBUTTON = (By.CLASS_NAME, '//*[@class=\'a-button askDetailPageSearchSubmitQuestionButton\']')
+    QAENTRYBUTTON = (By.CSS_SELECTOR, '[value=\'Ask the Community\']')
     QAPOSTBUTTON = (By.CLASS_NAME, '//*[@class=\'a-button a-button-span1 a-button-primary\']')
-    IMAGES = (By.ID, '//*[@id=\'altImages\']')
-    TESTIMAGES = (By.ID, '//*[@id=\'imageBlock\']')
-    LOADINGIMAGE = (By.ID, '//*[@id=\'landingImage\']')
 
 
 class AmazonCartPageLocator(AmazonPageLocator):
