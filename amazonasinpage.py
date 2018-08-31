@@ -63,6 +63,8 @@ class AmazonAsinPage(AmazonPage):
             self.click(*self.locator.WISHLISTSELETE)
             self.random_sleep(1000, 2000)
             # self.click(*self.locator.CREATELISTBUTTON)
+        else:
+            print("zzzzzzzzzzz\n")
 
         print("添加心愿卡。。。。\n")
         self.random_sleep(begin, end)
