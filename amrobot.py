@@ -217,7 +217,9 @@ if __name__ == "__main__":
                     if asinresult != False:
                         currenthandle= searchpage.enter_asin_page(asinresult, asin, 5000, 10000)
                         asinpage = AmazonAsinPage(driver)
+                        searchpage.switch_to_new_page(currenthandle)
                         asinpage.add_wishlist(5000, 8000)
+                        searchpage.close_page()
 
                 except Exception as err:
                     print(str(err))
