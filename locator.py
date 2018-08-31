@@ -36,7 +36,8 @@ class AmazonAsinPageLocator(AmazonPageLocator):
     CREATELISTBUTTON = (By.XPATH, '//*[@id=\'WLNEW_cancel\']/../../span[3]/span/span')
     WISHLISTSELETE = (By.XPATH, '//*[@id=\'WLNEW_list_type_WL\']/../span')
     QATEXT = (By.XPATH, '//*[@id=\'ask-dp-search_feature_div\']/div/div/div/div/form/span[position()=1]/span/span/span/span/span/div/input')
-    QAENTRYBUTTON = (By.CSS_SELECTOR, '[value=\'Ask the Community\']')
+    QAENTRYBUTTON_US = (By.CSS_SELECTOR, '[value=\'Ask the Community\']')
+    QAENTRYBUTTON_JP = (By.CSS_SELECTOR, '[value=\'コミュニティに尋ねる\']')
     QAPOSTBUTTON = (By.CSS_SELECTOR, '[data-action=\'ask-dpsearch-desktop-post-question\']')
 
 

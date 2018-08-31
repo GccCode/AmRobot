@@ -33,11 +33,15 @@ class AmazonAsinPage(AmazonPage):
         print("加入购物车。。。\n")
 
     def ask_qa(self, content, begin, end):
+        country = self.cf.get("account", "country")
         self.click(*self.locator.QATEXT)
         self.random_sleep(1000, 2000)
         self.input(content, *self.locator.QATEXT)
         self.random_sleep(3000, 6000)
-        self.click(*self.locator.QAENTRYBUTTON)
+        if country == "us":
+            self.click(*self.locator.QAENTRYBUTTON_US)
+        elif country == "jp":
+            self.click(*self.locator.QAENTRYBUTTON_JP)
         self.random_sleep(2000, 3000)
         # if self.is_element_exsist(*self.locator.QAPOSTBUTTON):
         #     print("QA post button is ready!\n")

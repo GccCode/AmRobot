@@ -219,7 +219,7 @@ if __name__ == "__main__":
                         asinpage = AmazonAsinPage(driver)
                         searchpage.switch_to_new_page(currenthandle)
                         asinpage.add_wishlist(5000, 8000)
-                        searchpage.close_page()
+                        searchpage.back_prev_page(currenthandle, 3000, 5000)
 
                 except Exception as err:
                     print(str(err))
