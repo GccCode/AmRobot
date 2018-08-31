@@ -57,7 +57,7 @@ class AmazonAsinPage(AmazonPage):
         self.random_sleep(begin, end)
         print("提交QA： " + content + "\n")
 
-    def add_wishlist(self, type, begin, end):
+    def add_wishlist(self, begin, end):
         self.click(*self.locator.ADDWISHLISTSUBMITBUTTON)
         if self.is_element_exsist(*self.locator.CREATELISTBUTTON):
             self.click(*self.locator.WISHLISTSELETE)
