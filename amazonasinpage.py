@@ -66,6 +66,8 @@ class AmazonAsinPage(AmazonPage):
         else:
             if self.is_element_exsist("//*[@id=\'a-popover-3\']"):
                 print("0000000000000\n")
+            if self.is_element_exsist(*self.locator.WISHLISTSELETE):
+                print("sdfds\n")
             print("zzzzzzzzzzz\n")
 
         print("添加心愿卡。。。。\n")
