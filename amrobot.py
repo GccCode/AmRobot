@@ -307,7 +307,6 @@ if __name__ == "__main__":
             proxy_socks_argument = '--proxy-server=\"socks5://' + host + ":" + port + "\""
             print(proxy_socks_argument)
             option = webdriver.ChromeOptions()
-            option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
             option.add_argument(proxy_socks_argument)
             driver = webdriver.Chrome(chrome_options=option)
             input("按下回车键关闭浏览器....\n")
