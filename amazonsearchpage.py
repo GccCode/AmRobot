@@ -28,6 +28,22 @@ class AmazonSearchPage(AmazonPage):
                 self.enter_next_page(3000, 5000)
         return False
 
+    def enter_random_product(self, asin, begin, end):
+        index = 0
+        asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
+        for asinresult in asinresults:
+            if asinresult.get_attribute('data-asin') == asin:
+                tmp = random.randint(0, (len(asinresults) - 1))
+                print("tmp = " + str(tmp) + "\n")
+                print("index = " + str(index) + "\n")
+                while tmp == index:
+                    tmp = random.randint(0, (len(asinresults) - 1))
+
+                currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 8000)
+                self.back_prev_page(currenthandle, begin, end)
+            else:
+                index += 1
+
     def find_target_asin(self, asin, type):
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         for asinresult in asinresults:
@@ -111,6 +127,7 @@ class AmazonSearchPage(AmazonPage):
                 self.click_asin_by_title_jp(asinresult, asin)
 
         self.random_sleep(begin, end)
+        return self.driver.current_window_handle
 
     def find_asin_ads(self, asin):
         return
@@ -121,9 +138,6 @@ class AmazonSearchPage(AmazonPage):
     def close_page(self):
         self.driver.close()
 
-    def save_page(self):
-        return self.driver.current_window_handle
-
     def switch_to_new_page(self, currenthandle):
         handles = self.driver.window_handles  # 获取当前窗口句柄集合（列表类型）
         for handle in handles:  # 切换窗口（切换到搜狗）
@@ -131,9 +145,15 @@ class AmazonSearchPage(AmazonPage):
                 self.driver.switch_to_window(handle)
                 break
 
-    def restore_page(self, handle, begin, end):
-        self.driver.switch_to_window(handle)
-        self.random_sleep(begin, end)
+    def back_prev_page(self, handle, begin, end):
+        country = self.cf.get("account", "country")
+        if country == "jp":
+            self.switch_to_new_page(handle)
+            self.close_page()
+            self.driver.switch_to_window(handle)
+            self.random_sleep(begin, end)
+        elif country == "us":
+            self.navigation_back(begin, end)
 
     def enter_next_page(self, begin, end):
         self.click(*self.locator.PAGENEXTSTRING)

@@ -150,13 +150,12 @@ if __name__ == "__main__":
                         print("the item is sponsored..\n")
                     if searchpage.is_asin_amazon_choice(asinresult, asin):
                         print("the item is amazon choice..\n")
-                    currenthandle = searchpage.save_page()
-                    searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
-                    searchpage.switch_to_new_page(currenthandle)
-                    searchpage.close_page()
-                    searchpage.restore_page(currenthandle, 3000, 5000)
+                    searchpage.enter_random_product(asin, 3000, 5000)
+                    searchpage.enter_random_product(asin, 3000, 5000)
+                    currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                    searchpage.back_prev_page(currenthandle, 3000, 5000)
                     searchpage.enter_next_page(3000, 5000)
-                    page.random_walk(15)
+                    page.random_walk(2)
 
             except Exception as err:
                 print(str(err))

@@ -63,6 +63,10 @@ class AmazonPage(BaseAction):
 
         self.random_sleep(begin, end)
 
+    def navigation_back(self, begin, end):
+        self.driver.back()
+        self.random_sleep(begin, end)
+
     def random_walk(self, count):
         i = 0
         while i < count:
