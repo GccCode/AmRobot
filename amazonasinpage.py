@@ -29,6 +29,7 @@ class AmazonAsinPage(AmazonPage):
         if self.is_element_exsist(*self.locator.IMAGES):
             print("xxxxxxxxx")
         else:
+            self.random_sleep(15000, 20000)
             if self.is_element_exsist(*self.locator.TESTIMAGES):
                 print("90illkj\n")
             else:
