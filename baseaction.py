@@ -31,6 +31,22 @@ class BaseAction(object):
         finally:
             return status
 
+    def  wait_element_display(self, timeout, begin, end, *locator):
+        status = False
+        count = 0
+        while status == False:
+            try:
+                self.driver.find_element(*locator)
+            except NoSuchElementException as msg:
+                status = False
+                time.sleep(1)
+                count += 1
+                if count == timeout:
+                    return False
+            else:
+                self.random_sleep(begin, end)
+                return True
+
     def hover(self, *locator):
         element = self.driver.find_element(*locator)
         hover = ActionChains(self.driver).move_to_element(element)

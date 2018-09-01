@@ -4,6 +4,8 @@
 
 import  sys
 import io
+import base64
+import configparser
 from selenium import webdriver
 from amazonpage import AmazonPage
 from amazonregisterpage import AmazonRegisterPage
@@ -14,6 +16,27 @@ from amazonsigninpage import AmazonSignInPage
 from amazonsearchpage import  AmazonSearchPage
 from amazonasinpage import  AmazonAsinPage
 
+
+def encry(cnf_org, cnf_encry):
+    f_org = open(cnf_org, 'r')
+    content = f_org.read()
+    content1 = content.encode(encoding='utf-8')
+    content2 = base64.b64encode(content1)
+    print("加密后内容：\n")
+    print(content2)
+    f_org.close()
+    with open(cnf_encry, 'wb+') as f_org:
+        f_org.write(content2)
+
+
+def deci(cnf_now, cnf_deci):
+    f_now = open(cnf_now, 'r')
+    content = f_now.read()
+    content1 = base64.b64decode((content))
+    print("解密后内容：\n")
+    print(content1)
+    with open(cnf_deci, 'wb+') as f_now:
+        f_now.write(content1)
 
 if __name__ == "__main__":
     #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
@@ -301,10 +324,9 @@ if __name__ == "__main__":
                     driver.close()
                     driver.quit()
         elif options == "11":
-            host = input("请输入ip：")
-            port = input("请输入端口：")
+            host_port = input("请输入ip-port：")
             ua = input("请选择UserAgent：")
-            proxy_socks_argument = '--proxy-server=socks5://' + host + ":" + port
+            proxy_socks_argument = '--proxy-server=socks5://' + host_port
             print(proxy_socks_argument)
             option = webdriver.ChromeOptions()
             option.add_argument(proxy_socks_argument)
@@ -316,6 +338,9 @@ if __name__ == "__main__":
                 option.add_argument('--user-agent=Mozilla/5.0 (Linux; U; Android 2.3.6; en-us; Nexus S Build/GRK39F) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1')
             elif ua == "4":
                 option.add_argument('--user-agent=Mozilla/5.0 (Linux; U; Android 4.0.2; en-us; Galaxy Nexus Build/ICL53F) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30')
+            else:
+                option.add_argument(
+                    r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
             driver = webdriver.Chrome(chrome_options=option)
             driver.get("http://www.whatsmyuseragent.com/")
             input("按下回车键关闭浏览器....\n")
