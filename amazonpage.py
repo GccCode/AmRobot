@@ -81,7 +81,7 @@ class AmazonPage(BaseAction):
             i += 1
 
         t2 = tm.time()
-        print("random walk次数：" + str(count) + "\n")
+        print("random walk次数：" + str(count) + " + 总耗时： " + format(t2 - t1))
 
     def enter_signin_page(self, begin, end):
         self.hover(*self.locator.ACCOUNT)

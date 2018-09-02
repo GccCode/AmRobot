@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import time
+import time as tm
 import win32api
 import win32con
 import pyautogui
@@ -87,6 +88,7 @@ class BaseAction(object):
         pyautogui.moveTo(x, y, move_time)
 
     def random_mouse_move(self):
+        t1 = tm.time()
         move_count = 0
         count = random.randint(1, 3)
         while move_count < count:
@@ -99,7 +101,11 @@ class BaseAction(object):
             self.random_sleep(500, 1500)
             move_count += 1
 
+        t2 = tm.time()
+        print("random_mouse_move-总耗时：" + format(t2 - t1))
+
     def random_mouse_scoll(self):
+        t1 = tm.time()
         scroll_count = 0
         count = random.randint(1, 3)
         tmp = random.randint(1, 2)
@@ -111,6 +117,9 @@ class BaseAction(object):
             self.mouse_scoll(direction)
             self.random_sleep(500, 1500)
             scroll_count += 1
+
+        t2 = tm.time()
+        print("random_mouse_move-总耗时：" + format(t2 - t1))
 
     def mouse_scoll(self, direction):
         scroll_count = random.randint(300, 800)

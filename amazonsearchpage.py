@@ -5,6 +5,7 @@
 from amazonpage import AmazonPage
 from locator import AmazonSearchPageLocator
 import configparser
+import time as tm
 from win32api import GetSystemMetrics
 from selenium.common.exceptions import NoSuchElementException
 import random
@@ -36,12 +37,15 @@ class AmazonSearchPage(AmazonPage):
             self.enter_random_product(False, count, begin, end)
 
     def enter_random_product(self, asin, count, begin, end):
+        t1 = tm.time()
         index = 0
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         if asin == False:
             tmp = random.randint(0, (len(asinresults) - 1))
             currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
-            self.random_walk(count)
+            random_status = random.randint(1, 2)
+            if random_status == "2":
+                self.random_walk(count)
             self.back_prev_page_by_country(currenthandle, begin, end)
             print("访问当前页面任意产品。。。\n")
         else:
@@ -54,12 +58,16 @@ class AmazonSearchPage(AmazonPage):
                         tmp = random.randint(0, (len(asinresults) - 1))
 
                     currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
-                    self.random_walk(count)
+                    random_status = random.randint(1, 2)
+                    if random_status == "2":
+                        self.random_walk(count)
                     self.back_prev_page_by_country(currenthandle, begin, end)
                     break
                 else:
                     index += 1
             print("访问当前页面除目标产品以外的任意产品。。。。\n")
+            t2 = tm.time()
+            print("random_mouse_move-总耗时：" + format(t2 - t1))
 
     def find_target_asin(self, asin, type):
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
