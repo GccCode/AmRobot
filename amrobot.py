@@ -216,14 +216,15 @@ if __name__ == "__main__":
                                 t1 = tm.time()
                                 searchpage.enter_random_product(asin, random.randint(10, 20), 3000, 5000)
                                 t2 = tm.time()
-                                print("第一次货比耗时" + format(t2 - t1))
+                                print("第1次货比耗时" + format(t2 - t1))
                                 t1 = tm.time()
                                 searchpage.enter_random_product(asin, random.randint(10, 20), 3000, 5000)
                                 t2 = tm.time()
-                                print("第二次货比耗时" + format(t2 - t1))
+                                print("第2次货比耗时" + format(t2 - t1))
                                 asinresult = searchpage.find_target_product(asin, type, 5)
                                 if asinresult != False:
                                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                                    page.random_walk(random.randint(50, 80))
                                     searchpage.back_prev_page_by_country(currenthandle, 3000, 5000)
                                 else:
                                     print("找不到产品！！！！\n")
@@ -464,7 +465,7 @@ if __name__ == "__main__":
                         type = cf.get("search", "type")
                         asinresult = searchpage.find_target_product(asin, type, page)
                         if asinresult != False:
-                            searchpage.enter_random_products(random.randint(2, 4), random.randint(30, 50), 8000, 15000)
+                            searchpage.enter_random_products(random.randint(2, 4), random.randint(20, 40), 8000, 15000)
                             asinresult = searchpage.find_target_product(asin, type, page)
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
@@ -476,29 +477,29 @@ if __name__ == "__main__":
                     if variation_setup == "1":
                         input("请进行手动选择目标变体，完成后按回车键继续自动化！！！：")
 
-                    amazonpage.random_walk(random.randint(100, 300))
+                    amazonpage.random_walk(random.randint(50, 80))
                     asinpage = AmazonAsinPage(driver)
-                    searchpage.switch_to_new_page() #切换到产品页handle
-                    asinpage_handle = amazonpage.get_currenthandle()
+                    searchpage.switch_to_new_page(searchpage_handle) #切换到产品页handle
 
                     review_view = cf.get("review_view", "status")
                     if review_view == "1":
-                        pass
+                        asinpage.review_all(3000, 5000)
+                        amazonpage.navigation_back(3000, 5000)
                     qa_submit = cf.get("qa_submit", "status")
                     if qa_submit == "1":
                         content = cf.get("qa_submit", "content")
                         asinpage.ask_qa(content, 3000, 5000)
-                        searchpage.back_prev_page_by_type(asinpage_handle, "current", 3000, 5000)
+                        amazonpage.navigation_back(3000, 5000)
 
                     wishlist = cf.get("wishlist", "status")
                     if wishlist == "1":
                         asinpage.add_wishlist(5000, 8000)
-                        searchpage.back_prev_page_by_type(asinpage_handle, "current", 3000, 5000)
 
                     addcart = cf.get("addcart", "status")
                     if addcart == "1":
                         asinpage.add_cart(3000, 5000)
-                        searchpage.back_prev_page_by_type(asinpage_handle, "current", 3000, 5000)
+
+                    searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
 
                     amazonpage.random_walk(random.randint(50, 100))
         else:

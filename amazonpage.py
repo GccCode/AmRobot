@@ -81,7 +81,6 @@ class AmazonPage(BaseAction):
             i += 1
 
         t2 = tm.time()
-        print("耗时" + format(t2 - t1) + "\n")
         print("random walk次数：" + str(count) + "\n")
 
     def enter_signin_page(self, begin, end):
