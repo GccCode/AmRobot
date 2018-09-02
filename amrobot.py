@@ -467,10 +467,10 @@ if __name__ == "__main__":
                         page = cf.get("search", "page")
                         asin = cf.get("search", "asin")
                         type = cf.get("search", "type")
-                        asinresult = searchpage.find_target_product(asin, type, page)
+                        asinresult = searchpage.find_target_product(asin, type, int(page))
                         if asinresult != False:
                             searchpage.enter_random_products(random.randint(2, 4), random.randint(15, 30), 8000, 15000)
-                            asinresult = searchpage.find_target_product(asin, type, page)
+                            asinresult = searchpage.find_target_product(asin, type, int(page))
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                             else:
