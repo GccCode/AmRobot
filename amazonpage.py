@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-import time
+import time as tm
 import random
 from selenium import webdriver
 from baseaction import BaseAction
@@ -50,7 +50,7 @@ class AmazonPage(BaseAction):
 
     def enter_wishlist(self):
         self.hover(*self.locator.ACCOUNT)
-        self.random_sleep(random.randint(1000, 2000) / 1000)
+        self.random_sleep(1000, 2000)
         self.click(*self.locator.WISHLIST)
 
     def enter_cart(self):
@@ -73,11 +73,16 @@ class AmazonPage(BaseAction):
         self.random_sleep(begin, end)
 
     def random_walk(self, count):
+        t1 = tm.time()
         i = 0
         while i < count:
             self.random_mouse_move()
             self.random_mouse_scoll()
             i += 1
+
+        t2 = tm.time()
+        print("耗时" + format(t2 - t1) + "\n")
+        print("random walk次数：" + str(count) + "\n")
 
     def enter_signin_page(self, begin, end):
         self.hover(*self.locator.ACCOUNT)

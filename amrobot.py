@@ -6,6 +6,7 @@ import  sys
 import io
 import random
 import os
+import time as tm
 import base64
 import configparser
 from selenium import webdriver
@@ -211,8 +212,14 @@ if __name__ == "__main__":
                                     print("the item is sponsored..\n")
                                 if searchpage.is_asin_amazon_choice(asinresult, asin):
                                     print("the item is amazon choice..\n")
+                                t1 = tm.time()
                                 searchpage.enter_random_product(asin, random.randint(10, 20), 3000, 5000)
+                                t2 = tm.time()
+                                print("第一次货比耗时" + format(t2 - t1))
+                                t1 = tm.time()
                                 searchpage.enter_random_product(asin, random.randint(10, 20), 3000, 5000)
+                                t2 = tm.time()
+                                print("第二次货比耗时" + format(t2 - t1))
                                 asinresult = searchpage.find_target_product(asin, type, 5)
                                 if asinresult != False:
                                     currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
