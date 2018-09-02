@@ -282,7 +282,7 @@ if __name__ == "__main__":
                                 asinpage = AmazonAsinPage(driver)
                                 searchpage.switch_to_new_page(currenthandle)
                                 asinpage.add_wishlist(5000, 8000)
-                                searchpage.back_prev_page_by_type(currenthandle, "new", 3000, 5000)
+                                searchpage.back_prev_page_by_type(currenthandle, "current", 3000, 5000)
 
                         except Exception as err:
                             print(str(err))
@@ -320,7 +320,7 @@ if __name__ == "__main__":
                                 asinpage = AmazonAsinPage(driver)
                                 searchpage.switch_to_new_page(currenthandle)
                                 asinpage.add_cart(3000, 5000)
-                                searchpage.back_prev_page_by_type(currenthandle, "new", 3000, 5000)
+                                searchpage.back_prev_page_by_type(currenthandle, "current", 3000, 5000)
 
                         except Exception as err:
                             print(str(err))
