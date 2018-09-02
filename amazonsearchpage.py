@@ -179,7 +179,7 @@ class AmazonSearchPage(AmazonPage):
             self.switch_to_new_page(prev_handle)
             self.navigation_back(begin, end)
             self.driver.switch_to_window(prev_handle)
-        print("返回上一页。。。 type：" + type + "\n")
+        print("返回上一页。。。\n")
         self.random_sleep(begin, end)
 
 

@@ -387,7 +387,7 @@ if __name__ == "__main__":
                             r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
                     driver = webdriver.Chrome(chrome_options=option)
                     driver.get("http://www.whatsmyuseragent.com/")
-                    input("按下回车键关闭浏览器....\n")
+                    input("按下回车键关闭浏览器....")
                     driver.close()
                     driver.quit()
                 else:
