@@ -26,7 +26,7 @@ class AmazonSearchPage(AmazonPage):
                 print("目标产品被找到的页数：" + str(page) + "\n")
                 return asinresult
             else:
-                self.enter_random_products(random.randint(1, 3), random.randint(30, 50), 5000, 8000)
+                self.enter_random_products(random.randint(0, 2), random.randint(30, 50), 5000, 8000)
                 self.enter_next_page(3000, 5000)
         return False
 

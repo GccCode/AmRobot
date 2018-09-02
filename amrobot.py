@@ -220,6 +220,8 @@ if __name__ == "__main__":
                                     searchpage.enter_next_page(3000, 5000)
                                     searchpage.enter_random_products(3, random.randint(10, 20), 3000, 5000)
                                     page.random_walk(5)
+                                else:
+                                    print("找不到产品！！！！\n")
 
                         except Exception as err:
                             print(str(err))
@@ -453,6 +455,9 @@ if __name__ == "__main__":
                             asinresult = searchpage.find_target_product(asin, type, page)
                             if asinresult != False:
                                 searchpage_handle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                            else:
+                                print("找不到产品！！！！\n")
+                                sys.exit(1)
 
                     variation_setup = cf.get("search", "variation_setup")
                     if variation_setup == "1":
