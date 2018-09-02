@@ -35,6 +35,7 @@ class AmazonAsinPageLocator(AmazonPageLocator):
     ADDWISHLISTSUBMITBUTTON = (By.ID, 'add-to-wishlist-button-submit')
     CREATELISTBUTTON = (By.XPATH, '//*[@id=\'WLNEW_cancel\']/../../span[3]/span/span')
     WISHLISTSELETE = (By.XPATH, '//*[@id=\'WLNEW_list_type_WL\']/../span')
+    WISHLISTCONTINUE = (By.ID, 'WLHUC_continue')
     QATEXT = (By.XPATH, '//*[@id=\'ask-dp-search_feature_div\']/div/div/div/div/form/span[position()=1]/span/span/span/span/span/div/input')
     QAENTRYBUTTON_US = (By.CSS_SELECTOR, '[value=\'Ask the Community\']')
     QAENTRYBUTTON_JP = (By.CSS_SELECTOR, '[value=\'コミュニティに尋ねる\']')
