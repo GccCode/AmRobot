@@ -148,6 +148,7 @@ class AmazonSearchPage(AmazonPage):
 
         print("进入产品页面 + " + asin + "\n")
         self.random_sleep(begin, end)
+        return self.driver.current_window_handle
 
     def close_page(self):
         self.driver.close()
