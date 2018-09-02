@@ -44,12 +44,13 @@ def deci(cnf_now, cnf_deci):
 def customized_broswer():
     cf = configparser.ConfigParser()
     cf.read("account.txt")
-
-    host_port = cf.get("proxy", "proxy")
-    ua = cf.get("broswer", "type")
-    proxy_socks_argument = '--proxy-server=socks5://' + host_port
     option = webdriver.ChromeOptions()
-    option.add_argument(proxy_socks_argument)
+    status = cf.get("proxy", "status")
+    if status == "1":
+        host_port = cf.get("proxy", "proxy")
+        ua = cf.get("broswer", "type")
+        proxy_socks_argument = '--proxy-server=socks5://' + host_port
+        option.add_argument(proxy_socks_argument)
     if ua == "2":
         option.add_argument(
             '--user-agent=Mozilla/5.0 (Windows NT 6.1; rv:61.0) Gecko/20100101 Firefox/61.0')
