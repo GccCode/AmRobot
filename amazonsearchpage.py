@@ -148,20 +148,19 @@ class AmazonSearchPage(AmazonPage):
 
         print("进入产品页面 + " + asin + "\n")
         self.random_sleep(begin, end)
-        return self.driver.current_window_handle
 
     def close_page(self):
         self.driver.close()
 
     def switch_to_new_page(self):
         handles = self.driver.window_handles  # 获取当前窗口句柄集合（列表类型）
-        # for handle in handles:  # 切换窗口（切换到搜狗）
-        #     if handle != currenthandle:
-        #         self.driver.switch_to_window(handle)
-        #         break
+        for handle in handles:  # 切换窗口（切换到搜狗）
+            if handle != currenthandle:
+                self.driver.switch_to_window(handle)
+                break
 
-        # 切换到当前最新打开的窗口
-        self.driver.switch_to.window(handles[-1])
+        # # 切换到当前最新打开的窗口
+        # self.driver.switch_to.window(handles[-1])
 
     def back_prev_page_by_country(self, prev_handle, begin, end):
         country = self.cf.get("account", "country")
@@ -175,12 +174,13 @@ class AmazonSearchPage(AmazonPage):
             self.switch_to_new_page()
             self.close_page()
             self.driver.switch_to_window(prev_handle)
-            self.random_sleep(begin, end)
         elif type == "current":
             self.switch_to_new_page()
             self.navigation_back(begin, end)
             self.driver.switch_to_window(prev_handle)
         print("返回上一页。。。 type：" + type + "\n")
+        self.random_sleep(begin, end)
+
 
     def enter_next_page(self, begin, end):
         print("翻到下一页。。。\n")

@@ -55,9 +55,6 @@ class AmazonAsinPage(AmazonPage):
         self.random_sleep(1000, 2000)
         if self.is_element_exsist(*self.locator.WISHLISTCONTINUE) == True:
             self.click(*self.locator.WISHLISTCONTINUE)
-            print("can find continue\n")
-        else:
-            print("can't find continue\n")
         if self.is_element_exsist(*self.locator.CREATELISTBUTTON):
             if country == "us":
                 self.click(*self.locator.WISHLISTSELETE)

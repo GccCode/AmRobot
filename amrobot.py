@@ -205,6 +205,7 @@ if __name__ == "__main__":
                             page = AmazonPage(driver)
                             page.enter_amazon_page(3000, 5000)
                             page.search_asin(keyword, 5000, 8000)
+                            currenthandle = page.get_currenthandle()
                             searchpage = AmazonSearchPage(driver)
                             asinresult = searchpage.find_target_product(asin, type, 5)
                             if asinresult != False:
@@ -222,17 +223,15 @@ if __name__ == "__main__":
                                 print("第二次货比耗时" + format(t2 - t1))
                                 asinresult = searchpage.find_target_product(asin, type, 5)
                                 if asinresult != False:
-                                    currenthandle= searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                                    searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                     searchpage.back_prev_page_by_country(currenthandle, 3000, 5000)
-                                    searchpage.enter_next_page(3000, 5000)
-                                    searchpage.enter_random_products(3, random.randint(10, 20), 3000, 5000)
-                                    page.random_walk(5)
                                 else:
                                     print("找不到产品！！！！\n")
 
                         except Exception as err:
                             print(str(err))
                         finally:
+                            input("请按回车键继续推出！")
                             driver.close()
                             driver.quit()
                 elif options == "7":
@@ -274,15 +273,17 @@ if __name__ == "__main__":
                             searchpage = AmazonSearchPage(driver)
                             asinresult = searchpage.find_target_product(asin, type, 5)
                             if asinresult != False:
-                                currenthandle= searchpage.enter_asin_page(asinresult, asin, 5000, 10000)
+                                currenthandle = page.get_currenthandle()
+                                searchpage.enter_asin_page(asinresult, asin, 5000, 10000)
                                 asinpage = AmazonAsinPage(driver)
                                 searchpage.switch_to_new_page()
                                 asinpage.add_wishlist(5000, 8000)
-                                searchpage.back_prev_page_by_type(currenthandle, "current", 3000, 5000)
+                                searchpage.back_prev_page_by_type(currenthandle, "new", 3000, 5000)
 
                         except Exception as err:
                             print(str(err))
                         finally:
+                            input("请按回车键继续推出！！！")
                             driver.close()
                             driver.quit()
                 elif options == "9":
@@ -307,18 +308,20 @@ if __name__ == "__main__":
                             page = AmazonPage(driver)
                             page.enter_amazon_page(3000, 5000)
                             page.search_asin(keyword, 3000, 5000)
+                            currenthandle = page.get_currenthandle()
                             searchpage = AmazonSearchPage(driver)
                             asinresult = searchpage.find_target_product(asin, type, 5)
                             if asinresult != False:
-                                currenthandle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                                searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                 asinpage = AmazonAsinPage(driver)
                                 searchpage.switch_to_new_page()
                                 asinpage.add_cart(3000, 5000)
-                                searchpage.back_prev_page_by_type(currenthandle, "current", 3000, 5000)
+                                searchpage.back_prev_page_by_type(currenthandle, "new", 3000, 5000)
 
                         except Exception as err:
                             print(str(err))
                         finally:
+                            input("请按回车键继续推出！！！")
                             driver.close()
                             driver.quit()
                 elif options == "10":
@@ -344,10 +347,11 @@ if __name__ == "__main__":
                             page = AmazonPage(driver)
                             page.enter_amazon_page(3000, 5000)
                             page.search_asin(keyword, 3000, 5000)
+                            currenthandle = page.get_currenthandle()
                             searchpage = AmazonSearchPage(driver)
                             asinresult = searchpage.find_target_product(asin, type, 5)
                             if asinresult != False:
-                                currenthandle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                                searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                 asinpage = AmazonAsinPage(driver)
                                 searchpage.switch_to_new_page()
                                 asinpage.ask_qa(content, 3000, 5000)
@@ -356,6 +360,7 @@ if __name__ == "__main__":
                         except Exception as err:
                             print(str(err))
                         finally:
+                            input("请按回车键继续推出！！！")
                             driver.close()
                             driver.quit()
                 elif options == "11":
@@ -450,6 +455,7 @@ if __name__ == "__main__":
                     else:
                         keyword = cf.get("search", "keyword")
                         amazonpage.search_asin(keyword, 5000, 8000)
+                        searchpage_handle = amazonpage.get_currenthandle()
                         condition_setup = cf.get("search", "condition_setup")
                         if condition_setup == "1":
                             input("请进行手动卡位，完成后按回车键继续自动搜索产品！！！：")
@@ -461,7 +467,7 @@ if __name__ == "__main__":
                             searchpage.enter_random_products(random.randint(2, 4), random.randint(30, 50), 8000, 15000)
                             asinresult = searchpage.find_target_product(asin, type, page)
                             if asinresult != False:
-                                searchpage_handle = searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
+                                searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                             else:
                                 print("找不到产品！！！！\n")
                                 sys.exit(1)
