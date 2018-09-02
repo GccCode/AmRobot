@@ -20,22 +20,6 @@ from amazonsearchpage import  AmazonSearchPage
 from amazonasinpage import  AmazonAsinPage
 
 
-def customized_broswer():
-    cf = configparser.ConfigParser()
-    cf.read("account.txt")
-
-    host_port = cf.get("proxy", "proxy")
-    ua = cf.get("broswer", "type")
-    proxy_socks_argument = '--proxy-server=socks5://' + host_port
-    option = webdriver.ChromeOptions()
-    option.add_argument(proxy_socks_argument)
-    if ua == "2":
-        option.add_argument(
-            '--user-agent=Mozilla/5.0 (Windows NT 6.1; rv:61.0) Gecko/20100101 Firefox/61.0')
-    option.add_argument(
-        r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-    return webdriver.Chrome(chrome_options=option)
-
 def encry(cnf_org, cnf_encry):
     f_org = open(cnf_org, 'r')
     content = f_org.read()
@@ -56,6 +40,22 @@ def deci(cnf_now, cnf_deci):
     print(content1)
     with open(cnf_deci, 'wb+') as f_now:
         f_now.write(content1)
+
+def customized_broswer():
+    cf = configparser.ConfigParser()
+    cf.read("account.txt")
+
+    host_port = cf.get("proxy", "proxy")
+    ua = cf.get("broswer", "type")
+    proxy_socks_argument = '--proxy-server=socks5://' + host_port
+    option = webdriver.ChromeOptions()
+    option.add_argument(proxy_socks_argument)
+    if ua == "2":
+        option.add_argument(
+            '--user-agent=Mozilla/5.0 (Windows NT 6.1; rv:61.0) Gecko/20100101 Firefox/61.0')
+    option.add_argument(
+        r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+    return webdriver.Chrome(chrome_options=option)
 
 if __name__ == "__main__":
     #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
@@ -396,10 +396,10 @@ if __name__ == "__main__":
             driver = customized_broswer()
             driver.set_page_load_timeout(60)
             driver.set_script_timeout(60)
-            deci("_task.txt", "task.txt")
+            # deci("_task.txt", "task.txt")
             cf = configparser.ConfigParser()
             cf.read("task.txt")
-            os.remove("task.txt")
+            #os.remove("task.txt")
             amazonpage = AmazonPage(driver)
             register = cf.get("register", "status")
             if register == "1":
