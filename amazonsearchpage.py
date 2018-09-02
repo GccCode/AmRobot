@@ -171,11 +171,11 @@ class AmazonSearchPage(AmazonPage):
 
     def back_prev_page_by_type(self, prev_handle, type, begin, end):
         if type == "new":
-            self.switch_to_new_page()
+            self.switch_to_new_page(prev_handle)
             self.close_page()
             self.driver.switch_to_window(prev_handle)
         elif type == "current":
-            self.switch_to_new_page()
+            self.switch_to_new_page(prev_handle)
             self.navigation_back(begin, end)
             self.driver.switch_to_window(prev_handle)
         print("返回上一页。。。 type：" + type + "\n")
