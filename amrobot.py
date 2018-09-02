@@ -475,7 +475,7 @@ if __name__ == "__main__":
                                 entry_type = "normal"
                             asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                             if asinresult != False:
-                                searchpage.enter_random_products(random.randint(2, 4), random.randint(10, 30), 8000, 15000)
+                                searchpage.enter_random_products(random.randint(2, 3), random.randint(8, 15), 5000, 8000)
                                 asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                                 if asinresult != False:
                                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
@@ -487,7 +487,7 @@ if __name__ == "__main__":
                         if variation_setup == "1":
                             input("请进行手动选择目标变体，完成后按回车键继续自动化！！！：")
 
-                        amazonpage.random_walk(random.randint(30, 50))
+                        amazonpage.random_walk(random.randint(20, 35))
                         asinpage = AmazonAsinPage(driver)
                         searchpage.switch_to_new_page(searchpage_handle) #切换到产品页handle
 
@@ -511,7 +511,7 @@ if __name__ == "__main__":
 
                         searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
 
-                        amazonpage.random_walk(random.randint(10, 20))
+                        amazonpage.random_walk(random.randint(5, 7))
             except Exception as err:
                 print(str(err))
             finally:

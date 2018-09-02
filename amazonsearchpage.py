@@ -26,7 +26,7 @@ class AmazonSearchPage(AmazonPage):
                 print("目标产品被找到的页数：" + str(page) + "\n")
                 return asinresult
             else:
-                self.enter_random_products(random.randint(0, 2), random.randint(10, 20), 5000, 8000)
+                self.enter_random_products(random.randint(0, 2), random.randint(8, 16), 3000, 5000)
                 self.enter_next_page(3000, 5000)
         return False
 
@@ -40,7 +40,7 @@ class AmazonSearchPage(AmazonPage):
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         if asin == False:
             tmp = random.randint(0, (len(asinresults) - 1))
-            currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 10000)
+            currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
             self.random_walk(count)
             self.back_prev_page_by_country(currenthandle, begin, end)
             print("访问当前页面任意产品。。。\n")
@@ -53,7 +53,7 @@ class AmazonSearchPage(AmazonPage):
                     while tmp == index:
                         tmp = random.randint(0, (len(asinresults) - 1))
 
-                    currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 10000)
+                    currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
                     self.random_walk(count)
                     self.back_prev_page_by_country(currenthandle, begin, end)
                     break
