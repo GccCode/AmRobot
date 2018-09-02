@@ -224,7 +224,10 @@ if __name__ == "__main__":
                                 asinresult = searchpage.find_target_product(asin, type, 5)
                                 if asinresult != False:
                                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
-                                    page.random_walk(random.randint(50, 80))
+                                    t1 = tm.time()
+                                    page.random_walk(random.randint(30, 60))
+                                    t2 = tm.time()
+                                    print("浏览产品耗时：" + format(t2 - t1))
                                     searchpage.back_prev_page_by_country(currenthandle, 3000, 5000)
                                 else:
                                     print("找不到产品！！！！\n")
@@ -477,7 +480,7 @@ if __name__ == "__main__":
                     if variation_setup == "1":
                         input("请进行手动选择目标变体，完成后按回车键继续自动化！！！：")
 
-                    amazonpage.random_walk(random.randint(50, 80))
+                    amazonpage.random_walk(random.randint(30, 60))
                     asinpage = AmazonAsinPage(driver)
                     searchpage.switch_to_new_page(searchpage_handle) #切换到产品页handle
 
@@ -501,6 +504,6 @@ if __name__ == "__main__":
 
                     searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
 
-                    amazonpage.random_walk(random.randint(50, 100))
+                    amazonpage.random_walk(random.randint(10, 20))
         else:
             print("你的输入有误，请重新输入对应测试项的数字号码！！！！")
