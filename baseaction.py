@@ -83,12 +83,12 @@ class BaseAction(object):
             time.sleep(random.randint(begin, end) / 1000)
 
     def mouse_move(self, x, y):
-        move_time = random.randint(100, 1500) / 1000
+        move_time = random.randint(100, 500) / 1000
         pyautogui.moveTo(x, y, move_time)
 
     def random_mouse_move(self):
         move_count = 0
-        count = random.randint(1, 5)
+        count = random.randint(1, 3)
         while move_count < count:
             x = random.randint(0, int(self.screen_width / 3))
             y = random.randint(0, int(self.screen_heigth / 3)) + 200
@@ -96,12 +96,12 @@ class BaseAction(object):
                 y = y + 200
             move_time = random.randint(1, 20) * 1000 / 10000
             pyautogui.moveTo(x, y, move_time)
-            time.sleep(random.randint(1, 4))
+            self.random_sleep(500, 1500)
             move_count += 1
 
     def random_mouse_scoll(self):
         scroll_count = 0
-        count = random.randint(3, 5)
+        count = random.randint(1, 3)
         tmp = random.randint(1, 2)
         if tmp == 1:
             direction = -1
@@ -109,7 +109,7 @@ class BaseAction(object):
             direction = 1
         while scroll_count < count:
             self.mouse_scoll(direction)
-            self.random_sleep(1, 5)
+            self.random_sleep(500, 1500)
             scroll_count += 1
 
     def mouse_scoll(self, direction):
