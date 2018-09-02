@@ -43,7 +43,7 @@ def deci(cnf_now, cnf_deci):
 
 def customized_broswer():
     cf = configparser.ConfigParser()
-    cf.read("account.txt")
+    cf.read("info.txt")
     option = webdriver.ChromeOptions()
     status = cf.get("proxy", "status")
     if status == "1":
