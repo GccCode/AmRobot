@@ -59,10 +59,11 @@ class AmazonAsinPage(AmazonPage):
                 self.random_sleep(1000, 2000)
             self.click(*self.locator.CREATELISTBUTTON)
             self.random_sleep(3000, 5000)
-            if self.is_element_exsist(*self.locator.WISHLISTCONTINUE):
+            if self.is_element_exsist(*self.locator.WISHLISTCONTINUE) == True:
                 self.click(*self.locator.WISHLISTCONTINUE)
+                print("can find continue\n")
             else:
-                print("找不到continue\n")
+                print("can't find continue\n")
 
         print("添加心愿卡。。。。\n")
         self.random_sleep(begin, end)
