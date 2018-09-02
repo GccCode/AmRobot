@@ -152,7 +152,7 @@ class AmazonSearchPage(AmazonPage):
     def close_page(self):
         self.driver.close()
 
-    def switch_to_new_page(self):
+    def switch_to_new_page(self, currenthandle):
         handles = self.driver.window_handles  # 获取当前窗口句柄集合（列表类型）
         for handle in handles:  # 切换窗口（切换到搜狗）
             if handle != currenthandle:

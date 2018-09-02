@@ -270,13 +270,13 @@ if __name__ == "__main__":
                             page = AmazonPage(driver)
                             page.enter_amazon_page(3000, 5000)
                             page.search_asin(keyword, 3000, 5000)
+                            currenthandle = page.get_currenthandle()
                             searchpage = AmazonSearchPage(driver)
                             asinresult = searchpage.find_target_product(asin, type, 5)
                             if asinresult != False:
-                                currenthandle = page.get_currenthandle()
                                 searchpage.enter_asin_page(asinresult, asin, 5000, 10000)
                                 asinpage = AmazonAsinPage(driver)
-                                searchpage.switch_to_new_page()
+                                searchpage.switch_to_new_page(currenthandle)
                                 asinpage.add_wishlist(5000, 8000)
                                 searchpage.back_prev_page_by_type(currenthandle, "new", 3000, 5000)
 
@@ -314,7 +314,7 @@ if __name__ == "__main__":
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                 asinpage = AmazonAsinPage(driver)
-                                searchpage.switch_to_new_page()
+                                searchpage.switch_to_new_page(currenthandle)
                                 asinpage.add_cart(3000, 5000)
                                 searchpage.back_prev_page_by_type(currenthandle, "new", 3000, 5000)
 
@@ -353,7 +353,7 @@ if __name__ == "__main__":
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                 asinpage = AmazonAsinPage(driver)
-                                searchpage.switch_to_new_page()
+                                searchpage.switch_to_new_page(currenthandle)
                                 asinpage.ask_qa(content, 3000, 5000)
                                 searchpage.back_prev_page_by_type(currenthandle, "current", 3000, 5000)
 
