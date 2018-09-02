@@ -1,0 +1,47 @@
+[register]
+status = 0
+
+[login]
+status = 1
+
+[bill_address]
+status = 0
+type = 0
+
+[card]
+status = 0
+
+[fba_address]
+status = 0
+type = 1
+
+[prime]
+status = 0
+
+[random_view]
+status = 0
+
+[super_link]
+status = 0
+
+[search]
+status = 1
+keyword = echo dot mount
+condition_setup = 0
+variation_setup = 0
+asin = B075JS85K2
+type = 1
+page = 5
+
+[review_view]
+status = 1
+
+[qa_submit]
+status = 0
+
+[wishlist]
+status = 1
+
+[addcart]
+status = 0
+

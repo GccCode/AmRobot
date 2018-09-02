@@ -242,6 +242,7 @@ if __name__ == "__main__":
                 else:
                     filename = input("请输入保存文件名：")
                     cf.write(open((filename + ".txt"), 'w'))
+                    encry((filename + ".txt"),(filename + "-encry.txt"))
 
         elif action == "2":
             print("\n========== 解密文件菜单 ============")

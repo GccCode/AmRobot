@@ -67,6 +67,6 @@ class AmazonAsinPage(AmazonPage):
     def review_all(self, begin, end):
          self.click(*self.locator.REVIEWALL)
          self.random_sleep(1000, 2000)
-         self.random_walk(10)
+         self.random_walk(random.randint(5, 10))
          print("浏览评论。。。。\n")
 

@@ -20,7 +20,7 @@ from amazonsearchpage import  AmazonSearchPage
 from amazonasinpage import  AmazonAsinPage
 
 
-def customized_broswer(self):
+def customized_broswer():
     cf = configparser.ConfigParser()
     cf.read("account.txt")
 
@@ -406,13 +406,13 @@ if __name__ == "__main__":
                 amazonpage.enter_amazon_page(3000, 5000)
                 amazonpage.enter_register_page(3000, 5000)
                 registerpage = AmazonRegisterPage(driver)
-                registerpage.register(3000, 5000)
+                registerpage.register(5000, 10000)
             login = cf.get("login", "status")
             if login == "1":
                 amazonpage.enter_amazon_page(3000, 5000)
                 amazonpage.enter_signin_page(3000, 5000)
                 signinpage = AmazonSignInPage(driver)
-                signinpage.sign_in(3000, 5000)
+                signinpage.sign_in(5000, 10000)
             bill_address = cf.get("bill_address", "status")
             if bill_address == "1":
                 type = cf.get("bill_address", "type")
@@ -420,14 +420,14 @@ if __name__ == "__main__":
                 accountpage = AmazonAccountPage(driver)
                 accountpage.enter_address_page(3000, 5000)
                 addresspage = AmazonAddressPage(driver)
-                addresspage.add_address("bill", 3000, 5000)
+                addresspage.add_address("bill", 5000, 10000)
             card = cf.get("card", "status")
             if card == "1":
                 amazonpage.enter_account_page(3000, 5000)
                 accountpage = AmazonAccountPage(driver)
                 accountpage.enter_payment_page(3000, 5000)
                 paymentpage = AmazonPaymentPage(driver)
-                paymentpage.add_new_payment(3000, 5000)
+                paymentpage.add_new_payment(5000, 10000)
             fba_address = cf.get("fba_address", "status")
             if fba_address == "1":
                 type = cf.get("fba_address", "type")
@@ -435,17 +435,17 @@ if __name__ == "__main__":
                 accountpage = AmazonAccountPage(driver)
                 accountpage.enter_address_page(3000, 5000)
                 addresspage = AmazonAddressPage(driver)
-                addresspage.add_address("fba", 3000, 5000)
+                addresspage.add_address("fba", 5000, 10000)
             prime = cf.get("prime", "status")
             if prime == "1":
                 amazonpage.enter_amazon_page(3000, 5000)
-                amazonpage.register_prime(3000, 5000)
+                amazonpage.register_prime(5000, 10000)
             random_view = cf.get("random_view", "status")
             if random_view == "1":
                 keyword = cf.get("random_view", "keyword")
                 amazonpage.search_asin(keyword, 5000, 8000)
                 searchpage = AmazonSearchPage(driver)
-                searchpage.enter_random_products(3, random.randint(30, 50), 3000, 5000)
+                searchpage.enter_random_products(3, random.randint(15, 30), 3000, 5000)
             else:
                 searchpage = AmazonSearchPage(driver)
                 search = cf.get("search", "status")
@@ -462,13 +462,13 @@ if __name__ == "__main__":
                         searchpage_handle = amazonpage.get_currenthandle()
                         condition_setup = cf.get("search", "condition_setup")
                         if condition_setup == "1":
-                            input("请进行手动卡位，完成后按回车键继续自动搜索产品！！！：")
+                            input("请进行手动卡位，完成后按回车键继续自动搜索产品！！！")
                         page = cf.get("search", "page")
                         asin = cf.get("search", "asin")
                         type = cf.get("search", "type")
                         asinresult = searchpage.find_target_product(asin, type, page)
                         if asinresult != False:
-                            searchpage.enter_random_products(random.randint(2, 4), random.randint(20, 40), 8000, 15000)
+                            searchpage.enter_random_products(random.randint(2, 4), random.randint(15, 30), 8000, 15000)
                             asinresult = searchpage.find_target_product(asin, type, page)
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
@@ -480,7 +480,7 @@ if __name__ == "__main__":
                     if variation_setup == "1":
                         input("请进行手动选择目标变体，完成后按回车键继续自动化！！！：")
 
-                    amazonpage.random_walk(random.randint(30, 60))
+                    amazonpage.random_walk(random.randint(30, 50))
                     asinpage = AmazonAsinPage(driver)
                     searchpage.switch_to_new_page(searchpage_handle) #切换到产品页handle
 
