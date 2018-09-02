@@ -208,21 +208,21 @@ if __name__ == "__main__":
                             page.search_asin(keyword, 5000, 8000)
                             currenthandle = page.get_currenthandle()
                             searchpage = AmazonSearchPage(driver)
-                            asinresult = searchpage.find_target_product(page, asin, type, 5)
+                            asinresult = searchpage.find_target_product(asin, type, 5)
                             if asinresult != False:
                                 if searchpage.is_asin_sponsored(asinresult, asin):
                                     print("the item is sponsored..\n")
                                 if searchpage.is_asin_amazon_choice(asinresult, asin):
                                     print("the item is amazon choice..\n")
                                 t1 = tm.time()
-                                searchpage.enter_random_product(page, asin, random.randint(10, 20), 3000, 5000)
+                                searchpage.enter_random_product(asin, random.randint(10, 20), 3000, 5000)
                                 t2 = tm.time()
                                 print("第1次货比耗时" + format(t2 - t1))
                                 t1 = tm.time()
-                                searchpage.enter_random_product(page, asin, random.randint(10, 20), 3000, 5000)
+                                searchpage.enter_random_product(asin, random.randint(10, 20), 3000, 5000)
                                 t2 = tm.time()
                                 print("第2次货比耗时" + format(t2 - t1))
-                                asinresult = searchpage.find_target_product(page, asin, type, 5)
+                                asinresult = searchpage.find_target_product(asin, type, 5)
                                 if asinresult != False:
                                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                     t1 = tm.time()
@@ -277,7 +277,7 @@ if __name__ == "__main__":
                             page.search_asin(keyword, 3000, 5000)
                             currenthandle = page.get_currenthandle()
                             searchpage = AmazonSearchPage(driver)
-                            asinresult = searchpage.find_target_product(page, asin, type, 5)
+                            asinresult = searchpage.find_target_product(asin, type, 5)
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 5000, 10000)
                                 asinpage = AmazonAsinPage(driver)
@@ -315,7 +315,7 @@ if __name__ == "__main__":
                             page.search_asin(keyword, 3000, 5000)
                             currenthandle = page.get_currenthandle()
                             searchpage = AmazonSearchPage(driver)
-                            asinresult = searchpage.find_target_product(page, asin, type, 5)
+                            asinresult = searchpage.find_target_product(asin, type, 5)
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                 asinpage = AmazonAsinPage(driver)
@@ -354,7 +354,7 @@ if __name__ == "__main__":
                             page.search_asin(keyword, 3000, 5000)
                             currenthandle = page.get_currenthandle()
                             searchpage = AmazonSearchPage(driver)
-                            asinresult = searchpage.find_target_product(page, asin, type, 5)
+                            asinresult = searchpage.find_target_product(asin, type, 5)
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                 asinpage = AmazonAsinPage(driver)
@@ -471,10 +471,10 @@ if __name__ == "__main__":
                             entry_type = "sponsored"
                         elif type == "1":
                             entry_type = "normal"
-                        asinresult = searchpage.find_target_product(amazonpage, asin, entry_type, int(page))
+                        asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                         if asinresult != False:
-                            searchpage.enter_random_products(amazonpage, random.randint(2, 4), random.randint(15, 30), 8000, 15000)
-                            asinresult = searchpage.find_target_product(amazonpage, asin, entry_type, int(page))
+                            searchpage.enter_random_products(random.randint(2, 4), random.randint(15, 30), 8000, 15000)
+                            asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                             else:
