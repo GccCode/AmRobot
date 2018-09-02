@@ -171,8 +171,6 @@ class AmazonSearchPage(AmazonPage):
             self.back_prev_page_by_type(prev_handle, "current", begin, end)
 
     def back_prev_page_by_type(self, prev_handle, type, begin, end):
-        print("返回上一页。。。\n")
-        country = self.cf.get("account", "country")
         if type == "new":
             self.switch_to_new_page()
             self.close_page()
@@ -182,6 +180,7 @@ class AmazonSearchPage(AmazonPage):
             self.switch_to_new_page()
             self.navigation_back(begin, end)
             self.driver.switch_to_window(prev_handle)
+        print("返回上一页。。。 type：" + type + "\n")
 
     def enter_next_page(self, begin, end):
         print("翻到下一页。。。\n")
