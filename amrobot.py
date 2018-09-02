@@ -492,6 +492,7 @@ if __name__ == "__main__":
                     review_view = cf.get("review_view", "status")
                     if review_view == "1":
                         asinpage.review_all(3000, 5000)
+                        amazonpage.random_walk(random.randint(5, 10))
                         amazonpage.navigation_back(3000, 5000)
                     qa_submit = cf.get("qa_submit", "status")
                     if qa_submit == "1":
