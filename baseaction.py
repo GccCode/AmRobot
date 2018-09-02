@@ -2,8 +2,6 @@
 # -*- coding:utf-8 -*-
 
 import time
-import os
-import sys
 import win32api
 import win32con
 import pyautogui
@@ -19,9 +17,6 @@ class BaseAction(object):
         self.screen_width = GetSystemMetrics(0)
         self.screen_heigth = GetSystemMetrics(1)
 
-    def log_location(self):
-        print(sys._getframe().f_code.co_filename + " : " + sys._getframe().f_code.co_name + " : " + str(sys._getframe().f_lineno))
-
     def is_element_exsist(self, *locator):
         status = True
         try:
@@ -31,21 +26,16 @@ class BaseAction(object):
         finally:
             return status
 
-    def  wait_element_display(self, timeout, begin, end, *locator):
-        status = False
+    def  wait_element_match(self, timeout, displayed, begin, end, *locator):
         count = 0
-        while status == False:
-            try:
-                self.driver.find_element(*locator)
-            except NoSuchElementException as msg:
-                status = False
-                time.sleep(1)
-                count += 1
-                if count == timeout:
-                    return False
-            else:
-                self.random_sleep(begin, end)
+        while count < timeout:
+            status = self.is_element_exsist(*locator)
+            if status == displayed:
                 return True
+            else:
+                count += 1
+                time.sleep(1)
+        raise Exception("wait_element timeout")
 
     def hover(self, *locator):
         element = self.driver.find_element(*locator)
@@ -89,7 +79,8 @@ class BaseAction(object):
                 self.driver.set_script_timeout(30)
 
     def random_sleep(self, begin, end):
-        time.sleep(random.randint(begin, end) / 1000)
+        if end != 0:
+            time.sleep(random.randint(begin, end) / 1000)
 
     def mouse_move(self, x, y):
         move_time = random.randint(100, 1500) / 1000

@@ -19,29 +19,29 @@ class AmazonSearchPage(AmazonPage):
         self.screen_width = GetSystemMetrics(0)
         self.screen_heigth = GetSystemMetrics(1)
 
-    def find_target_product(self, asin, type):
-        for page in range(1, 5):
+    def find_target_product(self, asin, type, pages):
+        for page in range(1, pages):
             asinresult = self.find_target_asin(asin, type)
             if asinresult != False:
                 print("目标产品被找到的页数：" + str(page) + "\n")
                 return asinresult
             else:
-                self.random_walk(random.randint(1, 3))
+                self.enter_random_products(random.randint(1, 3), random.randint(30, 50), 5000, 8000)
                 self.enter_next_page(3000, 5000)
         return False
 
-    def enter_random_products(self, count, begin, end):
+    def enter_random_products(self, items, count, begin, end):
         print("访问当前页面任意产品，数量为：" + str(count) + "\n")
-        for i in range(0, count):
-            self.enter_random_product(False, begin, end)
+        for i in range(0, items):
+            self.enter_random_product(False, count, begin, end)
 
-    def enter_random_product(self, asin, begin, end):
+    def enter_random_product(self, asin, count, begin, end):
         index = 0
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         if asin == False:
             tmp = random.randint(0, (len(asinresults) - 1))
             currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 10000)
-            self.back_prev_page(currenthandle, begin, end)
+            self.back_prev_page_by_country(currenthandle, begin, end)
             print("访问当前页面任意产品。。。\n")
         else:
             for asinresult in asinresults:
@@ -53,7 +53,8 @@ class AmazonSearchPage(AmazonPage):
                         tmp = random.randint(0, (len(asinresults) - 1))
 
                     currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 10000)
-                    self.back_prev_page(currenthandle, begin, end)
+                    self.random_walk(count)
+                    self.back_prev_page_by_country(currenthandle, begin, end)
                     break
                 else:
                     index += 1
@@ -152,25 +153,35 @@ class AmazonSearchPage(AmazonPage):
     def close_page(self):
         self.driver.close()
 
-    def switch_to_new_page(self, currenthandle):
+    def switch_to_new_page(self):
         handles = self.driver.window_handles  # 获取当前窗口句柄集合（列表类型）
-        for handle in handles:  # 切换窗口（切换到搜狗）
-            if handle != currenthandle:
-                self.driver.switch_to_window(handle)
-                break
+        # for handle in handles:  # 切换窗口（切换到搜狗）
+        #     if handle != currenthandle:
+        #         self.driver.switch_to_window(handle)
+        #         break
 
-    def back_prev_page(self, handle, begin, end):
-        print("返回上一页。。。\n")
+        # 切换到当前最新打开的窗口
+        self.driver.switch_to.window(handles[-1])
+
+    def back_prev_page_by_country(self, prev_handle, begin, end):
         country = self.cf.get("account", "country")
         if country == "jp":
-            self.switch_to_new_page(handle)
-            self.close_page()
-            self.driver.switch_to_window(handle)
-            self.random_sleep(begin, end)
+            self.back_prev_page_by_type(prev_handle, "new", begin, end)
         elif country == "us":
-            self.switch_to_new_page(handle)
+            self.back_prev_page_by_type(prev_handle, "current", begin, end)
+
+    def back_prev_page_by_type(self, prev_handle, type, begin, end):
+        print("返回上一页。。。\n")
+        country = self.cf.get("account", "country")
+        if type == "new":
+            self.switch_to_new_page()
+            self.close_page()
+            self.driver.switch_to_window(prev_handle)
+            self.random_sleep(begin, end)
+        elif type == "current":
+            self.switch_to_new_page()
             self.navigation_back(begin, end)
-            self.driver.switch_to_window(handle)
+            self.driver.switch_to_window(prev_handle)
 
     def enter_next_page(self, begin, end):
         print("翻到下一页。。。\n")

@@ -29,6 +29,13 @@ class AmazonPage(BaseAction):
         self.random_sleep(begin, end)
         self.wait_page_loaded(*self.locator.LOGO)
 
+    def get_currenthandle(self):
+        return self.driver.current_window_handle
+
+    def enter_super_link(self, link, begin, end):
+        self.driver.get(link)
+        self.random_sleep(begin, end)
+
     def wait_page_loaded(self, *locator):
         self.driver.find_element(*locator)
 

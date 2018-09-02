@@ -39,6 +39,8 @@ class AmazonAsinPageLocator(AmazonPageLocator):
     QAENTRYBUTTON_US = (By.CSS_SELECTOR, '[value=\'Ask the Community\']')
     QAENTRYBUTTON_JP = (By.CSS_SELECTOR, '[value=\'コミュニティに尋ねる\']')
     QAPOSTBUTTON = (By.CSS_SELECTOR, '[data-action=\'ask-dpsearch-desktop-post-question\']')
+    REVIEWALL = (By.ID, 'dp-summary-see-all-reviews')
+    REVIEWPAGE_SYMBOL = (By.ID, 'cm_cr-buy_box')
 
 
 class AmazonCartPageLocator(AmazonPageLocator):
