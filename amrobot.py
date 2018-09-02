@@ -473,7 +473,7 @@ if __name__ == "__main__":
                             entry_type = "normal"
                         asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                         if asinresult != False:
-                            searchpage.enter_random_products(random.randint(2, 4), random.randint(15, 30), 8000, 15000)
+                            searchpage.enter_random_products(random.randint(2, 4), random.randint(10, 30), 8000, 15000)
                             asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                             if asinresult != False:
                                 searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
@@ -492,7 +492,6 @@ if __name__ == "__main__":
                     review_view = cf.get("review_view", "status")
                     if review_view == "1":
                         asinpage.review_all(3000, 5000)
-                        amazonpage.random_walk(random.randint(5, 10))
                         amazonpage.navigation_back(3000, 5000)
                     qa_submit = cf.get("qa_submit", "status")
                     if qa_submit == "1":

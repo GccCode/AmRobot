@@ -26,6 +26,8 @@ class AmazonAsinPage(AmazonPage):
         self.locator = AmazonAsinPageLocator
         self.cf = configparser.ConfigParser()
         self.cf.read("info.txt")
+        self.screen_width = GetSystemMetrics(0)
+        self.screen_heigth = GetSystemMetrics(1)
 
     def add_cart(self, begin, end):
         self.click(*self.locator.ADDCARTBUTTON)
@@ -67,5 +69,6 @@ class AmazonAsinPage(AmazonPage):
     def review_all(self, begin, end):
          self.click(*self.locator.REVIEWALL)
          self.random_sleep(1000, 2000)
+         self.random_walk(random.randint(5, 10))
          print("浏览评论。。。。\n")
 

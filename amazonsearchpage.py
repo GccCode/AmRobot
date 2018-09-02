@@ -41,6 +41,7 @@ class AmazonSearchPage(AmazonPage):
         if asin == False:
             tmp = random.randint(0, (len(asinresults) - 1))
             currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 10000)
+            self.random_walk(count)
             self.back_prev_page_by_country(currenthandle, begin, end)
             print("访问当前页面任意产品。。。\n")
         else:
