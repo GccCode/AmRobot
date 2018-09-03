@@ -27,14 +27,14 @@ class AmazonSearchPage(AmazonPage):
                 print("目标产品被找到的页数：" + str(page) + "\n")
                 return asinresult
             else:
-                self.enter_random_products(random.randint(0, 2), random.randint(8, 16), 3000, 5000)
+                self.enter_random_products(False, random.randint(0, 2), random.randint(8, 16), 3000, 5000)
                 self.enter_next_page(3000, 5000)
         return False
 
-    def enter_random_products(self, items, count, begin, end):
+    def enter_random_products(self, asin, items, count, begin, end):
         print("访问当前页面任意产品，数量为：" + str(count) + "\n")
         for i in range(0, items):
-            self.enter_random_product(False, count, begin, end)
+            self.enter_random_product(asin, count, begin, end)
 
     def enter_random_product(self, asin, count, begin, end):
         t1 = tm.time()

@@ -475,7 +475,7 @@ if __name__ == "__main__":
                                 entry_type = "normal"
                             asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                             if asinresult != False:
-                                searchpage.enter_random_products(random.randint(2, 3), random.randint(8, 15), 5000, 8000)
+                                searchpage.enter_random_products(asinresult, random.randint(2, 3), random.randint(8, 15), 5000, 8000)
                                 asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                                 if asinresult != False:
                                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
