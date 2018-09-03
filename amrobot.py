@@ -59,8 +59,8 @@ def customized_broswer():
     return webdriver.Chrome(chrome_options=option)
 
 if __name__ == "__main__":
-    #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gbk')
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gbk')
     while True:
         print("========= 程序功能选择 ========\n")
         print("0. 退出\n")
