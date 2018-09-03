@@ -32,7 +32,7 @@ class AmazonSearchPage(AmazonPage):
         return False
 
     def enter_random_products(self, asin, items, count, begin, end):
-        print("访问当前页面任意产品，数量为：" + str(count) + "\n")
+        #print("访问当前页面任意产品，数量为：" + str(count) + "\n")
         for i in range(0, items):
             self.enter_random_product(asin, count, begin, end)
 
@@ -46,6 +46,8 @@ class AmazonSearchPage(AmazonPage):
             random_status = random.randint(1, 200)
             if (random_status % 2) == 1:
                 self.random_walk(count)
+            else:
+                print("随机数是：" + str(random_status) + "\n")
             self.back_prev_page_by_country(currenthandle, begin, end)
             print("访问当前页面任意产品。。。\n")
         else:
@@ -61,13 +63,15 @@ class AmazonSearchPage(AmazonPage):
                     random_status = random.randint(1, 200)
                     if (random_status % 2) == 1:
                         self.random_walk(count)
+                    else:
+                        print("随机数是：" + str(random_status) + "\n")
                     self.back_prev_page_by_country(currenthandle, begin, end)
                     break
                 else:
                     index += 1
             print("访问当前页面除目标产品以外的任意产品。。。。\n")
             t2 = tm.time()
-            print("random_mouse_move-总耗时：" + format(t2 - t1))
+            # print("random_mouse_move-总耗时：" + format(t2 - t1))
 
     def find_target_asin(self, asin, type):
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)

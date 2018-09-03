@@ -513,6 +513,8 @@ if __name__ == "__main__":
                         random_status = random.randint(1, 200)
                         if (random_status % 2) == 1:
                             amazonpage.random_walk(random.randint(2, 7))
+                        else:
+                            print("随机数是：" + str(random_status) + "\n")
             except Exception as err:
                 print(str(err))
             finally:
