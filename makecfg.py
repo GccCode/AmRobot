@@ -180,7 +180,7 @@ if __name__ == "__main__":
                     super_link = keep_input_bool("*** 是否浏览超链接（否-0，是-1）：")
                     cf.set("super_link", "status", super_link)
                     if super_link == "1":
-                        link = input("**** 请输入关键词：")
+                        link = input("**** 超链接：")
                         cf.set("super_link", "link", link)
                         cf.add_section("review_view")
                         review_view = keep_input_bool("**** 是否浏览评论（否-0，是-1）：")
