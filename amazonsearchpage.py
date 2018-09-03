@@ -193,11 +193,11 @@ class AmazonSearchPage(AmazonPage):
             self.switch_to_new_page(prev_handle)
             self.navigation_back(begin, end)
             self.driver.switch_to_window(prev_handle)
-        print("返回上一页。。。")
+        print("*** 返回上一页。。。")
         self.random_sleep(begin, end)
 
 
     def enter_next_page(self, begin, end):
-        print("翻到下一页。。。")
+        print("** 翻到下一页。。。")
         self.click(*self.locator.PAGENEXTSTRING)
         self.random_sleep(begin, end)
