@@ -63,9 +63,13 @@ if __name__ == "__main__":
                     cf.set("broswer", "type", broswer)
                     print("\n==== 配置代理 ====\n")
                     host_ip = input("*** 请输入代理ip端口（格式：IP:端口，直接跳过请输入0）：")
+                    cf.add_section("proxy")
                     if host_ip != "0":
-                        cf.add_section("proxy")
+                        cf.set("proxy", "status", "1")
                         cf.set("proxy", "proxy", host_ip)
+                    else:
+                        cf.set("proxy", "status", "0")
+                        
                     print("\n==== 配置登陆账号 ====\n")
                     cf.add_section("account")
                     country = input("*** 请输入账号国家（美国-us，日本-jp)：")
