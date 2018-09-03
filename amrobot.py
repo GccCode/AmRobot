@@ -451,7 +451,7 @@ if __name__ == "__main__":
                     keyword = cf.get("random_view", "keyword")
                     amazonpage.search_asin(keyword, 5000, 8000)
                     searchpage = AmazonSearchPage(driver)
-                    searchpage.enter_random_products(3, random.randint(15, 30), 3000, 5000)
+                    searchpage.enter_random_products(3, 15, 30, 3000, 5000)
                 else:
                     searchpage = AmazonSearchPage(driver)
                     search = cf.get("search", "status")

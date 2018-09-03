@@ -41,7 +41,8 @@ def keep_input_bool(content):
                 print("输入有误，请重新输入次数：" + str(4 - count) + " \n")
 
 if __name__ == "__main__":
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gbk')
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gbk')
     status = True
     while status == True:
         print("\n========== 主菜单 ============")
