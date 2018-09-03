@@ -399,14 +399,13 @@ if __name__ == "__main__":
                     print("你的输入有误，请重新输入对应测试项的数字号码！！！！")
         elif action == "2":
             try:
+                deci("task-encry.txt", "task.txt")
                 t1 = tm.time()
                 driver = customized_broswer()
                 driver.set_page_load_timeout(60)
                 driver.set_script_timeout(60)
-                # deci("_task.txt", "task.txt")
                 cf = configparser.ConfigParser()
                 cf.read("task.txt")
-                #os.remove("task.txt")
                 amazonpage = AmazonPage(driver)
                 register = cf.get("register", "status")
                 if register == "1":
@@ -525,6 +524,7 @@ if __name__ == "__main__":
                 t2 = tm.time()
                 print("总耗时：" + format(t2 - t1))
                 input("请按回车键继续退出程序！！！")
+                os.remove("task.txt")
                 driver.close()
                 driver.quit()
         else:

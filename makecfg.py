@@ -140,7 +140,7 @@ if __name__ == "__main__":
                     else:
                         filename = input("请输入保存文件名：")
                         cf.write(open((filename + ".txt"), 'w'))
-                        encry((filename + ".txt"), ("_" + filename + ".txt"))
+                        encry((filename + ".txt"), (filename + "-encry.txt"))
             elif cfgtype == "2":
                 cf = configparser.ConfigParser()
                 register = keep_input_bool("*** 是否注册账号（否-0，是-1)：")
