@@ -44,7 +44,7 @@ class AmazonSearchPage(AmazonPage):
             tmp = random.randint(0, (len(asinresults) - 1))
             currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
             random_status = random.randint(1, 2)
-            if random_status == "2":
+            if random_status == 2:
                 self.random_walk(count)
             self.back_prev_page_by_country(currenthandle, begin, end)
             print("访问当前页面任意产品。。。\n")
@@ -59,7 +59,7 @@ class AmazonSearchPage(AmazonPage):
 
                     currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
                     random_status = random.randint(1, 2)
-                    if random_status == "2":
+                    if random_status == 2:
                         self.random_walk(count)
                     self.back_prev_page_by_country(currenthandle, begin, end)
                     break

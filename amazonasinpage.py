@@ -54,7 +54,7 @@ class AmazonAsinPage(AmazonPage):
     def add_wishlist(self, begin, end):
         country = self.cf.get("account", "country")
         self.click(*self.locator.ADDWISHLISTSUBMITBUTTON)
-        self.random_sleep(1000, 2000)
+        self.random_sleep(3000, 5000)
         if self.is_element_exsist(*self.locator.WISHLISTCONTINUE) == True:
             self.click(*self.locator.WISHLISTCONTINUE)
         if self.is_element_exsist(*self.locator.CREATELISTBUTTON):

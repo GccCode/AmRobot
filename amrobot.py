@@ -511,7 +511,7 @@ if __name__ == "__main__":
 
                         searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
                         random_status = random.randint(1, 2)
-                        if random_status == "2":
+                        if random_status == 2:
                             amazonpage.random_walk(random.randint(2, 7))
             except Exception as err:
                 print(str(err))
