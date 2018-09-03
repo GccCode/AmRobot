@@ -62,10 +62,11 @@ if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gbk')
     while True:
-        print("========= 程序功能选择 ========\n")
-        print("0. 退出\n")
-        print("1. 单独操作\n")
-        print("2. 批量操作\n")
+        print("========= 程序功能选择 ========")
+        print("版本号： 1809031313")
+        print("0. 退出")
+        print("1. 单独操作")
+        print("2. 批量操作")
         action = input("请选择：")
         if action == "0":
             break
