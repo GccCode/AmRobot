@@ -32,7 +32,7 @@ class AmazonAsinPage(AmazonPage):
     def add_cart(self, begin, end):
         self.click(*self.locator.ADDCARTBUTTON)
         self.random_sleep(begin, end)
-        print("加入购物车。。。\n")
+        print("**** 加入购物车。。。")
 
     def ask_qa(self, content, begin, end):
         country = self.cf.get("account", "country")
@@ -46,10 +46,10 @@ class AmazonAsinPage(AmazonPage):
             self.click(*self.locator.QAENTRYBUTTON_JP)
         self.random_sleep(2000, 3000)
         if self.is_element_exsist(*self.locator.QAPOSTBUTTON):
-            print("QA post button is ready!\n")
+            print("**** QA post button is ready!")
             self.click(*self.locator.QAPOSTBUTTON)
         self.random_sleep(begin, end)
-        print("提交QA： " + content + "\n")
+        print("**** 提交QA： " + content)
 
     def add_wishlist(self, begin, end):
         country = self.cf.get("account", "country")
@@ -63,12 +63,12 @@ class AmazonAsinPage(AmazonPage):
                 self.random_sleep(1000, 2000)
             self.click(*self.locator.CREATELISTBUTTON)
 
-        print("添加心愿卡。。。。\n")
+        print("**** 添加心愿卡。。。。")
         self.random_sleep(begin, end)
 
     def review_all(self, begin, end):
          self.click(*self.locator.REVIEWALL)
          self.random_sleep(1000, 2000)
          self.random_walk(random.randint(5, 10))
-         print("浏览评论。。。。\n")
+         print("**** 浏览评论。。。。")
 

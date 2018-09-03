@@ -475,12 +475,12 @@ if __name__ == "__main__":
                                 entry_type = "normal"
                             asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                             if asinresult != False:
-                                searchpage.enter_random_products(asin, random.randint(2, 3), random.randint(8, 15), 5000, 8000)
+                                searchpage.enter_random_products(asin, random.randint(2, 3), 8, 15, 5000, 8000)
                                 asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                                 if asinresult != False:
                                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                 else:
-                                    print("找不到产品！！！！\n")
+                                    print("找不到产品！！！！")
                                     sys.exit(1)
 
                         variation_setup = cf.get("search", "variation_setup")
@@ -513,8 +513,8 @@ if __name__ == "__main__":
                         random_status = random.randint(1, 200)
                         if (random_status % 2) == 1:
                             amazonpage.random_walk(random.randint(2, 7))
-                        else:
-                            print("随机数是：" + str(random_status) + "\n")
+                        # else:
+                        #     print("随机数是：" + str(random_status) + "\n")
             except Exception as err:
                 print(str(err))
             finally:

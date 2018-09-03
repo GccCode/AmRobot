@@ -24,17 +24,17 @@ class AmazonSearchPage(AmazonPage):
         for page in range(1, pages):
             asinresult = self.find_target_asin(asin, type)
             if asinresult != False:
-                print("目标产品被找到的页数：" + str(page) + "\n")
+                print("** 目标产品被找到的页数：" + str(page))
                 return asinresult
             else:
-                self.enter_random_products(False, random.randint(0, 2), random.randint(8, 16), 3000, 5000)
+                self.enter_random_products(False, random.randint(0, 2), 8, 16, 3000, 5000)
                 self.enter_next_page(3000, 5000)
         return False
 
-    def enter_random_products(self, asin, items, count, begin, end):
+    def enter_random_products(self, asin, items, start_time, end_time, begin, end):
         #print("访问当前页面任意产品，数量为：" + str(count) + "\n")
         for i in range(0, items):
-            self.enter_random_product(asin, count, begin, end)
+            self.enter_random_product(asin, random.randint(start_time, end_time), begin, end)
 
     def enter_random_product(self, asin, count, begin, end):
         t1 = tm.time()
@@ -46,10 +46,10 @@ class AmazonSearchPage(AmazonPage):
             random_status = random.randint(1, 200)
             if (random_status % 2) == 1:
                 self.random_walk(count)
-            else:
-                print("随机数是：" + str(random_status) + "\n")
+            # else:
+            #     print("随机数是：" + str(random_status))
             self.back_prev_page_by_country(currenthandle, begin, end)
-            print("访问当前页面任意产品。。。\n")
+            print("*** 访问当前页面任意产品。。。")
         else:
             for asinresult in asinresults:
                 if asinresult.get_attribute('data-asin') == asin:
@@ -63,10 +63,10 @@ class AmazonSearchPage(AmazonPage):
                     random_status = random.randint(1, 200)
                     if (random_status % 2) == 1:
                         self.random_walk(count)
-                    else:
-                        print("随机数是：" + str(random_status) + "\n")
+                    # else:
+                    #     print("随机数是：" + str(random_status))
                     self.back_prev_page_by_country(currenthandle, begin, end)
-                    print("访问当前页面除目标产品以外的任意产品。。。。\n")
+                    print("*** 访问当前页面除目标产品以外的任意产品。。。。")
                     break
                 else:
                     index += 1
@@ -80,11 +80,11 @@ class AmazonSearchPage(AmazonPage):
             if asinresult.get_attribute('data-asin') == asin:
                 if type == "normal":
                     if self.is_asin_sponsored(asinresult, asin) != True:
-                        print("找到目标产品 - 普通。。。\n")
+                        print("** 找到目标产品 - 普通。。。")
                         return asinresult
                 elif type == "sponsored":
                     if self.is_asin_sponsored(asinresult, asin):
-                        print("找到目标产品 - 广告。。。\n")
+                        print("** 找到目标产品 - 广告。。。")
                         return asinresult
         return False
 
@@ -92,7 +92,7 @@ class AmazonSearchPage(AmazonPage):
         status = True
         try:
             asinresult.find_element_by_id("AMAZONS_CHOICE_"+ asin + "-supplementary")
-            print("产品是AmazonChoice。。。。\n")
+            print("产品是AmazonChoice。。。。")
         except NoSuchElementException as msg:
             status = False
         finally:
@@ -102,7 +102,7 @@ class AmazonSearchPage(AmazonPage):
         status = True
         try:
             asinresult.find_element_by_id("BESTSELLER_" + asin + "-supplementary")
-            print("产品是Best Seller。。。\n")
+            print("产品是Best Seller。。。")
         except NoSuchElementException as msg:
             status = False
         finally:
@@ -160,7 +160,7 @@ class AmazonSearchPage(AmazonPage):
             elif country == "jp":
                 self.click_asin_by_title_jp(asinresult, asin)
 
-        print("进入产品页面 + " + asin + "\n")
+        print("*** 进入产品页面 + " + asin)
         self.random_sleep(begin, end)
         return self.driver.current_window_handle
 
@@ -193,11 +193,11 @@ class AmazonSearchPage(AmazonPage):
             self.switch_to_new_page(prev_handle)
             self.navigation_back(begin, end)
             self.driver.switch_to_window(prev_handle)
-        print("返回上一页。。。\n")
+        print("返回上一页。。。")
         self.random_sleep(begin, end)
 
 
     def enter_next_page(self, begin, end):
-        print("翻到下一页。。。\n")
+        print("翻到下一页。。。")
         self.click(*self.locator.PAGENEXTSTRING)
         self.random_sleep(begin, end)
