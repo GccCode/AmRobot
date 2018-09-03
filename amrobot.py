@@ -399,7 +399,7 @@ if __name__ == "__main__":
                     print("你的输入有误，请重新输入对应测试项的数字号码！！！！")
         elif action == "2":
             try:
-                deci("info-encry.txt", "info.txt")
+                #deci("info-encry.txt", "info.txt")
                 t1 = tm.time()
                 driver = customized_broswer()
                 driver.set_page_load_timeout(60)
@@ -524,7 +524,7 @@ if __name__ == "__main__":
                 t2 = tm.time()
                 print("总耗时：" + format(t2 - t1))
                 input("请按回车键继续退出程序！！！")
-                os.remove("info.txt")
+                #os.remove("info.txt")
                 driver.close()
                 driver.quit()
         else:

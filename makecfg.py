@@ -69,7 +69,6 @@ if __name__ == "__main__":
                         cf.set("proxy", "proxy", host_ip)
                     else:
                         cf.set("proxy", "status", "0")
-                        
                     print("\n==== 配置登陆账号 ====\n")
                     cf.add_section("account")
                     country = input("*** 请输入账号国家（美国-us，日本-jp)：")
@@ -144,7 +143,7 @@ if __name__ == "__main__":
                     else:
                         filename = input("请输入保存文件名：")
                         cf.write(open((filename + ".txt"), 'w'))
-                        encry((filename + ".txt"), (filename + "-encry.txt"))
+                        #encry((filename + ".txt"), (filename + "-encry.txt"))
             elif cfgtype == "2":
                 cf = configparser.ConfigParser()
                 register = keep_input_bool("*** 是否注册账号（否-0，是-1)：")
@@ -247,7 +246,7 @@ if __name__ == "__main__":
                 else:
                     filename = input("请输入保存文件名：")
                     cf.write(open((filename + ".txt"), 'w'))
-                    encry((filename + ".txt"),(filename + "-encry.txt"))
+                    #encry((filename + ".txt"),(filename + "-encry.txt"))
 
         elif action == "2":
             print("\n========== 解密文件菜单 ============")
