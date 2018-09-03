@@ -22,8 +22,8 @@ def deci(cnf_now, cnf_deci):
     f_now = open(cnf_now, 'r')
     content = f_now.read()
     content1 = base64.b64decode((content))
-    print("解密后内容：\n")
-    print(content1)
+    # print("解密后内容：\n")
+    # print(content1)
     with open(cnf_deci, 'wb+') as f_now:
         f_now.write(content1)
 
