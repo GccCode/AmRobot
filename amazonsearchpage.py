@@ -52,7 +52,7 @@ class AmazonSearchPage(AmazonPage):
             print("访问当前页面任意产品。。。\n")
         else:
             for asinresult in asinresults:
-                if asinresult.get_attribute('data-asin') == asin.get_attribute('data-asin'):
+                if asinresult.get_attribute('data-asin') == asin:
                     tmp = random.randint(0, (len(asinresults) - 1))
                     # print("tmp = " + str(tmp) + "\n")
                     # print("index = " + str(index) + "\n")
@@ -66,10 +66,11 @@ class AmazonSearchPage(AmazonPage):
                     else:
                         print("随机数是：" + str(random_status) + "\n")
                     self.back_prev_page_by_country(currenthandle, begin, end)
+                    print("访问当前页面除目标产品以外的任意产品。。。。\n")
                     break
                 else:
                     index += 1
-            print("访问当前页面除目标产品以外的任意产品。。。。\n")
+
             t2 = tm.time()
             # print("random_mouse_move-总耗时：" + format(t2 - t1))
 
