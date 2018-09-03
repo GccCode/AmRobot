@@ -46,8 +46,8 @@ class AmazonSearchPage(AmazonPage):
             random_status = random.randint(1, 200)
             if (random_status % 2) == 1:
                 self.random_walk(count)
-            # else:
-            #     print("随机数是：" + str(random_status))
+            else:
+                print("*** 随机数是：" + str(random_status))
             self.back_prev_page_by_country(currenthandle, begin, end)
             print("*** 访问当前页面任意产品。。。")
         else:
@@ -63,8 +63,8 @@ class AmazonSearchPage(AmazonPage):
                     random_status = random.randint(1, 200)
                     if (random_status % 2) == 1:
                         self.random_walk(count)
-                    # else:
-                    #     print("随机数是：" + str(random_status))
+                    else:
+                        print("*** 随机数是：" + str(random_status))
                     self.back_prev_page_by_country(currenthandle, begin, end)
                     print("*** 访问当前页面除目标产品以外的任意产品。。。。")
                     break
