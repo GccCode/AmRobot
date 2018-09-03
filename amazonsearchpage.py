@@ -52,7 +52,7 @@ class AmazonSearchPage(AmazonPage):
             print("访问当前页面任意产品。。。\n")
         else:
             for asinresult in asinresults:
-                if asinresult.get_attribute('data-asin') == asin:
+                if asinresult.get_attribute('data-asin') == asin.get_attribute('data-asin'):
                     tmp = random.randint(0, (len(asinresults) - 1))
                     # print("tmp = " + str(tmp) + "\n")
                     # print("index = " + str(index) + "\n")
