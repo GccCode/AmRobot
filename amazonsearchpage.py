@@ -22,6 +22,8 @@ class AmazonSearchPage(AmazonPage):
 
     def find_target_product(self, asin, type, pages):
         print(("** 开始查找产品，限制页数：" + str(pages)), flush=True)
+        cf = configparser.ConfigParser()
+        cf.read("task.txt")
         for page in range(1, pages):
             print(("*** 当前处于的页数是：" + str(page)), flush=True)
             asinresult = self.find_target_asin(asin, type)
@@ -29,7 +31,7 @@ class AmazonSearchPage(AmazonPage):
                 print(("*** 目标产品被找到的页数：" + str(page)), flush=True)
                 return asinresult
             else:
-                fakediff = self.cf.get("search", "fakediff")
+                fakediff = cf.get("search", "fakediff")
                 if fakediff == "1":
                     min_time = int(self.cf.get("search", "diff_time_min"))
                     max_time = int(self.cf.get("search", "diff_time_max"))
