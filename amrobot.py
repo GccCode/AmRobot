@@ -453,47 +453,48 @@ if __name__ == "__main__":
                     searchpage.enter_random_products(False, 3, 15, 30, 3000, 5000)
                 else:
                     searchpage = AmazonSearchPage(driver)
-                    search = cf.get("search", "status")
+                    status = cf.get("search", "status")
                     searchpage_handle = 0
                     asinresult = False
                     entry_type = ""
-                    if search == "1":
+                    if status == "0":
                         super_link = cf.get("search", "super_link")
                         if super_link == "1":
                             link = cf.get("search", "link")
                             print(("* 开始通过超链接访问产品页。。。"), flush=True)
                             amazonpage.enter_super_link(link, 3000, 5000)
                             searchpage_handle = amazonpage.get_currenthandle()
-                        else:
-                            keyword = cf.get("search", "keyword")
-                            print(("* 开始搜索关键词。。。"), flush=True)
-                            amazonpage.search_asin(keyword, 5000, 8000)
-                            searchpage_handle = amazonpage.get_currenthandle()
-                            condition_setup = cf.get("search", "condition_setup")
-                            if condition_setup == "1":
-                                input("请进行手动卡位，完成后按回车键继续自动搜索产品！！！")
-                            page = cf.get("search", "page")
-                            asin = cf.get("search", "asin")
-                            type = cf.get("search", "type")
-                            if type == "0":
-                                entry_type = "sponsored"
-                            elif type == "1":
-                                entry_type = "normal"
+                    else:
+                        keyword = cf.get("search", "keyword")
+                        print(("* 开始搜索关键词。。。"), flush=True)
+                        amazonpage.search_asin(keyword, 5000, 8000)
+                        searchpage_handle = amazonpage.get_currenthandle()
+                        condition_setup = cf.get("search", "condition_setup")
+                        if condition_setup == "1":
+                            input("请进行手动卡位，完成后按回车键继续自动搜索产品！！！")
+                        page = cf.get("search", "page")
+                        asin = cf.get("search", "asin")
+                        type = cf.get("search", "type")
+                        if type == "0":
+                            entry_type = "sponsored"
+                        elif type == "1":
+                            entry_type = "normal"
 
+                        asinresult = searchpage.find_target_product(asin, entry_type, int(page))
+                        if asinresult != False:
+                            fakeview = cf.get("search", "fakeview")
+                            if fakeview == "1":
+                                min_time = int(cf.get("search", "view_time_min"))
+                                max_time = int(cf.get("search", "view_time_max"))
+                                searchpage.enter_random_products(asin, random.randint(2, 3), min_time, max_time, 5000, 8000)
                             asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                             if asinresult != False:
-                                fakeview = cf.get("search", "fakeview")
-                                if fakeview == "1":
-                                    min_time = int(cf.get("search", "view_time_min"))
-                                    max_time = int(cf.get("search", "view_time_max"))
-                                    searchpage.enter_random_products(asin, random.randint(2, 3), min_time, max_time, 5000, 8000)
-                                asinresult = searchpage.find_target_product(asin, entry_type, int(page))
-                                if asinresult != False:
-                                    searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
-                                else:
-                                    print(("找不到产品！！！！"), flush=True)
+                                searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                             else:
                                 print(("找不到产品！！！！"), flush=True)
+                        else:
+                            print(("找不到产品！！！！"), flush=True)
+
                         if asinresult != False:
                             variation_setup = cf.get("search", "variation_setup")
                             if variation_setup == "1":
