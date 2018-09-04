@@ -496,46 +496,47 @@ if __name__ == "__main__":
                         else:
                             print(("找不到产品！！！！"), flush=True)
 
-                        if asinresult != False:
-                            variation_setup = cf.get("search", "variation_setup")
-                            if variation_setup == "1":
-                                input("请进行手动选择目标变体，完成后按回车键继续自动化！！！：")
-                            mainview = cf.get("search", "mainview")
-                            if mainview == "1":
-                                print(("* 开始随意浏览产品页。。。"), flush=True)
-                                amazonpage.random_walk(random.randint(35, 50))
-                                asinpage = AmazonAsinPage(driver)
-                                searchpage.switch_to_new_page(searchpage_handle) #切换到产品页handle
+                    if asinresult != False:
+                        variation_setup = cf.get("search", "variation_setup")
+                        if variation_setup == "1":
+                            input("请进行手动选择目标变体，完成后按回车键继续自动化！！！：")
+                        mainview = cf.get("search", "mainview")
+                        if mainview == "1":
+                            print(("* 开始随意浏览产品页。。。"), flush=True)
+                            amazonpage.random_walk(random.randint(35, 50))
+                            asinpage = AmazonAsinPage(driver)
+                            searchpage.switch_to_new_page(searchpage_handle) #切换到产品页handle
 
-                                review_view = cf.get("review_view", "status")
-                                if review_view == "1":
-                                    print(("* 开始随意浏览评论页。。。"), flush=True)
-                                    asinpage.review_all(3000, 5000)
-                                    amazonpage.navigation_back(3000, 5000)
-                                qa_submit = cf.get("qa_submit", "status")
-                                if qa_submit == "1":
-                                    print(("* 开始提交QA。。。。"), flush=True)
-                                    content = cf.get("qa_submit", "content")
-                                    asinpage.ask_qa(content, 3000, 5000)
-                                    amazonpage.navigation_back(3000, 5000)
+                            review_view = cf.get("review_view", "status")
+                            if review_view == "1":
+                                print(("* 开始随意浏览评论页。。。"), flush=True)
+                                asinpage.review_all(3000, 5000)
+                                amazonpage.navigation_back(3000, 5000)
+                            qa_submit = cf.get("qa_submit", "status")
+                            if qa_submit == "1":
+                                print(("* 开始提交QA。。。。"), flush=True)
+                                content = cf.get("qa_submit", "content")
+                                asinpage.ask_qa(content, 3000, 5000)
+                                amazonpage.navigation_back(3000, 5000)
 
-                                wishlist = cf.get("wishlist", "status")
-                                if wishlist == "1":
-                                    print(("* 开始添加wishlist。。。。"), flush=True)
-                                    asinpage.add_wishlist(5000, 8000)
+                            wishlist = cf.get("wishlist", "status")
+                            if wishlist == "1":
+                                print(("* 开始添加wishlist。。。。"), flush=True)
+                                asinpage.add_wishlist(5000, 8000)
 
-                                addcart = cf.get("addcart", "status")
-                                if addcart == "1":
-                                    print(("* 开始加购物车。。。"), flush=True)
-                                    asinpage.add_cart(3000, 5000)
+                            addcart = cf.get("addcart", "status")
+                            if addcart == "1":
+                                print(("* 开始加购物车。。。"), flush=True)
+                                asinpage.add_cart(3000, 5000)
 
-                                searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
-                            random_status = random.randint(1, 200)
-                            if (random_status % 2) == 1:
-                                print(("* 随意浏览并等待退出"), flush=True)
-                                amazonpage.random_walk(random.randint(2, 7))
-                            # else:
-                            #     print("随机数是：" + str(random_status) + "\n")
+                            searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
+                            
+                        random_status = random.randint(1, 200)
+                        if (random_status % 2) == 1:
+                            print(("* 随意浏览并等待退出"), flush=True)
+                            amazonpage.random_walk(random.randint(2, 7))
+                        # else:
+                        #     print("随机数是：" + str(random_status) + "\n")
             except Exception as err:
                 print(str(err))
             finally:
