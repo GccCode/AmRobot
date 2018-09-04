@@ -71,7 +71,7 @@ if __name__ == "__main__":
                         cf.set("proxy", "status", "0")
                     print("\n==== 配置登陆账号 ====\n")
                     cf.add_section("account")
-                    country = input("*** 请输入账号国家（美国-us，日本-jp)：")
+                    country = input("*** 请输入账号国家（美国-us，日本-jp，加拿大-ca)：")
                     cf.set("account", "country", country)
                     username = input("*** 请输入用户名：")
                     cf.set("account", "username", username)

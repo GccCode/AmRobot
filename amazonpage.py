@@ -26,6 +26,8 @@ class AmazonPage(BaseAction):
             self.driver.get('https://www.amazon.com')
         elif country == 'jp':
             self.driver.get('https://www.amazon.co.jp')
+        elif country == 'ca':
+            self.driver.get('https://www.amazon.ca')
         self.random_sleep(begin, end)
         self.wait_page_loaded(*self.locator.LOGO)
 
