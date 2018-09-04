@@ -376,12 +376,9 @@ if __name__ == "__main__":
                     amazonpage.enter_amazon_page(3000, 5000)
                 login = cf.get("login", "status")
                 if login == "1":
-                    amazonpage.enter_amazon_page(3000, 5000)
                     amazonpage.enter_signin_page(3000, 5000)
                     signinpage = AmazonSignInPage(driver)
                     signinpage.sign_in(5000, 10000)
-                else:
-                    amazonpage.enter_amazon_page(3000, 5000)
                 bill_address = cf.get("bill_address", "status")
                 if bill_address == "1":
                     type = cf.get("bill_address", "type")
