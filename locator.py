@@ -77,7 +77,7 @@ class AmazonSearchPageLocator(AmazonPageLocator):
     ## usa small
     # ASINIMAGE_US_BS_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
     # ASINIMAGE_US_AC_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
-    ASINIMAGE_US_S = (By.XPATH, './/div/div[position()=2]/div')
+    ASINIMAGE_US_S = (By.XPATH, './/div/div[position()=2]/div/a[position()=1]/img')
 
     # ASINTITLE_US_BS_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
     # ASINTITLE_US_AC_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
