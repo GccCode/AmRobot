@@ -21,7 +21,7 @@ class AmazonSearchPage(AmazonPage):
         self.screen_heigth = GetSystemMetrics(1)
 
     def find_target_product(self, asin, type, pages):
-        print("** 开始查找产品，限制页数：" + str(pages))
+        print(("** 开始查找产品，限制页数：" + str(pages)), flush=True)
         for page in range(1, pages):
             print("*** 当前处于的页数是：" + str(page))
             asinresult = self.find_target_asin(asin, type)
