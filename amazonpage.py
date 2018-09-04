@@ -42,7 +42,7 @@ class AmazonPage(BaseAction):
             for cookie in listCookies:
                 #print("expiry: "+ str(cookie['expiry']))
                 # if self.is_name_err(cookie['expiry']):
-                if cookie.__contains('expiry'):
+                if 'expiry' in cookie:
                     self.driver.add_cookie({
                         'domain': cookie['domain'],
                         'expiry': str(cookie['expiry']),
