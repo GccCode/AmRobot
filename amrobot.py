@@ -66,7 +66,7 @@ if __name__ == "__main__":
     #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gbk')
     while True:
         print("========= 程序功能选择 ========")
-        print("版本号： 1809041044")
+        print("版本号： 1809041418")
         print("0. 退出")
         print("1. 单独操作")
         print("2. 批量操作")
