@@ -64,15 +64,28 @@ class AmazonPaymentPageLocator(AmazonPageLocator):
 
 class AmazonSearchPageLocator(AmazonPageLocator):
     ASINRESULTS = (By.XPATH, '//li[contains(@id, \'result_\')]')
-    ASINIMAGE_BS = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
-    ASINIMAGE_AC = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
-    ASINIMAGE = (By.XPATH, './/div/div/div/div[position()=1]/div/div')
+    ## usa
+    ASINIMAGE_US_BS = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
+    ASINIMAGE_US_AC = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
+    ASINIMAGE_US = (By.XPATH, './/div/div/div/div[position()=1]/div/div')
 
-    ASINTITLE_BS = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
-    ASINTITLE_AC = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
-    ASINTITLE_SP = (By.XPATH, './/div/div/div/div[position()=2]/div[position()=2]/div[position()=1]/a/h2')
-    ASINTITLE = (By.XPATH, './/div/div/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
+    ASINTITLE_US_BS = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
+    ASINTITLE_US_AC = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
+    ASINTITLE_US_SP = (By.XPATH, './/div/div/div/div[position()=2]/div[position()=2]/div[position()=1]/a/h2')
+    ASINTITLE_US = (By.XPATH, './/div/div/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
 
+    ## usa small
+    # ASINIMAGE_US_BS_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
+    # ASINIMAGE_US_AC_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=1]/div/div')
+    ASINIMAGE_US_S = (By.XPATH, './/div/div[position()=2]/div')
+
+    # ASINTITLE_US_BS_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
+    # ASINTITLE_US_AC_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
+    ASINTITLE_US_SP_S = (By.XPATH, './/div/div[position()=4]/div[position()=1]/a/h2')
+    ASINTITLE_US_S = (By.XPATH, './/div/div[position()=3]/div[position()=1]/a/h2')
+
+
+    # jp
     # ASINIMAGE_BS_JP = (By.XPATH, './')
     # ASINIMAGE_SP_JP = (By.XPATH, './')
     # ASINIMAGE_AC_JP = (By.XPATH, './')

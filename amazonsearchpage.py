@@ -117,7 +117,7 @@ class AmazonSearchPage(AmazonPage):
         finally:
             return status
 
-    def click_asin_by_img_jp(self, asinresult, asin):
+    def click_asin_by_img_jp_small(self, asinresult, asin):
         asinresult.find_element(*self.locator.ASINIMAGE_JP).click()
 
     def click_asin_by_title_jp(self, asinresult, asin):
@@ -126,49 +126,66 @@ class AmazonSearchPage(AmazonPage):
         else:
             asinresult.find_element(*self.locator.ASINTITLE_JP).click()
 
-    def click_asin_by_img(self, asinresult, asin):
+    def click_asin_by_img_us(self, asinresult, asin):
         if self.is_asin_amazon_choice(asinresult, asin):
-            asinresult.find_element(*self.locator.ASINIMAGE_AC).click()
+            asinresult.find_element(*self.locator.ASINIMAGE_US_AC).click()
         elif self.is_asin_bestseller(asinresult, asin):
-            asinresult.find_element(*self.locator.ASINIMAGE_BS).click()
-        else:
-            asinresult.find_element(*self.locator.ASINIMAGE).click()
-
-    def click_asin_by_title(self, asinresult, asin):
-        if self.is_asin_amazon_choice(asinresult, asin):
-            asinresult.find_element(*self.locator.ASINTITLE_AC).click()
+            asinresult.find_element(*self.locator.ASINIMAGE_US_BS).click()
         elif self.is_asin_sponsored(asinresult, asin):
-            asinresult.find_element(*self.locator.ASINTITLE_SP).click()
-        elif self.is_asin_bestseller(asinresult, asin):
-            asinresult.find_element(*self.locator.ASINTITLE_BS).click()
+            asinresult.find_element(*self.locator.ASINIMAGE_US).click()
         else:
-            asinresult.find_element(*self.locator.ASINTITLE).click()
+            asinresult.find_element(*self.locator.ASINIMAGE_US).click()
+
+    def click_asin_by_img_us_small(self, asinresult, asin):
+        if self.is_asin_amazon_choice(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINIMAGE_US_S).click()
+        elif self.is_asin_sponsored(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINIMAGE_US_S).click()
+        elif self.is_asin_bestseller(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINIMAGE_US_S).click()
+        else:
+            asinresult.find_element(*self.locator.ASINIMAGE_US_S).click()
+
+    def click_asin_by_title_us(self, asinresult, asin):
+        if self.is_asin_amazon_choice(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_US_AC).click()
+        elif self.is_asin_sponsored(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_US_SP).click()
+        elif self.is_asin_bestseller(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_US_BS).click()
+        else:
+            asinresult.find_element(*self.locator.ASINTITLE_US).click()
+
+    def click_asin_by_title_us_small(self, asinresult, asin):
+        if self.is_asin_amazon_choice(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_US_S).click()
+        elif self.is_asin_sponsored(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_US_SP_S).click()
+        elif self.is_asin_bestseller(asinresult, asin):
+            asinresult.find_element(*self.locator.ASINTITLE_US_S).click()
+        else:
+            asinresult.find_element(*self.locator.ASINTITLE_US_S).click()
 
     def enter_asin_page(self, asinresult, asin, begin, end):
-        print("元素大小：")
-        print(asinresult.size['width'])
-        print(asinresult.size['height'])
         country = self.cf.get("account", "country")
         option = random.randint(1, 2)
         if option == 1:
-            #print("enter by image link..\n")
-            # if country == 'us':
-            #     self.click_asin_by_img(asinresult, asin)
-            # elif country == "jp":
-            #     self.click_asin_by_img_jp(asinresult, asin)
-            if int(asinresult.size['width']) > 500:
-                self.click_asin_by_img(asinresult, asin)
-            else:
-                self.click_asin_by_img_jp(asinresult, asin)
+            print("enter by image link..\n")
+            if country == 'us':
+                if int(asinresult.size['width']) > 500:
+                    self.click_asin_by_img_us(asinresult, asin)
+                else:
+                    self.click_asin_by_img_us_small(asinresult, asin)
+            elif country == "jp":
+                self.click_asin_by_img_jp_small(asinresult, asin)
         else:
-            #print("enter by title link..\n")
-            # if country == 'us':
-            #     self.click_asin_by_title(asinresult, asin)
-            # elif country == "jp":
-            #     self.click_asin_by_title_jp(asinresult, asin)
-            if int(asinresult.size['width']) > 500:
-                self.click_asin_by_title(asinresult, asin)
-            else:
+            print("enter by title link..\n")
+            if country == 'us':
+                if int(asinresult.size['width']) > 500:
+                    self.click_asin_by_title_us(asinresult, asin)
+                else:
+                    self.click_asin_by_title_us_small(asinresult, asin)
+            elif country == "jp":
                 self.click_asin_by_title_jp(asinresult, asin)
         print("*** 进入产品页面 + " + asin)
         self.random_sleep(begin, end)
