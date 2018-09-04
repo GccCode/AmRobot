@@ -32,6 +32,8 @@ class AmazonPage(BaseAction):
         elif country == 'ca':
             self.driver.get('https://www.amazon.ca')
         self.random_sleep(begin, end)
+        print("cookies after enter amazon:")
+        print(self.get_cookies())
         self.wait_page_loaded(*self.locator.LOGO)
 
     def get_currenthandle(self):
