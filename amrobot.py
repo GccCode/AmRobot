@@ -56,14 +56,17 @@ def customized_broswer():
             '--user-agent=Mozilla/5.0 (Windows NT 6.1; rv:61.0) Gecko/20100101 Firefox/61.0')
     option.add_argument(
         r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-    return webdriver.Chrome(chrome_options=option)
+    driver =  webdriver.Chrome(chrome_options=option)
+    driver.set_page_load_timeout(60)
+    driver.set_script_timeout(60)
+    return driver
 
 if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gbk')
     while True:
         print("========= 程序功能选择 ========")
-        print("版本号： 1809031440")
+        print("版本号： 1809041044")
         print("0. 退出")
         print("1. 单独操作")
         print("2. 批量操作")
@@ -90,9 +93,7 @@ if __name__ == "__main__":
                 if options == "0":
                     break
                 elif options == "1":
-                    driver = webdriver.Chrome()
-                    driver.set_page_load_timeout(30)
-                    driver.set_script_timeout(30)
+                    driver = customized_broswer()
                     try:
                         page = AmazonPage(driver)
                         page.enter_amazon_page(3000, 5000)
@@ -105,11 +106,7 @@ if __name__ == "__main__":
                         driver.close()
                         driver.quit()
                 elif options == "2":
-                    option = webdriver.ChromeOptions()
-                    option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-                    driver = webdriver.Chrome(chrome_options=option)
-                    driver.set_page_load_timeout(30)
-                    driver.set_script_timeout(30)
+                    driver = customized_broswer()
                     try:
                         page = AmazonPage(driver)
                         page.enter_amazon_page(3000, 5000)
@@ -127,11 +124,7 @@ if __name__ == "__main__":
                     print("1 - 账单地址")
                     print("2 - FBA地址")
                     addressoption = input("请输入你的选择： ")
-                    option = webdriver.ChromeOptions()
-                    option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-                    driver = webdriver.Chrome(chrome_options=option)
-                    driver.set_page_load_timeout(30)
-                    driver.set_script_timeout(30)
+                    driver = customized_broswer()
                     try:
                         page = AmazonPage(driver)
                         page.enter_amazon_page(3000, 5000)
@@ -149,12 +142,7 @@ if __name__ == "__main__":
                         driver.close()
                         driver.quit()
                 elif options == "4":
-                    option = webdriver.ChromeOptions()
-                    option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-                    driver = webdriver.Chrome(chrome_options=option)
-                    # driver = webdriver.Chrome()
-                    driver.set_page_load_timeout(30)
-                    driver.set_script_timeout(30)
+                    driver = customized_broswer()
                     try:
                         page = AmazonPage(driver)
                         page.enter_amazon_page(3000, 5000)
@@ -169,12 +157,7 @@ if __name__ == "__main__":
                         driver.close()
                         driver.quit()
                 elif options == "5":
-                    # option = webdriver.ChromeOptions()
-                    # option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-                    # driver = webdriver.Chrome(chrome_options=option)
                     driver = customized_broswer()
-                    driver.set_page_load_timeout(60)
-                    driver.set_script_timeout(60)
                     input("按下回车键关闭浏览器....\n")
                     driver.close()
                     driver.quit()
@@ -190,11 +173,7 @@ if __name__ == "__main__":
                     else:
                         print("你的输入有误！！！！\n")
                     if typestr == "0" or typestr == "1":
-                        option = webdriver.ChromeOptions()
-                        option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-                        driver = webdriver.Chrome(chrome_options=option)
-                        driver.set_page_load_timeout(30)
-                        driver.set_script_timeout(30)
+                        driver = customized_broswer()
                         try:
                             # keyword = "echo dot 壁掛け"
                             # asin = "B07BBL5T2P"
@@ -244,11 +223,7 @@ if __name__ == "__main__":
                             driver.close()
                             driver.quit()
                 elif options == "7":
-                    option = webdriver.ChromeOptions()
-                    option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-                    driver = webdriver.Chrome(chrome_options=option)
-                    driver.set_page_load_timeout(30)
-                    driver.set_script_timeout(30)
+                    driver = customized_broswer()
                     try:
                         page = AmazonPage(driver)
                         page.enter_amazon_page(3000, 5000)
@@ -270,11 +245,7 @@ if __name__ == "__main__":
                     else:
                         print("你的输入有误！！！！\n")
                     if typestr == "0" or typestr == "1":
-                        option = webdriver.ChromeOptions()
-                        option.add_argument(r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-                        driver = webdriver.Chrome(chrome_options=option)
-                        driver.set_page_load_timeout(30)
-                        driver.set_script_timeout(30)
+                        driver = customized_broswer()
                         try:
                             page = AmazonPage(driver)
                             page.enter_amazon_page(3000, 5000)
@@ -307,12 +278,7 @@ if __name__ == "__main__":
                     else:
                         print("你的输入有误！！！！\n")
                     if typestr == "0" or typestr == "1":
-                        option = webdriver.ChromeOptions()
-                        option.add_argument(
-                            r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-                        driver = webdriver.Chrome(chrome_options=option)
-                        driver.set_page_load_timeout(30)
-                        driver.set_script_timeout(30)
+                        driver = customized_broswer()
                         try:
                             page = AmazonPage(driver)
                             page.enter_amazon_page(3000, 5000)
@@ -346,12 +312,7 @@ if __name__ == "__main__":
                     else:
                         print("你的输入有误！！！！\n")
                     if typestr == "0" or typestr == "1":
-                        option = webdriver.ChromeOptions()
-                        option.add_argument(
-                            r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
-                        driver = webdriver.Chrome(chrome_options=option)
-                        driver.set_page_load_timeout(30)
-                        driver.set_script_timeout(30)
+                        driver = customized_broswer()
                         try:
                             page = AmazonPage(driver)
                             page.enter_amazon_page(3000, 5000)
@@ -402,8 +363,6 @@ if __name__ == "__main__":
                 #deci("info-encry.txt", "info.txt")
                 t1 = tm.time()
                 driver = customized_broswer()
-                driver.set_page_load_timeout(60)
-                driver.set_script_timeout(60)
                 cf = configparser.ConfigParser()
                 cf.read("task.txt")
                 amazonpage = AmazonPage(driver)
@@ -413,12 +372,16 @@ if __name__ == "__main__":
                     amazonpage.enter_register_page(3000, 5000)
                     registerpage = AmazonRegisterPage(driver)
                     registerpage.register(5000, 10000)
+                else:
+                    amazonpage.enter_amazon_page(3000, 5000)
                 login = cf.get("login", "status")
                 if login == "1":
                     amazonpage.enter_amazon_page(3000, 5000)
                     amazonpage.enter_signin_page(3000, 5000)
                     signinpage = AmazonSignInPage(driver)
                     signinpage.sign_in(5000, 10000)
+                else:
+                    amazonpage.enter_amazon_page(3000, 5000)
                 bill_address = cf.get("bill_address", "status")
                 if bill_address == "1":
                     type = cf.get("bill_address", "type")
