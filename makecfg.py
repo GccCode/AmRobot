@@ -220,6 +220,10 @@ if __name__ == "__main__":
                             cf.set("search", "type", type)
                             page = input("**** 产品大概是几页内：")
                             cf.set("search", "page", page)
+                            fakeview = keep_input_bool("**** 是否翻页随机浏览产品（否-0，是-1：")
+                            cf.set("search", "fakeview", fakeview)
+                            fakediff = keep_input_bool("**** 是否货比？（否0，是-1：")
+                            cf.set("search", "fakediff", fakediff)
 
                             cf.add_section("review_view")
                             review_view = keep_input_bool("**** 是否浏览评论（否-0，是-1）：")

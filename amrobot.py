@@ -66,7 +66,7 @@ if __name__ == "__main__":
     #sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gbk')
     while True:
         print("========= 程序功能选择 ========")
-        print("版本号： 1809041418")
+        print("版本号： 1809041456")
         print("0. 退出")
         print("1. 单独操作")
         print("2. 批量操作")
@@ -446,6 +446,8 @@ if __name__ == "__main__":
                                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                 else:
                                     print("找不到产品！！！！")
+                            else:
+                                print("找不到产品！！！！")
                         if asinresult != False:
                             variation_setup = cf.get("search", "variation_setup")
                             if variation_setup == "1":
