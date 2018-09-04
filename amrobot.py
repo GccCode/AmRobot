@@ -416,6 +416,8 @@ if __name__ == "__main__":
                     searchpage = AmazonSearchPage(driver)
                     search = cf.get("search", "status")
                     searchpage_handle = 0
+                    asinresult = False
+                    entry_type = ""
                     if search == "1":
                         super_link = cf.get("super_link", "status")
                         if super_link == "1":
