@@ -458,13 +458,15 @@ if __name__ == "__main__":
                     asinresult = False
                     entry_type = ""
                     if search == "1":
-                        super_link = cf.get("super_link", "status")
+                        super_link = cf.get("search", "super_link")
                         if super_link == "1":
-                            link = cf.get("super_link", "link")
+                            link = cf.get("search", "link")
+                            print(("* 开始通过超链接访问产品页。。。"), flush=True)
                             amazonpage.enter_super_link(link, 3000, 5000)
                             searchpage_handle = amazonpage.get_currenthandle()
                         else:
                             keyword = cf.get("search", "keyword")
+                            print(("* 开始搜索关键词。。。"), flush=True)
                             amazonpage.search_asin(keyword, 5000, 8000)
                             searchpage_handle = amazonpage.get_currenthandle()
                             condition_setup = cf.get("search", "condition_setup")
