@@ -145,6 +145,8 @@ class AmazonSearchPage(AmazonPage):
             asinresult.find_element(*self.locator.ASINTITLE).click()
 
     def enter_asin_page(self, asinresult, asin, begin, end):
+        print("元素大小：")
+        print(asinresult.size)
         country = self.cf.get("account", "country")
         option = random.randint(1, 2)
         if option == 1:

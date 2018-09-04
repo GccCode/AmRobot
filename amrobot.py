@@ -440,8 +440,6 @@ if __name__ == "__main__":
                                 entry_type = "normal"
                             asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                             if asinresult != False:
-                                print("元素大小：")
-                                print(asinresult.size)
                                 searchpage.enter_random_products(asin, random.randint(2, 3), 8, 15, 5000, 8000)
                                 asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                                 if asinresult != False:
