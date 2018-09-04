@@ -16,8 +16,12 @@ class AmazonSignInPage(AmazonPage):
         self.cf.read("info.txt")
 
     def sign_in(self, begin, end):
+        print("cookies before login:")
+        print(self.get_cookies())
         self.fill_in_form()
         self.random_sleep(begin, end)
+        print("cookies after login:")
+        print(self.get_cookies())
 
     def fill_in_form(self):
         emailname = self.cf.get("account", "email")

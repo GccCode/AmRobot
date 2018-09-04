@@ -20,6 +20,9 @@ class AmazonPage(BaseAction):
         self.screen_width = GetSystemMetrics(0)
         self.screen_heigth = GetSystemMetrics(1)
 
+    def get_cookies(self):
+        return self.driver.get_cookies()
+
     def enter_amazon_page(self, begin, end):
         country = self.cf.get("account", "country")
         if country == 'us':
