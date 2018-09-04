@@ -152,17 +152,24 @@ class AmazonSearchPage(AmazonPage):
         option = random.randint(1, 2)
         if option == 1:
             #print("enter by image link..\n")
-            if country == 'us':
+            # if country == 'us':
+            #     self.click_asin_by_img(asinresult, asin)
+            # elif country == "jp":
+            #     self.click_asin_by_img_jp(asinresult, asin)
+            if int(asinresult.size['width']) > 500:
                 self.click_asin_by_img(asinresult, asin)
-            elif country == "jp":
+            else:
                 self.click_asin_by_img_jp(asinresult, asin)
         else:
             #print("enter by title link..\n")
-            if country == 'us':
+            # if country == 'us':
+            #     self.click_asin_by_title(asinresult, asin)
+            # elif country == "jp":
+            #     self.click_asin_by_title_jp(asinresult, asin)
+            if int(asinresult.size['width']) > 500:
                 self.click_asin_by_title(asinresult, asin)
-            elif country == "jp":
+            else:
                 self.click_asin_by_title_jp(asinresult, asin)
-
         print("*** 进入产品页面 + " + asin)
         self.random_sleep(begin, end)
         return self.driver.current_window_handle
