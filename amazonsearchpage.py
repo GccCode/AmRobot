@@ -21,6 +21,7 @@ class AmazonSearchPage(AmazonPage):
         self.screen_heigth = GetSystemMetrics(1)
 
     def find_target_product(self, asin, type, pages):
+        print("开始查找产品，限制页数：" + int(pages))
         for page in range(1, pages):
             asinresult = self.find_target_asin(asin, type)
             if asinresult != False:
@@ -81,11 +82,12 @@ class AmazonSearchPage(AmazonPage):
                 if type == "normal":
                     if self.is_asin_sponsored(asinresult, asin) != True:
                         print("** 找到目标产品 - 普通。。。")
-                        return asinresult
                 elif type == "sponsored":
                     if self.is_asin_sponsored(asinresult, asin):
                         print("** 找到目标产品 - 广告。。。")
-                        return asinresult
+
+                return asinresult
+
         return False
 
     def is_asin_amazon_choice(self, asinresult, asin):

@@ -81,8 +81,8 @@ class AmazonSearchPageLocator(AmazonPageLocator):
 
     # ASINTITLE_US_BS_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
     # ASINTITLE_US_AC_S = (By.XPATH, './/div/div[position()=2]/div/div[position()=2]/div[position()=1]/div[position()=1]/a/h2')
-    ASINTITLE_US_SP_S = (By.XPATH, './/div/div[position()=4]/div[position()=1]/a/h2')
-    ASINTITLE_US_S = (By.XPATH, './/div/div[position()=3]/div[position()=1]/a/h2')
+    ASINTITLE_US_SP_S = (By.XPATH, './/div/div[position()=4]/div[position()=1]')
+    ASINTITLE_US_S = (By.XPATH, './/div/div[position()=3]/div[position()=1]')
 
 
     # jp
