@@ -31,7 +31,7 @@ class AmazonPage(BaseAction):
         with open('cookies.json', 'w') as f:
             f.write(jsonCookies)
 
-    def load_cookies(self, start_url):
+    def load_cookies(self):
         # self.driver.get(start_url)
         # self.driver.delete_all_cookies()
         if os.path.exists('cookies.json'):
