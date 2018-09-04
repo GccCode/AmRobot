@@ -3,6 +3,8 @@
 
 import time as tm
 import random
+import  json
+import  os
 from selenium import webdriver
 from baseaction import BaseAction
 from locator import AmazonPageLocator
@@ -23,6 +25,30 @@ class AmazonPage(BaseAction):
     def get_cookies(self):
         return self.driver.get_cookies()
 
+    def save_cookies(self):
+        cookies = self.driver.get_cookies()
+        jsonCookies = json.dumps(cookies)
+        with open('cookies.json', 'w') as f:
+            f.write(jsonCookies)
+
+    def load_cookies(self, start_url):
+        # self.driver.get(start_url)
+        # self.driver.delete_all_cookies()
+        if os.path.exists('cookies.json'):
+            with open('cookies.json', 'r', encoding='utf-8') as f:
+                listCookies = json.loads(f.read())
+            for cookie in listCookies:
+                self.driver.add_cookie({
+                    'domain': cookie['domain'],
+                    'name': cookie['name'],
+                    'value': cookie['value'],
+                    'path': cookie['path'],
+                    'expires': cookie['expires']
+                    # 'path': '/',
+                    # 'expires': None
+                })
+            # self.driver.get(start_url)
+
     def enter_amazon_page(self, begin, end):
         country = self.cf.get("account", "country")
         if country == 'us':
@@ -32,9 +58,9 @@ class AmazonPage(BaseAction):
         elif country == 'ca':
             self.driver.get('https://www.amazon.ca')
         self.random_sleep(begin, end)
-        print("cookies after enter amazon:")
-        print(self.get_cookies())
         self.wait_page_loaded(*self.locator.LOGO)
+        if os.path.exists('cookies.json'):
+            self.load_cookies()
 
     def get_currenthandle(self):
         return self.driver.current_window_handle
