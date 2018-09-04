@@ -19,6 +19,29 @@ from amazonsigninpage import AmazonSignInPage
 from amazonsearchpage import  AmazonSearchPage
 from amazonasinpage import  AmazonAsinPage
 
+#0)
+#1) Chrome
+#2) Firefox+Win7:
+#3) Safari+Win7:
+#4) Opera+Win7:
+#5) IE+Win7+ie9：
+#6) Win7+ie8：
+#7) WinXP+ie8：
+#8) WinXP+ie7：
+#9) WinXP+ie6：
+useragentlist = [
+    'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1',
+    'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0',
+    'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50',
+    'Opera/9.80 (Windows NT 6.1; U; zh-cn) Presto/2.9.168 Version/11.50',
+    'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)',
+    'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0)',
+    'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)',
+    'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)',
+    'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)',
+    'Mozilla/5.0 (Windows NT 6.1; rv:61.0) Gecko/20100101 Firefox/61.0'
+]
+
 
 def encry(cnf_org, cnf_encry):
     f_org = open(cnf_org, 'r')
@@ -48,14 +71,25 @@ def customized_broswer():
     status = cf.get("proxy", "status")
     if status == "1":
         host_port = cf.get("proxy", "proxy")
-        proxy_socks_argument = '--proxy-server=socks5://' + host_port
+        proxy_type = cf.get("proxy", "type")
+        if proxy_type == "0":
+            proxy_socks_argument = '--proxy-server=socks5://' + host_port
+        else:
+            proxy_socks_argument = '--proxy-server=https://' + host_port
         option.add_argument(proxy_socks_argument)
     ua = cf.get("broswer", "type")
-    if ua == "2":
-        option.add_argument(
-            '--user-agent=Mozilla/5.0 (Windows NT 6.1; rv:61.0) Gecko/20100101 Firefox/61.0')
-    option.add_argument(
-        r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
+    if int(ua) > 0:
+        index = int(ua) - 1
+        useragent = "--user-agent=" + useragentlist[index]
+        option.add_argument(useragent)
+    # if ua == "2":
+    #     option.add_argument(
+    #         '--user-agent=Mozilla/5.0 (Windows NT 6.1; rv:61.0) Gecko/20100101 Firefox/61.0')
+    userdataid = cf.get("broswer", "userdataid")
+    userdatadir = 'user-data-dir=C:\\Users\\Administrator\\AppData\\Local\\Google\\Chrome\\User Data\\Profile ' + userdataid
+    option.add_argument(userdatadir)
+    # option.add_argument(
+    #     r"user-data-dir=C:\Users\Administrator\AppData\Local\Google\Chrome\User Data\Profile 6")
     driver =  webdriver.Chrome(chrome_options=option)
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
@@ -368,6 +402,7 @@ if __name__ == "__main__":
                 amazonpage = AmazonPage(driver)
                 register = cf.get("register", "status")
                 if register == "1":
+                    print(("* 开始注册账号"), flush=True)
                     amazonpage.enter_amazon_page(3000, 5000)
                     amazonpage.enter_register_page(3000, 5000)
                     registerpage = AmazonRegisterPage(driver)
@@ -376,12 +411,13 @@ if __name__ == "__main__":
                     amazonpage.enter_amazon_page(3000, 5000)
                 login = cf.get("login", "status")
                 if login == "1":
+                    print(("* 开始登陆账号"), flush=True)
                     amazonpage.enter_signin_page(3000, 5000)
                     signinpage = AmazonSignInPage(driver)
                     signinpage.sign_in(5000, 10000)
                 bill_address = cf.get("bill_address", "status")
                 if bill_address == "1":
-                    type = cf.get("bill_address", "type")
+                    print(("* 开始添加账单地址"), flush=True)
                     amazonpage.enter_account_page(3000, 5000)
                     accountpage = AmazonAccountPage(driver)
                     accountpage.enter_address_page(3000, 5000)
@@ -389,6 +425,7 @@ if __name__ == "__main__":
                     addresspage.add_address("bill", 5000, 10000)
                 card = cf.get("card", "status")
                 if card == "1":
+                    print(("* 开始添加信用卡"), flush=True)
                     amazonpage.enter_account_page(3000, 5000)
                     accountpage = AmazonAccountPage(driver)
                     accountpage.enter_payment_page(3000, 5000)
@@ -396,7 +433,7 @@ if __name__ == "__main__":
                     paymentpage.add_new_payment(5000, 10000)
                 fba_address = cf.get("fba_address", "status")
                 if fba_address == "1":
-                    type = cf.get("fba_address", "type")
+                    print(("* 开始添加收货地址。。。"), flush=True)
                     amazonpage.enter_account_page(3000, 5000)
                     accountpage = AmazonAccountPage(driver)
                     accountpage.enter_address_page(3000, 5000)
@@ -404,6 +441,7 @@ if __name__ == "__main__":
                     addresspage.add_address("fba", 5000, 10000)
                 prime = cf.get("prime", "status")
                 if prime == "1":
+                    print(("* 开始注册prime。。。"), flush=True)
                     amazonpage.enter_amazon_page(3000, 5000)
                     amazonpage.register_prime(5000, 10000)
                 random_view = cf.get("random_view", "status")
@@ -411,6 +449,7 @@ if __name__ == "__main__":
                     keyword = cf.get("random_view", "keyword")
                     amazonpage.search_asin(keyword, 5000, 8000)
                     searchpage = AmazonSearchPage(driver)
+                    print(("* 开始随意浏览产品。。。。"), flush=True)
                     searchpage.enter_random_products(False, 3, 15, 30, 3000, 5000)
                 else:
                     searchpage = AmazonSearchPage(driver)
@@ -438,9 +477,14 @@ if __name__ == "__main__":
                                 entry_type = "sponsored"
                             elif type == "1":
                                 entry_type = "normal"
+
                             asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                             if asinresult != False:
-                                searchpage.enter_random_products(asin, random.randint(2, 3), 8, 15, 5000, 8000)
+                                fakeview = cf.get("search", "fakeview")
+                                if fakeview == "1":
+                                    min_time = int(cf.get("search", "view_time_min"))
+                                    max_time = int(cf.get("search", "view_time_max"))
+                                    searchpage.enter_random_products(asin, random.randint(2, 3), min_time, max_time, 5000, 8000)
                                 asinresult = searchpage.find_target_product(asin, entry_type, int(page))
                                 if asinresult != False:
                                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
@@ -452,32 +496,39 @@ if __name__ == "__main__":
                             variation_setup = cf.get("search", "variation_setup")
                             if variation_setup == "1":
                                 input("请进行手动选择目标变体，完成后按回车键继续自动化！！！：")
+                            mainview = cf.get("search", "mainview")
+                            if mainview == "1":
+                                print(("* 开始随意浏览产品页。。。"), flush=True)
+                                amazonpage.random_walk(random.randint(35, 50))
+                                asinpage = AmazonAsinPage(driver)
+                                searchpage.switch_to_new_page(searchpage_handle) #切换到产品页handle
 
-                            amazonpage.random_walk(random.randint(35, 50))
-                            asinpage = AmazonAsinPage(driver)
-                            searchpage.switch_to_new_page(searchpage_handle) #切换到产品页handle
+                                review_view = cf.get("review_view", "status")
+                                if review_view == "1":
+                                    print(("* 开始随意浏览评论页。。。"), flush=True)
+                                    asinpage.review_all(3000, 5000)
+                                    amazonpage.navigation_back(3000, 5000)
+                                qa_submit = cf.get("qa_submit", "status")
+                                if qa_submit == "1":
+                                    print(("* 开始提交QA。。。。"), flush=True)
+                                    content = cf.get("qa_submit", "content")
+                                    asinpage.ask_qa(content, 3000, 5000)
+                                    amazonpage.navigation_back(3000, 5000)
 
-                            review_view = cf.get("review_view", "status")
-                            if review_view == "1":
-                                asinpage.review_all(3000, 5000)
-                                amazonpage.navigation_back(3000, 5000)
-                            qa_submit = cf.get("qa_submit", "status")
-                            if qa_submit == "1":
-                                content = cf.get("qa_submit", "content")
-                                asinpage.ask_qa(content, 3000, 5000)
-                                amazonpage.navigation_back(3000, 5000)
+                                wishlist = cf.get("wishlist", "status")
+                                if wishlist == "1":
+                                    print(("* 开始添加wishlist。。。。"), flush=True)
+                                    asinpage.add_wishlist(5000, 8000)
 
-                            wishlist = cf.get("wishlist", "status")
-                            if wishlist == "1":
-                                asinpage.add_wishlist(5000, 8000)
+                                addcart = cf.get("addcart", "status")
+                                if addcart == "1":
+                                    print(("* 开始加购物车。。。"), flush=True)
+                                    asinpage.add_cart(3000, 5000)
 
-                            addcart = cf.get("addcart", "status")
-                            if addcart == "1":
-                                asinpage.add_cart(3000, 5000)
-
-                            searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
+                                searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
                             random_status = random.randint(1, 200)
                             if (random_status % 2) == 1:
+                                print(("* 随意浏览并等待退出"), flush=True)
                                 amazonpage.random_walk(random.randint(2, 7))
                             # else:
                             #     print("随机数是：" + str(random_status) + "\n")

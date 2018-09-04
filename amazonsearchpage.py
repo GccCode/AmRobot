@@ -29,7 +29,11 @@ class AmazonSearchPage(AmazonPage):
                 print(("*** 目标产品被找到的页数：" + str(page)), flush=True)
                 return asinresult
             else:
-                self.enter_random_products(False, random.randint(0, 2), 8, 16, 3000, 5000)
+                fakediff = self.cf.get("search", "fakediff")
+                if fakediff == "1":
+                    min_time = int(self.cf.get("search", "diff_time_min"))
+                    max_time = int(self.cf.get("search", "diff_time_max"))
+                    self.enter_random_products(False, random.randint(0, 2), min_time, max_time, 3000, 5000)
                 self.enter_next_page(3000, 5000)
         return False
 

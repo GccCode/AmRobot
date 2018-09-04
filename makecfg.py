@@ -46,7 +46,7 @@ if __name__ == "__main__":
     status = True
     while status == True:
         print("\n========== 主菜单 ============")
-        action = input("* 退出-0, 配置-1，解密文件-2：")
+        action = input("* 退出-0, 配置-1：")
         if action == "0":
             status = False
         elif action == "1":
@@ -56,16 +56,25 @@ if __name__ == "__main__":
                 cf = configparser.ConfigParser()
                 cf.add_section("broswer")
                 print("\n==== 配置浏览器 ====\n")
-                broswer = input("*** 请输入浏览器类型（谷歌-1，火狐-2）：")
-                if (broswer != "2") and (broswer != "1"):
-                    print("输入有误！！！！只能为0或者1\n")
+                userdataid = input("*** 请输入浏览器数据序号：")
+                if broswer.isdigit():
+                    cf.set("broswer", "userdataid", userdataid)
+                else:
+                    cf.set("broswer", "userdataid", "0")
+                broswer = input("*** 请输入浏览器类型（默认为本地谷歌-0）：")
+                #if (broswer != "2") and (broswer != "1"):
+                if broswer.isdigit() == False:
+                    print("输入有误！！！！只能为数字\n")
                 else:
                     cf.set("broswer", "type", broswer)
                     print("\n==== 配置代理 ====\n")
-                    host_ip = input("*** 请输入代理ip端口（格式：IP:端口，直接跳过请输入0）：")
                     cf.add_section("proxy")
-                    if host_ip != "0":
+                    type = keep_input_bool("*** 是否设置代理？(否-0，是-1）：")
+                    if type == "1":
                         cf.set("proxy", "status", "1")
+                        proxy_type = keep_input_bool("*** 设置代理类型（sock5-0，https-1）：")
+                        cf.set("proxy", "type", proxy_type)
+                        host_ip = input("*** 请输入代理ip端口（格式：IP:端口）：")
                         cf.set("proxy", "proxy", host_ip)
                     else:
                         cf.set("proxy", "status", "0")
@@ -179,12 +188,53 @@ if __name__ == "__main__":
                     keyword = input("**** 请输入关键词：")
                     cf.set("random_view", "keyword", keyword)
                 elif random_view == "0":
-                    cf.add_section("super_link")
+                    cf.add_section("search")
                     super_link = keep_input_bool("*** 是否浏览超链接（否-0，是-1）：")
-                    cf.set("super_link", "status", super_link)
+                    cf.set("search", "super_link", super_link)
                     if super_link == "1":
                         link = input("**** 超链接：")
-                        cf.set("super_link", "link", link)
+                        cf.set("search", "link", link)
+                        variation = keep_input_bool("**** 是否手动选择变体（否-0，是-1）：")
+                        cf.set("search", "variation_setup", variation)
+                    else:
+                        search = keep_input_bool("*** 是否搜索关键词产品（否-0，是-1）：")
+                        cf.set("search", "status", search)
+                        if search == "1":
+                            keyword = input("**** 请输入关键词：")
+                            cf.set("search", "keyword", keyword)
+                            condition = keep_input_bool("**** 是否手动卡位（否-0，是-1）：")
+                            cf.set("search", "condition_setup", condition)
+                            variation = keep_input_bool("**** 是否手动选择变体（否-0，是-1）：")
+                            cf.set("search", "variation_setup", variation)
+                            asin = input("**** 请输入产品ASIN：")
+                            cf.set("search", "asin", asin)
+                            type = input("**** 请输入产品入口（广告-0，普通-1）：")
+                            cf.set("search", "type", type)
+                            page = input("**** 产品大概是几页内：")
+                            cf.set("search", "page", page)
+                            fakeview = keep_input_bool("**** 是否翻页随机浏览产品（否-0，是-1)：")
+                            cf.set("search", "fakeview", fakeview)
+                            if fakeview == "1":
+                                time_min = input("*****  请输入最小时间（1-8）：")
+                                cf.set("search", "view_time_min", time_min)
+                                time_max = input("*****  请输入最大时间（1-15）：")
+                                cf.set("search", "view_time_max", time_max)
+                            else:
+                                cf.set("search", "view_time_min", "8")
+                                cf.set("search", "view_time_max", "15")
+                            fakediff = keep_input_bool("**** 是否货比？（否0，是-1）：")
+                            cf.set("search", "fakediff", fakediff)
+                            if fakediff == "1":
+                                time_min = input("*****  请输入最小时间（1-8）：")
+                                cf.set("search", "diff_time_min", time_min)
+                                time_max = input("*****  请输入最大时间（1-15）：")
+                                cf.set("search", "diff_time_max", time_max)
+                            else:
+                                cf.set("search", "diff_time_min", "5")
+                                cf.set("search", "diff_time_max", "15")
+                    mainview = keep_input_bool("***** 是否浏览产品页（否-0，是-1）：")
+                    cf.set("search", "mainview", mainview)
+                    if mainview == "1":
                         cf.add_section("review_view")
                         review_view = keep_input_bool("**** 是否浏览评论（否-0，是-1）：")
                         cf.set("review_view", "status", review_view)
@@ -203,46 +253,6 @@ if __name__ == "__main__":
                         cf.add_section("addcart")
                         addcart = keep_input_bool("**** 是否加购物车（否-0，是-1）：")
                         cf.set("addcart", "status", addcart)
-                    else:
-                        cf.add_section("search")
-                        search = keep_input_bool("*** 是否搜索关键词产品（否-0，是-1：")
-                        cf.set("search", "status", search)
-                        if search == "1":
-                            keyword = input("**** 请输入关键词：")
-                            cf.set("search", "keyword", keyword)
-                            condition = keep_input_bool("**** 是否手动卡位（否-0，是-1）：")
-                            cf.set("search", "condition_setup", condition)
-                            variation = keep_input_bool("**** 是否手动选择变体（否-0，是-1）：")
-                            cf.set("search", "variation_setup", variation)
-                            asin = input("**** 请输入产品ASIN：")
-                            cf.set("search", "asin", asin)
-                            type = input("**** 请输入产品入口（广告-0，普通-1）：")
-                            cf.set("search", "type", type)
-                            page = input("**** 产品大概是几页内：")
-                            cf.set("search", "page", page)
-                            fakeview = keep_input_bool("**** 是否翻页随机浏览产品（否-0，是-1：")
-                            cf.set("search", "fakeview", fakeview)
-                            fakediff = keep_input_bool("**** 是否货比？（否0，是-1：")
-                            cf.set("search", "fakediff", fakediff)
-
-                            cf.add_section("review_view")
-                            review_view = keep_input_bool("**** 是否浏览评论（否-0，是-1）：")
-                            cf.set("review_view", "status", review_view)
-
-                            cf.add_section("qa_submit")
-                            qa_submit = keep_input_bool("**** 是否提交QA（否-0，是-1）：")
-                            cf.set("qa_submit", "status", qa_submit)
-                            if qa_submit == "1":
-                                content = input("***** 请输入QA内容：")
-                                cf.set("qa_submit", "content", content)
-
-                            cf.add_section("wishlist")
-                            wishlist = keep_input_bool("**** 是否加心愿卡（否-0，是-1）：")
-                            cf.set("wishlist", "status", wishlist)
-
-                            cf.add_section("addcart")
-                            addcart = keep_input_bool("**** 是否加购物车（否-0，是-1）：")
-                            cf.set("addcart", "status", addcart)
 
                 store = keep_input_bool("退出-0，保存设置文件-1，请输入：")
                 if store == "0":

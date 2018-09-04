@@ -20,6 +20,7 @@ class AmazonSignInPage(AmazonPage):
         self.random_sleep(begin, end)
         if self.is_element_exsist(*self.locator.LOGO) == False:
             input("请手动解决登陆问题，并按回车键继续执行！！！")
+        print(("** 开始保存cookies。。。"), flush=True)
         self.save_cookies()
 
     def fill_in_form(self):
