@@ -38,15 +38,25 @@ class AmazonPage(BaseAction):
             with open('cookies.json', 'r', encoding='utf-8') as f:
                 listCookies = json.loads(f.read())
             for cookie in listCookies:
-                self.driver.add_cookie({
-                    'domain': cookie['domain'],
-                    'name': cookie['name'],
-                    'value': cookie['value'],
-                    'path': cookie['path'],
-                    'expiry': cookie['expiry']
-                    # 'path': '/',
-                    # 'expires': None
-                })
+                if self.is_name_err(cookie['expiry']):
+                    self.driver.add_cookie({
+                        'domain': cookie['domain'],
+                        'name': cookie['name'],
+                        'value': cookie['value'],
+                        'path': cookie['path'],
+                        'expiry': cookie['expiry']
+                        # 'path': '/',
+                        # 'expires': None
+                    })
+                else:
+                    self.driver.add_cookie({
+                        'domain': cookie['domain'],
+                        'name': cookie['name'],
+                        'value': cookie['value'],
+                        'path': cookie['path'],
+                        # 'path': '/',
+                        # 'expires': None
+                    })
             # self.driver.get(start_url)
 
     def enter_amazon_page(self, begin, end):

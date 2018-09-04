@@ -18,6 +18,14 @@ class BaseAction(object):
         self.screen_width = GetSystemMetrics(0)
         self.screen_heigth = GetSystemMetrics(1)
 
+    def is_name_err(self, var):
+        try:
+            var
+        except NameError:
+            return False
+        else:
+            return True
+
     def is_element_exsist(self, *locator):
         status = True
         try:
