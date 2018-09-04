@@ -464,6 +464,7 @@ if __name__ == "__main__":
                             print(("* 开始通过超链接访问产品页。。。"), flush=True)
                             amazonpage.enter_super_link(link, 3000, 5000)
                             searchpage_handle = amazonpage.get_currenthandle()
+                            asinresult = True
                     else:
                         keyword = cf.get("search", "keyword")
                         print(("* 开始搜索关键词。。。"), flush=True)
