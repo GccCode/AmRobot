@@ -44,8 +44,8 @@ class AmazonSearchPage(AmazonPage):
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         if asin == False:
             tmp = random.randint(0, (len(asinresults) - 1))
-            currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
             print(("*** 访问当前页面产品 + " + asinresults[tmp].get_attribute('data-asin')), flush=True)
+            currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
             random_status = random.randint(1, 200)
             if (random_status % 2) == 1:
                 self.random_walk(count)
@@ -59,8 +59,9 @@ class AmazonSearchPage(AmazonPage):
                     while tmp == index:
                         tmp = random.randint(0, (len(asinresults) - 1))
 
-                    currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
                     print(("*** 访问当前页面除目标产品以外的产品 + " + asinresults[tmp].get_attribute('data-asin')), flush=True)
+                    currenthandle = self.enter_asin_page(asinresults[tmp], asinresults[tmp].get_attribute('data-asin'), 3000, 5000)
+
                     random_status = random.randint(1, 200)
                     if (random_status % 2) == 1:
                         self.random_walk(count)
