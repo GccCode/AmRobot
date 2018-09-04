@@ -43,7 +43,7 @@ class AmazonPage(BaseAction):
                     'name': cookie['name'],
                     'value': cookie['value'],
                     'path': cookie['path'],
-                    'expires': cookie['expires']
+                    'expiry': cookie['expiry']
                     # 'path': '/',
                     # 'expires': None
                 })
