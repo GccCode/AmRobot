@@ -40,11 +40,11 @@ class AmazonPage(BaseAction):
             with open('cookies.json', 'r', encoding='utf-8') as f:
                 listCookies = json.loads(f.read())
             for cookie in listCookies:
-                print("expiry: "+ cookie['expiry'])
+                print("expiry: "+ str(cookie['expiry']))
                 if self.is_name_err(cookie['expiry']):
                     self.driver.add_cookie({
                         'domain': cookie['domain'],
-                        'expiry': cookie['expiry'],
+                        'expiry': str(cookie['expiry']),
                         'name': cookie['name'],
                         'path': cookie['path'],
                         'value': cookie['value']
