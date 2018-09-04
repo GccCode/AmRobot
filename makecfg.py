@@ -57,7 +57,7 @@ if __name__ == "__main__":
                 cf.add_section("broswer")
                 print("\n==== 配置浏览器 ====\n")
                 userdataid = input("*** 请输入浏览器数据序号：")
-                if broswer.isdigit():
+                if userdataid.isdigit():
                     cf.set("broswer", "userdataid", userdataid)
                 else:
                     cf.set("broswer", "userdataid", "0")
