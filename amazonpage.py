@@ -34,14 +34,10 @@ class AmazonPage(BaseAction):
             f.write(jsonCookies)
 
     def load_cookies(self):
-        # self.driver.get(start_url)
-        # self.driver.delete_all_cookies()
         if os.path.exists('cookies.json'):
             with open('cookies.json', 'r', encoding='utf-8') as f:
                 listCookies = json.loads(f.read())
             for cookie in listCookies:
-                #print("expiry: "+ str(cookie['expiry']))
-                # if self.is_name_err(cookie['expiry']):
                 if 'expiry' in cookie:
                     self.driver.add_cookie({
                         'domain': cookie['domain'],
@@ -49,21 +45,14 @@ class AmazonPage(BaseAction):
                         'name': cookie['name'],
                         'path': cookie['path'],
                         'value': cookie['value']
-                        # 'path': '/',
-                        # 'expires': None
                     })
-                    print("yyyyyyyyyyyyy")
                 else:
                     self.driver.add_cookie({
                         'domain': cookie['domain'],
                         'name': cookie['name'],
                         'path': cookie['path'],
                         'value': cookie['value']
-                        # 'path': '/',
-                        # 'expires': None
                     })
-                    print("zzzzzzzzzzzzzzzzzzzzzzz")
-            # self.driver.get(start_url)
 
     def enter_amazon_page(self, begin, end):
         country = self.cf.get("account", "country")
