@@ -445,9 +445,9 @@ if __name__ == "__main__":
                                 if asinresult != False:
                                     searchpage.enter_asin_page(asinresult, asin, 3000, 5000)
                                 else:
-                                    print("找不到产品！！！！")
+                                    print(("找不到产品！！！！"), flush=True)
                             else:
-                                print("找不到产品！！！！")
+                                print(("找不到产品！！！！"), flush=True)
                         if asinresult != False:
                             variation_setup = cf.get("search", "variation_setup")
                             if variation_setup == "1":
