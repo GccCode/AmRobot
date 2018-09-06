@@ -65,7 +65,7 @@ class AmazonAsinPage(AmazonPage):
             self.random_sleep(1000, 2000)
             if self.is_element_exsist(*self.locator.WISHLISTCONTINUE) == True:
                 self.click(*self.locator.WISHLISTCONTINUE)
-
+        self.window_capture("wishlist")
         print(("**** 添加心愿卡。。。。"), flush=True)
         self.random_sleep(begin, end)
 
