@@ -20,7 +20,6 @@ from amazonpaymentpage import AmazonPaymentPage
 from amazonsigninpage import AmazonSignInPage
 from amazonsearchpage import  AmazonSearchPage
 from amazonasinpage import  AmazonAsinPage
-import Image
 import os, win32gui, win32ui, win32con, win32api
 
 #0)
@@ -100,7 +99,8 @@ def generate_username():
 
 
 def generate_password():
-    candidates = string.digits + string.ascii_letters + '!@$%&*+-_'
+    #candidates = string.digits + string.ascii_letters + '!@$%&*+-_'
+    candidates = string.digits + string.ascii_letters + '!@'
     passwd = ''
     for i in range(random.randint(8, 14)):
         passwd += random.choice(candidates)
@@ -251,7 +251,7 @@ def customized_broswer():
 class Administrator():
     def __init__(self):
         self.cf = configparser.ConfigParser()
-        self.cf.read("task.txt")
+        self.cf.read("_task.txt")
 
     def get_tasks(self):
         return self.cf.sections()
@@ -300,14 +300,14 @@ class Administrator():
     def delete_task(self, section):
         if self.is_run_out(section):
             self.cf.remove_section(section)
-            self.cf.write(open('task.txt', 'w'))
-            self.cf.read("task.txt")
+            self.cf.write(open('_task.txt', 'w'))
+            self.cf.read("_task.txt")
 
     def finish_task(self, section):
         count = int(self.cf.get(section, "count"))
         count -= 1
         self.cf.set(section, "count", str(count))
-        self.cf.write(open('task.txt', 'w'))
+        self.cf.write(open('_task.txt', 'w'))
         if count <= 0:
             self.delete_task(section)
 
