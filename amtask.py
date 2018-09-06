@@ -380,10 +380,10 @@ if __name__ == "__main__":
                     print(("* 开始添加wishlist。。。。"), flush=True)
                     asinpage.add_wishlist(5000, 8000)
 
-                searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
+                #searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
 
                 admin.finish_task(task)
-                time.sleep(random.randint(60 * 5, 120 * 5))
+                time.sleep(random.randint(60, 120))
             else:
                 print(("找不到产品！！！！"), flush=True)
         except NoSuchElementException as msg:
