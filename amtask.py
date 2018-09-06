@@ -181,6 +181,8 @@ def generate_info_file():
     validmonth = cardinfo[2].split('/')[0]
     cf_info.set("cardinfo", "month", validmonth)
     validyear = cardinfo[2].split('/')[1]
+    if int(validyear) < 2019:
+        validyear = "2019"
     cf_info.set("cardinfo", "year", validyear)
 
     cf_info.write(open('info.txt', 'w'))
