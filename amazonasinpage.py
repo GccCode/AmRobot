@@ -56,7 +56,7 @@ class AmazonAsinPage(AmazonPage):
         self.click(*self.locator.ADDWISHLISTSUBMITBUTTON)
         self.random_sleep(5000, 8000)
         if self.is_element_exsist(*self.locator.WISHLISTCONTINUE) == True:
-            self.window_capture("wishlist")
+            self.window_capture("wishlist" + "-" + asin)
             self.click(*self.locator.WISHLISTCONTINUE)
         else:
             if self.is_element_exsist(*self.locator.CREATELISTBUTTON):
