@@ -22,6 +22,8 @@ from amazonsearchpage import  AmazonSearchPage
 from amazonasinpage import  AmazonAsinPage
 import os, win32gui, win32ui, win32con, win32api
 import io
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 
 #0)
 #1) Chrome
@@ -37,7 +39,6 @@ useragentlist = [
     'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1',
     'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0',
     'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50',
-    'Opera/9.80 (Windows NT 6.1; U; zh-cn) Presto/2.9.168 Version/11.50',
     'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0)',
     'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0)',
     'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0)',
@@ -338,75 +339,81 @@ if __name__ == "__main__":
         generate_info_file()
         task = admin.get_random_task()
         driver = customized_broswer()
-        amazonpage = AmazonPage(driver)
-        ## registeration
-        amazonpage.enter_amazon_page(3000, 5000)
-        amazonpage.enter_register_page(3000, 5000)
-        registerpage = AmazonRegisterPage(driver)
-        registerpage.register(5000, 10000)
-        ## add bill address
-        amazonpage.enter_account_page(3000, 5000)
-        accountpage = AmazonAccountPage(driver)
-        accountpage.enter_address_page(3000, 5000)
-        addresspage = AmazonAddressPage(driver)
-        addresspage.add_address("bill", 5000, 10000)
-        ## add payment
-        amazonpage.enter_account_page(3000, 5000)
-        accountpage = AmazonAccountPage(driver)
-        accountpage.enter_payment_page(3000, 5000)
-        paymentpage = AmazonPaymentPage(driver)
-        paymentpage.add_new_payment(5000, 10000)
+        try:
+            amazonpage = AmazonPage(driver)
+            ## registeration
+            amazonpage.enter_amazon_page(3000, 5000)
+            amazonpage.enter_register_page(3000, 5000)
+            registerpage = AmazonRegisterPage(driver)
+            registerpage.register(5000, 10000)
+            ## add bill address
+            amazonpage.enter_account_page(3000, 5000)
+            accountpage = AmazonAccountPage(driver)
+            accountpage.enter_address_page(3000, 5000)
+            addresspage = AmazonAddressPage(driver)
+            addresspage.add_address("bill", 5000, 10000)
+            ## add payment
+            amazonpage.enter_account_page(3000, 5000)
+            accountpage = AmazonAccountPage(driver)
+            accountpage.enter_payment_page(3000, 5000)
+            paymentpage = AmazonPaymentPage(driver)
+            paymentpage.add_new_payment(5000, 10000)
 
-        searchpage = AmazonSearchPage(driver)
-        searchpage_handle = 0
-        asinresult = False
-        entry_type = ""
-        link = admin.is_super_link(task)
-        if link != "0":
-            print(("* 开始通过超链接访问产品页。。。"), flush=True)
-            amazonpage.enter_super_link(link, 3000, 5000)
-            searchpage_handle = amazonpage.get_currenthandle()
-            asinresult = True
-        else:
-            keyword = admin.get_keyword(task)
-            print(("* 开始搜索关键词。。。"), flush=True)
-            amazonpage.search_asin(keyword, 5000, 8000)
-            searchpage_handle = amazonpage.get_currenthandle()
+            searchpage = AmazonSearchPage(driver)
+            searchpage_handle = 0
+            asinresult = False
+            entry_type = ""
+            link = admin.is_super_link(task)
+            if link != "0":
+                print(("* 开始通过超链接访问产品页。。。"), flush=True)
+                amazonpage.enter_super_link(link, 3000, 5000)
+                searchpage_handle = amazonpage.get_currenthandle()
+                asinresult = True
+            else:
+                keyword = admin.get_keyword(task)
+                print(("* 开始搜索关键词。。。"), flush=True)
+                amazonpage.search_asin(keyword, 5000, 8000)
+                searchpage_handle = amazonpage.get_currenthandle()
 
-            asinresult = searchpage.find_target_product(task, "normal", int(5))
+                asinresult = searchpage.find_target_product(task, "normal", int(5))
 
-        if asinresult != False:
-            print(("* 开始随意浏览产品页。。。"), flush=True)
-            #amazonpage.random_walk(random.randint(35, 50))
-            time.sleep(random.randint(60, 120))
-            asinpage = AmazonAsinPage(driver)
-            searchpage.switch_to_new_page(searchpage_handle)  # 切换到产品页handle
+            if asinresult != False:
+                print(("* 开始随意浏览产品页。。。"), flush=True)
+                #amazonpage.random_walk(random.randint(35, 50))
+                time.sleep(random.randint(60, 120))
+                asinpage = AmazonAsinPage(driver)
+                searchpage.switch_to_new_page(searchpage_handle)  # 切换到产品页handle
 
-            qa_submit = admin.is_qa_submit_needed(task)
-            if qa_submit == "1":
-                print(("* 开始提交QA。。。。"), flush=True)
-                content = admin.get_qa_content(task)
-                asinpage.ask_qa(content, 3000, 5000)
-                if admin.is_qa_submit_image(task):
-                    window_capture("qa")
-                amazonpage.navigation_back(3000, 5000)
+                qa_submit = admin.is_qa_submit_needed(task)
+                if qa_submit == "1":
+                    print(("* 开始提交QA。。。。"), flush=True)
+                    content = admin.get_qa_content(task)
+                    asinpage.ask_qa(content, 3000, 5000)
+                    if admin.is_qa_submit_image(task):
+                        window_capture("qa")
+                    amazonpage.navigation_back(3000, 5000)
 
-            wishlist = admin.is_add_wishlist_needed(task)
-            if wishlist == "1":
-                print(("* 开始添加wishlist。。。。"), flush=True)
-                asinpage.add_wishlist(5000, 8000)
-                if admin.is_add_wishlist_image(task) == "1":
-                    window_capture("addwishlist")
+                wishlist = admin.is_add_wishlist_needed(task)
+                if wishlist == "1":
+                    print(("* 开始添加wishlist。。。。"), flush=True)
+                    asinpage.add_wishlist(5000, 8000)
+                    if admin.is_add_wishlist_image(task) == "1":
+                        window_capture("addwishlist")
 
-            addcart = admin.is_add_to_card_needed(task)
-            if addcart == "1":
-                print(("* 开始加购物车。。。"), flush=True)
-                asinpage.add_cart(3000, 5000)
+                addcart = admin.is_add_to_card_needed(task)
+                if addcart == "1":
+                    print(("* 开始加购物车。。。"), flush=True)
+                    asinpage.add_cart(3000, 5000)
 
-            searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
+                searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
+                admin.finish_task(task)
+            else:
+                print(("找不到产品！！！！"), flush=True)
+        except NoSuchElementException as msg:
+            print(("* 找不到元素。。。"), flush=True)
+        except TimeoutException as msg:
+            print(("* 网页加载超时。。。"), flush=True)
+        finally:
+            driver.quit()
 
-            admin.finish_task(task)
-        else:
-            print(("找不到产品！！！！"), flush=True)
-
-            time.sleep(random.randint(60*5, 120*5))
+        time.sleep(random.randint(60 * 5, 120 * 5))
