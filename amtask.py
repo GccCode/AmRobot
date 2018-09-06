@@ -317,7 +317,7 @@ if __name__ == "__main__":
     # print(generate_password())
     # print(generate_address())
     # print(generate_card())
-
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     admin = Administrator()
     # if admin.is_all_over() == False:
     #     task = admin.get_random_task()
