@@ -17,7 +17,7 @@ class BaseAction(object):
         self.screen_width = GetSystemMetrics(0)
         self.screen_heigth = GetSystemMetrics(1)
 
-    def window_capture(filename):
+    def window_capture(self, filename):
         hwnd = 0  # 窗口的编号，0号表示当前活跃窗口
         # 根据窗口句柄获取窗口的设备上下文DC（Divice Context）
         hwndDC = win32gui.GetWindowDC(hwnd)
@@ -30,7 +30,7 @@ class BaseAction(object):
         # 获取监控器信息
         MoniterDev = win32api.EnumDisplayMonitors(None, None)
         w = MoniterDev[0][2][2]
-        h = MoniterDev[0][2][3]
+        h = MoniterDev[0][2][3] - 80
         # print w,h　　　#图片大小
         # 为bitmap开辟空间
         saveBitMap.CreateCompatibleBitmap(mfcDC, w, h)

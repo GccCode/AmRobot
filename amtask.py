@@ -222,6 +222,7 @@ def customized_broswer():
     driver =  webdriver.Chrome(chrome_options=option)
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
+    driver.maximize_window()
     return driver
 
 class Administrator():
