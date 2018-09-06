@@ -408,8 +408,6 @@ if __name__ == "__main__":
 
                 searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
                 admin.finish_task(task)
-                t2 = time.time()
-                print("总耗时：" + format(t2 - t1))
             else:
                 print(("找不到产品！！！！"), flush=True)
         except NoSuchElementException as msg:
@@ -417,6 +415,8 @@ if __name__ == "__main__":
         except TimeoutException as msg:
             print(("* 网页加载超时。。。"), flush=True)
         finally:
+            t2 = time.time()
+            print("总耗时：" + format(t2 - t1))
             driver.quit()
 
         time.sleep(random.randint(60 * 5, 120 * 5))
