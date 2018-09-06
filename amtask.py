@@ -281,6 +281,9 @@ class Administrator():
     def is_qa_submit_needed(self, section):
         return self.cf.get(section, "qa_submit")
 
+    def is_qa_submit_image(self, section):
+        return self.cf.get(section, "qa_submit_image")
+
     def get_qa_content(self, section):
         return self.cf.get(section, "content")
 
@@ -289,6 +292,9 @@ class Administrator():
 
     def is_add_wishlist_needed(self, section):
         return self.cf.get(section, "wishlist")
+
+    def is_add_wishlist_image(self, section):
+        return self.cf.get(section, "wishlist_image")
 
     def get_keyword(self, section):
         return self.cf.get(section, "keyword")
@@ -381,20 +387,21 @@ if __name__ == "__main__":
                 print(("* 开始提交QA。。。。"), flush=True)
                 content = admin.get_qa_content(task)
                 asinpage.ask_qa(content, 3000, 5000)
+                if admin.is_qa_submit_image(task):
+                    window_capture("qa")
                 amazonpage.navigation_back(3000, 5000)
-                window_capture("qa")
 
             wishlist = admin.is_add_wishlist_needed(task)
             if wishlist == "1":
                 print(("* 开始添加wishlist。。。。"), flush=True)
                 asinpage.add_wishlist(5000, 8000)
-                window_capture("addwishlist")
+                if admin.is_add_wishlist_image(task) == "1":
+                    window_capture("addwishlist")
 
             addcart = admin.is_add_to_card_needed(task)
             if addcart == "1":
                 print(("* 开始加购物车。。。"), flush=True)
                 asinpage.add_cart(3000, 5000)
-                window_capture("addcart")
 
             searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
 
