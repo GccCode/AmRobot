@@ -24,6 +24,7 @@ import io
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
 
+
 #0)
 #1) Chrome
 #2) Firefox+Win7:
@@ -368,17 +369,18 @@ if __name__ == "__main__":
                         amazonpage.window_capture("qa")
                     amazonpage.navigation_back(3000, 5000)
 
-                wishlist = admin.is_add_wishlist_needed(task)
-                if wishlist == "1":
-                    print(("* 开始添加wishlist。。。。"), flush=True)
-                    asinpage.add_wishlist(5000, 8000)
-
                 addcart = admin.is_add_to_card_needed(task)
                 if addcart == "1":
                     print(("* 开始加购物车。。。"), flush=True)
                     asinpage.add_cart(3000, 5000)
 
                 searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
+
+                wishlist = admin.is_add_wishlist_needed(task)
+                if wishlist == "1":
+                    print(("* 开始添加wishlist。。。。"), flush=True)
+                    asinpage.add_wishlist(5000, 8000)
+
                 admin.finish_task(task)
             else:
                 print(("找不到产品！！！！"), flush=True)
@@ -391,6 +393,7 @@ if __name__ == "__main__":
         finally:
             t2 = time.time()
             print("总耗时：" + format(t2 - t1))
+            input("xxxx")
             driver.quit()
 
         time.sleep(random.randint(60 * 5, 120 * 5))
