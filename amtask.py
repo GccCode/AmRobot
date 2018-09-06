@@ -21,6 +21,7 @@ from amazonsigninpage import AmazonSignInPage
 from amazonsearchpage import  AmazonSearchPage
 from amazonasinpage import  AmazonAsinPage
 import os, win32gui, win32ui, win32con, win32api
+import io
 
 #0)
 #1) Chrome
