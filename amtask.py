@@ -386,6 +386,8 @@ if __name__ == "__main__":
             print(("* 找不到元素。。。"), flush=True)
         except TimeoutException as msg:
             print(("* 网页加载超时。。。"), flush=True)
+        except:
+            pass
         finally:
             t2 = time.time()
             print("总耗时：" + format(t2 - t1))
