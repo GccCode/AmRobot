@@ -383,6 +383,7 @@ if __name__ == "__main__":
                 searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
 
                 admin.finish_task(task)
+                time.sleep(random.randint(60 * 5, 120 * 5))
             else:
                 print(("找不到产品！！！！"), flush=True)
         except NoSuchElementException as msg:
@@ -397,4 +398,3 @@ if __name__ == "__main__":
             input("xxxx")
             driver.quit()
 
-        time.sleep(random.randint(60 * 5, 120 * 5))
