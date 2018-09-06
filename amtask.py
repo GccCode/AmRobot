@@ -88,7 +88,7 @@ def getrandomline(filename):
 
 def change_proxy():
     cur_cwd = os.getcwd()
-    os.chdir("D:\Program Files\911S5 2018-05-23 fixed")
+    os.chdir("D:\Program Files\911S5 2018-05-23 fixed\ProxyTool")
     os.popen("Autoproxytool.exe -changeproxy/US/CA")
     os.chdir(cur_cwd)
     time.sleep(5)
