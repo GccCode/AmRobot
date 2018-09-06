@@ -339,6 +339,7 @@ if __name__ == "__main__":
         generate_info_file()
         task = admin.get_random_task()
         driver = customized_broswer()
+        t1 = time.time()
         try:
             amazonpage = AmazonPage(driver)
             ## registeration
@@ -407,6 +408,8 @@ if __name__ == "__main__":
 
                 searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
                 admin.finish_task(task)
+                t2 = time.time()
+                print("总耗时：" + format(t2 - t1))
             else:
                 print(("找不到产品！！！！"), flush=True)
         except NoSuchElementException as msg:
