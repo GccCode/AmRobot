@@ -51,7 +51,7 @@ class AmazonAsinPage(AmazonPage):
         self.random_sleep(begin, end)
         print(("**** 提交QA： " + content), flush=True)
 
-    def add_wishlist(self, begin, end):
+    def add_wishlist(self, begin, end, asin = False):
         country = self.cf.get("account", "country")
         self.click(*self.locator.ADDWISHLISTSUBMITBUTTON)
         self.random_sleep(5000, 8000)
@@ -65,7 +65,8 @@ class AmazonAsinPage(AmazonPage):
                     self.random_sleep(1000, 2000)
                 self.click(*self.locator.CREATELISTBUTTON)
                 self.random_sleep(3000, 5000)
-                self.window_capture("wishlist")
+                if asin != False:
+                    self.window_capture("wishlist" + "-" + asin)
                 if self.is_element_exsist(*self.locator.WISHLISTCONTINUE1) == True:
                     self.click(*self.locator.WISHLISTCONTINUE1)
                 else:

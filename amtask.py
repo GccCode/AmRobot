@@ -367,8 +367,8 @@ if __name__ == "__main__":
                     print(("* 开始提交QA。。。。"), flush=True)
                     content = admin.get_qa_content(task)
                     asinpage.ask_qa(content, 3000, 5000)
-                    if admin.is_qa_submit_image(task):
-                        amazonpage.window_capture("qa")
+                    if admin.is_qa_submit_image(task) == "1":
+                        amazonpage.window_capture("qa" + "-" + task)
                     amazonpage.navigation_back(3000, 5000)
 
                 addcart = admin.is_add_to_card_needed(task)
@@ -380,7 +380,10 @@ if __name__ == "__main__":
                 wishlist = admin.is_add_wishlist_needed(task)
                 if wishlist == "1":
                     print(("* 开始添加wishlist。。。。"), flush=True)
-                    asinpage.add_wishlist(5000, 8000)
+                    if admin.is_add_wishlist_image(task) == "1":
+                        asinpage.add_wishlist(5000, 8000, task)
+                    else:
+                        asinpage.add_wishlist(5000, 8000)
 
                 #searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
 
@@ -397,6 +400,7 @@ if __name__ == "__main__":
         finally:
             t2 = time.time()
             print("总耗时：" + format(t2 - t1))
-            input("xxxx")
             driver.quit()
+
+    print("* 任务全部完成！！！！")
 
