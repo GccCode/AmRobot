@@ -68,6 +68,9 @@ class AmazonAsinPage(AmazonPage):
                 self.window_capture("wishlist")
                 if self.is_element_exsist(*self.locator.WISHLISTCONTINUE1) == True:
                     self.click(*self.locator.WISHLISTCONTINUE1)
+                else:
+                    print(("**** 新建wishlist找不到返回按钮。。。。"), flush=True)
+
         print(("**** 添加心愿卡。。。。"), flush=True)
         self.random_sleep(begin, end)
 
