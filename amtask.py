@@ -356,7 +356,7 @@ if __name__ == "__main__":
             if asinresult != False:
                 print(("* 开始随意浏览产品页。。。"), flush=True)
                 #amazonpage.random_walk(random.randint(35, 50))
-                time.sleep(random.randint(60, 120))
+                time.sleep(random.randint(10, 30))
                 asinpage = AmazonAsinPage(driver)
                 searchpage.switch_to_new_page(searchpage_handle)  # 切换到产品页handle
 
@@ -373,13 +373,14 @@ if __name__ == "__main__":
                 if addcart == "1":
                     print(("* 开始加购物车。。。"), flush=True)
                     asinpage.add_cart(3000, 5000)
-
-                searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
+                    amazonpage.navigation_back(3000, 5000)
 
                 wishlist = admin.is_add_wishlist_needed(task)
                 if wishlist == "1":
                     print(("* 开始添加wishlist。。。。"), flush=True)
                     asinpage.add_wishlist(5000, 8000)
+
+                searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
 
                 admin.finish_task(task)
             else:
