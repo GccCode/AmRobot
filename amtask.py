@@ -298,6 +298,7 @@ if __name__ == "__main__":
             accountpage.enter_payment_page(3000, 5000)
             paymentpage = AmazonPaymentPage(driver)
             paymentpage.add_new_payment(5000, 10000)
+            input("xxxx")
 
             searchpage = AmazonSearchPage(driver)
             searchpage_handle = 0
