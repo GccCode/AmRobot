@@ -313,10 +313,13 @@ if __name__ == "__main__":
                 keyword = admin.get_keyword(task)
                 print(("* 开始搜索关键词。。。"), flush=True)
                 amazonpage.search_asin(keyword, 5000, 8000)
+                print(("* xxxxxx。。。"), flush=True)
                 searchpage_handle = amazonpage.get_currenthandle()
                 asinresult = searchpage.find_target_product(task, "normal", int(5))
+                print(("* yyyyy。。。"), flush=True)
                 if asinresult != False:
                     searchpage.enter_asin_page(asinresult, task, 3000, 5000)
+                    print(("* zzz。。。"), flush=True)
 
             if asinresult != False:
                 print(("* 开始随意浏览产品页。。。"), flush=True)
