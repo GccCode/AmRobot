@@ -270,18 +270,12 @@ class Administrator():
             self.delete_task(section)
 
 if __name__ == "__main__":
-    # print(generate_username())
-    # print(generate_email())
-    # print(generate_password())
-    # print(generate_address())
-    # print(generate_card())
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    cf = configparser.ConfigParser()
+    cf.read("info.txt")
+    min_time = cf.get("timeout", "min_time")
+    max_time = cf.get("timeout", "max_time")
     admin = Administrator()
-    # if admin.is_all_over() == False:
-    #     task = admin.get_random_task()
-    #     admin.finish_task(task)
-    # else:
-    #     print("it is all over...")
 
     while admin.is_all_over() == False:
         change_proxy()
@@ -360,7 +354,7 @@ if __name__ == "__main__":
                 #searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
 
                 admin.finish_task(task)
-                time.sleep(random.randint(60, 120))
+                time.sleep(random.randint(min_time, max_time))
             else:
                 print(("找不到产品！！！！"), flush=True)
         except NoSuchElementException as msg:
