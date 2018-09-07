@@ -60,7 +60,8 @@ class AmazonPaymentPage(AmazonPage):
             self.click(*self.locator.ADDCARD_JP)
             self.random_sleep(2000, 4000)
             self.click(*self.locator.USETHISADDRESS_JP)
-            self.random_sleep(begin, end)
+            
+        self.random_sleep(begin, end)
 
 
 # if __name__ == "__main__":
