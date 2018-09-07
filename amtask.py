@@ -272,9 +272,9 @@ class Administrator():
 if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     cf = configparser.ConfigParser()
-    cf.read("info.txt")
-    min_time = cf.get("timeout", "min_time")
-    max_time = cf.get("timeout", "max_time")
+    cf.read("task.txt")
+    min_time = cf.get("search", "min_time")
+    max_time = cf.get("search", "max_time")
     admin = Administrator()
 
     while admin.is_all_over() == False:
