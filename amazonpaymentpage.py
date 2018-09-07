@@ -61,12 +61,6 @@ class AmazonPaymentPage(AmazonPage):
             self.random_sleep(2000, 4000)
             self.click(*self.locator.USETHISADDRESS_JP)
 
-        self.random_sleep(2000, 3000)
-        if self.is_element_exsist(*self.locator.UPDATECARDINFO_US):
-            self.click(*self.locator.UPDATECARDINFO_US)
-        else:
-            print(("** 添加卡后不需要点更新按钮。。。"), flush=True)
-
         self.random_sleep(begin, end)
 
 
