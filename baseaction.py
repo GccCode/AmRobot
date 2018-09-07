@@ -18,6 +18,7 @@ class BaseAction(object):
         self.screen_heigth = GetSystemMetrics(1)
 
     def window_capture(self, filename):
+        self.random_sleep(3000, 5000)
         cc = time.gmtime()
         bmpname = str(cc[0]) + str(cc[1]) + str(cc[2]) + str(cc[3] + 8) + str(cc[4]) + str(cc[5]) + '.bmp'
         tmpname = filename + "-" + bmpname

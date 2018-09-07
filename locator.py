@@ -61,7 +61,6 @@ class AmazonPaymentPageLocator(AmazonPageLocator):
     ADDCARD_US = (By.XPATH, '//span[contains(@id, \'-32\')]/span/input[position()=1] ')
     ADDCARD_JP = (By.XPATH, '//span[contains(@id, \'-30\')]/span/input[position()=1] ')
     USETHISADDRESS_US = (By.XPATH, '//div[contains(@id, \'-21\')]/div/div[position()=2]/form/div/div/div/div/div/span[position()=2]/span/input[position()=1]')
-    UPDATECARDINFO_US = (By.CSS_SELECTOR, 'input[name=ppw-widgetEvent]')
     USETHISADDRESS_JP = (By.XPATH, '//div[contains(@id, \'-19\')]/div/div[position()=2]/form/div/div/div/div/div/span[position()=2]/span/input[position()=1]')
 
 class AmazonSearchPageLocator(AmazonPageLocator):

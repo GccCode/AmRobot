@@ -341,6 +341,11 @@ if __name__ == "__main__":
                     print(("* 开始加购物车。。。"), flush=True)
                     asinpage.add_cart(3000, 5000)
                     amazonpage.navigation_back(3000, 5000)
+                else:
+                    possible = random.randint(1, 100)
+                    if possible < 70:
+                        asinpage.add_cart(3000, 5000)
+                        amazonpage.navigation_back(3000, 5000)
 
                 wishlist = admin.is_add_wishlist_needed(task)
                 if wishlist == "1":
@@ -348,6 +353,10 @@ if __name__ == "__main__":
                     if admin.is_add_wishlist_image(task) == "1":
                         asinpage.add_wishlist(5000, 8000, task)
                     else:
+                        asinpage.add_wishlist(5000, 8000)
+                else:
+                    possible = random.randint(1, 100)
+                    if possible < 70:
                         asinpage.add_wishlist(5000, 8000)
 
                 #searchpage.back_prev_page_by_country(searchpage_handle, 3000, 5000)
