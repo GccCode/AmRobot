@@ -222,11 +222,7 @@ class Administrator():
             return False
 
     def is_super_link(self, section):
-        link = self.cf.get(section, "link")
-        if link == "0":
-            return True
-        else:
-            return link
+        return self.cf.get(section, "link")
 
     def is_qa_submit_needed(self, section):
         return self.cf.get(section, "qa_submit")
