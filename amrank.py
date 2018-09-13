@@ -63,9 +63,10 @@ if __name__ == "__main__":
         time.sleep(random.randint(3, 5))
         searchpage = AmazonSearchPage(driver)
         asinresult = False
-        entry_type = "normal"
+        entry_type = "sponsored"
         keyword = "swing swivel"
-        asin = "B01HWSQIGM"
+        #asin = "B01HWSQIGM"
+        asin = "B075C6G6M1"
         print(("* 开始搜索关键词。。。"), flush=True)
         amazonpage.search_asin(keyword, 8000, 10000)
         asinresult = searchpage.find_target_product_rank(asin, "normal", int(5))
