@@ -41,9 +41,9 @@ useragentlist = [
 
 def customized_broswer():
     option = webdriver.ChromeOptions()
-    index = random.randint(0, (len(useragentlist) - 1))
-    useragent = "--user-agent=" + useragentlist[index]
-    option.add_argument(useragent)
+    # index = random.randint(0, (len(useragentlist) - 1))
+    # useragent = "--user-agent=" + useragentlist[index]
+    # option.add_argument(useragent)
     driver =  webdriver.Chrome(chrome_options=option)
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)

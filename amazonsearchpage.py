@@ -21,7 +21,7 @@ class AmazonSearchPage(AmazonPage):
         self.screen_heigth = GetSystemMetrics(1)
 
     def find_target_asin_rank(self, asin, type):
-        index = 0
+        index = 1
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         for asinresult in asinresults:
             index += 1
@@ -33,6 +33,13 @@ class AmazonSearchPage(AmazonPage):
                 elif type == "sponsored":
                     if self.is_asin_sponsored(asinresult, asin):
                         print(("** 找到目标产品 - 广告。。。"), flush=True)
+            else:
+                if type == "normal":
+                    if self.is_asin_sponsored(asinresult, asin) != True:
+                        index += 1
+                elif type == "sponsored":
+                    if self.is_asin_sponsored(asinresult, asin):
+                        index += 1
 
                 return index
 
