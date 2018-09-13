@@ -32,6 +32,8 @@ class AmazonSearchPage(AmazonPage):
                 elif type == "sponsored":
                     if self.is_asin_sponsored(asinresult, asin):
                         print(("** 找到目标产品 - 广告。。。"), flush=True)
+
+                return index
             else:
                 if type == "normal":
                     if self.is_asin_sponsored(asinresult, asin) == True:
@@ -39,8 +41,6 @@ class AmazonSearchPage(AmazonPage):
                 elif type == "sponsored":
                     if self.is_asin_sponsored(asinresult, asin) != True:
                         index += 1
-
-                return index
 
         return False
 
