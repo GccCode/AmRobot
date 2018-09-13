@@ -25,7 +25,6 @@ class AmazonSearchPage(AmazonPage):
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         for asinresult in asinresults:
             if asinresult.get_attribute('data-asin') == asin:
-                print(("** ASIN：" + asinresult.get_attribute('data-asin')), flush=True)
                 if type == "normal":
                     if self.is_asin_sponsored(asinresult, asin) != True:
                         print(("** 找到目标产品 - 普通。。。"), flush=True)
