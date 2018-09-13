@@ -69,7 +69,7 @@ if __name__ == "__main__":
         asin = "B075C6G6M1"
         print(("* 开始搜索关键词。。。"), flush=True)
         amazonpage.search_asin(keyword, 8000, 10000)
-        asinresult = searchpage.find_target_product_rank(asin, "normal", int(5))
+        asinresult = searchpage.find_target_product_rank(asin, entry_type, int(5))
         if asinresult != False:
             pass
         else:
