@@ -20,6 +20,38 @@ class AmazonSearchPage(AmazonPage):
         self.screen_width = GetSystemMetrics(0)
         self.screen_heigth = GetSystemMetrics(1)
 
+    def find_target_asin_rank(self, asin, type):
+        index = 0
+        asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
+        for asinresult in asinresults:
+            index += 1
+            if asinresult.get_attribute('data-asin') == asin:
+                print(("** ASIN：" + asinresult.get_attribute('data-asin')), flush=True)
+                if type == "normal":
+                    if self.is_asin_sponsored(asinresult, asin) != True:
+                        print(("** 找到目标产品 - 普通。。。"), flush=True)
+                elif type == "sponsored":
+                    if self.is_asin_sponsored(asinresult, asin):
+                        print(("** 找到目标产品 - 广告。。。"), flush=True)
+
+                return index
+
+        return False
+
+    def find_target_product_rank(self, asin, type, pages):
+        print(("** 开始查找产品，限制页数：" + str(pages)), flush=True)
+        task_cf = configparser.ConfigParser()
+        task_cf.read("task.txt")
+        for page in range(1, pages):
+            asinresult = self.find_target_asin_rank(asin, type)
+            if asinresult != False:
+                print(("*** 目标页数：" + str(page)), flush=True)
+                print(("*** 页面排名：" + str(asinresult)), flush=True)
+                return [page, asinresult]
+            else:
+                self.enter_next_page(5000, 8000)
+        return False
+
     def find_target_product(self, asin, type, pages):
         print(("** 开始查找产品，限制页数：" + str(pages)), flush=True)
         task_cf = configparser.ConfigParser()

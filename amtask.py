@@ -80,6 +80,12 @@ def readtline(filename, lineno, eol="\n", buffsize=4096):
             raise IndexError
 
 
+def getrandomproxy():
+    return getrandomline("proxy.txt")
+
+def is_proxy_file_exist():
+    return os.path.exists("proxy.txt")
+
 def getrandomline(filename):
     """读取文件的任意一行"""
     import random
@@ -92,7 +98,12 @@ def change_proxy():
     cur_cwd = os.getcwd()
     os.chdir("D:\Program Files\911S5 2018-05-23 fixed\ProxyTool")
     # os.popen("Autoproxytool.exe -changeproxy/US/CA")
-    os.popen("Autoproxytool.exe -changeproxy/US")
+    if is_proxy_file_exist() == False:
+        os.popen("Autoproxytool.exe -changeproxy/US/CA")
+    else:
+        ip = getrandomproxy()
+        cmd = "Autoproxytool.exe -changeproxy/ -ip=" + ip
+        os.popen(cmd)
     os.chdir(cur_cwd)
     time.sleep(5)
     print(("* 切换代理ip。。。"), flush=True)
