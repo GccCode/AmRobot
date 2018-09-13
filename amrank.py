@@ -70,7 +70,8 @@ if __name__ == "__main__":
         time.sleep(random.randint(3, 5))
         searchpage = AmazonSearchPage(driver)
         asinresult = False
-        entry_type = "sponsored"
+        #entry_type = "sponsored"
+        entry_type = "normal"
         keyword = "swing swivel"
         #asin = "B01HWSQIGM"
         #asin = "B075C6G6M1"
