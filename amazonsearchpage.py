@@ -29,11 +29,11 @@ class AmazonSearchPage(AmazonPage):
                 if type == "normal":
                     if self.is_asin_sponsored(asinresult, asin) != True:
                         print(("** 找到目标产品 - 普通。。。"), flush=True)
+                        return index
                 elif type == "sponsored":
                     if self.is_asin_sponsored(asinresult, asin):
                         print(("** 找到目标产品 - 广告。。。"), flush=True)
-
-                return index
+                        return index
             else:
                 if type == "normal":
                     if self.is_asin_sponsored(asinresult, asin) == True:
