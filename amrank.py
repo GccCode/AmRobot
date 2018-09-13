@@ -70,7 +70,7 @@ if __name__ == "__main__":
         amazonpage.search_asin(keyword, 8000, 10000)
         asinresult = searchpage.find_target_product_rank(asin, "normal", int(5))
         if asinresult != False:
-            print(("产品页数：" + str(asinresult[0]) + " 页面排名：" + str(asinresult[1])), flush=True)
+            pass
         else:
             print(("找不到产品！！！！"), flush=True)
     except NoSuchElementException as msg:

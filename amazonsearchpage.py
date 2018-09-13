@@ -24,7 +24,6 @@ class AmazonSearchPage(AmazonPage):
         index = 1
         asinresults = self.driver.find_elements(*self.locator.ASINRESULTS)
         for asinresult in asinresults:
-            index += 1
             if asinresult.get_attribute('data-asin') == asin:
                 print(("** ASIN：" + asinresult.get_attribute('data-asin')), flush=True)
                 if type == "normal":
