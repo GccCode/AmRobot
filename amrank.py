@@ -2,24 +2,11 @@
 # -*- coding:utf-8 -*-
 
 import random
-import string
 import time
-import requests
 import sys
-from bs4 import BeautifulSoup
-from user_agent import generate_user_agent
-import re
-import configparser
 from selenium import webdriver
 from amazonpage import AmazonPage
-from amazonregisterpage import AmazonRegisterPage
-from amazonaccountpage import AmazonAccountPage
-from amazonaddresspage import AmazonAddressPage
-from amazonpaymentpage import AmazonPaymentPage
-from amazonsigninpage import AmazonSignInPage
 from amazonsearchpage import  AmazonSearchPage
-from amazonasinpage import  AmazonAsinPage
-import os, win32gui, win32ui, win32con, win32api
 import io
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException

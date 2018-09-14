@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from selenium import webdriver
 from amazonpage import AmazonPage
 from locator import AmazonRegisterPageLocator
 import configparser

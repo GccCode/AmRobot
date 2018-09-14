@@ -16,10 +16,9 @@ from amazonregisterpage import AmazonRegisterPage
 from amazonaccountpage import AmazonAccountPage
 from amazonaddresspage import AmazonAddressPage
 from amazonpaymentpage import AmazonPaymentPage
-from amazonsigninpage import AmazonSignInPage
 from amazonsearchpage import  AmazonSearchPage
 from amazonasinpage import  AmazonAsinPage
-import os, win32gui, win32ui, win32con, win32api
+import os
 import io
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException

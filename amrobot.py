@@ -5,7 +5,6 @@
 import  sys
 import io
 import random
-import os
 import time as tm
 import base64
 import configparser

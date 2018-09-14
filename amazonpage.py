@@ -3,9 +3,8 @@
 
 import time as tm
 import random
-import  json
-import  os
-from selenium import webdriver
+import json
+import os
 from baseaction import BaseAction
 from locator import AmazonPageLocator
 from win32api import GetSystemMetrics
