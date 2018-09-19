@@ -81,7 +81,7 @@ def jp_node_gather():
                     tmp_symbol = TOP3_IMGSRC_PREFIX + str(i + 1) + TOP3_IMGSRC_POSTFIX
                     element = driver.find_element_by_xpath(tmp_symbol)
                     print(element.get_attribute('src'), flush=True)
-                    tmp_symbol = TOP3_RANK_PREFIX + str(i + 1) + TOP3_RANK_PREFIX
+                    tmp_symbol = TOP3_RANK_PREFIX + str(i + 1) + TOP3_RANK_POSTFIX
                     element = driver.find_element_by_xpath(tmp_symbol)
                     print(element.text.strip(), flush=True)
         amazonpage.random_sleep(2000, 5000)
