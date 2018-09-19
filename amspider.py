@@ -119,6 +119,7 @@ def jp_node_gather():
     except Exception as e:
         print(e, flush=True)
     finally:
+        input("waiting.....")
         driver.quit()
 
 def us_node_gather(url):
