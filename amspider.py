@@ -114,6 +114,12 @@ if __name__ == "__main__":
         else:
             print("qa_count not exsist...", flush=True)
 
+        if amazonasinpage.is_element_exsist(*BUYER_COUNT):
+            element = driver.find_element(*BUYER_COUNT)
+            print(element.text)
+        else:
+            print("buy count no no")
+
         amazonasinpage.add_cart(8000, 10000)
 
         NO_THANKS = (By.ID, 'attachSiNoCoverage')
