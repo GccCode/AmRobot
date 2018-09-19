@@ -79,10 +79,10 @@ def jp_node_gather():
             print("Start gathering page: " + str(page + 1), flush=True)
             if amazonpage.is_element_exsist(*CRITICAL_CONTAINER):
                 for i in range(0, 3):
-                    tmp_symbol = CRITICAL_PRICE_PREFIX + str(i + 1) + CRITICAL_PRICE_POSTFIX
-                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
-                        element = driver.find_element_by_xpath(tmp_symbol)
-                        print(element.text, flush=True)
+                    # tmp_symbol = CRITICAL_PRICE_PREFIX + str(i + 1) + CRITICAL_PRICE_POSTFIX
+                    # if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                    #     element = driver.find_element_by_xpath(tmp_symbol)
+                    #     print(element.text, flush=True)
                     tmp_symbol = CRITICAL_REVIEWS_PREFIX + str(i + 1) + CRITICAL_REVIEWS_POSTFIX
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
