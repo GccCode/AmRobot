@@ -5,7 +5,7 @@ from selenium import webdriver
 import re
 from selenium.webdriver.common.by import By
 from amazonasinpage import AmazonAsinPage
-import time
+from selenium.common.exceptions import NoSuchElementException
 
 
 item_prefix = "//*[@id='zg-ordered-list']/li[position()="
@@ -83,10 +83,53 @@ def test_get_inventory():
             print("llll", flush=True)
         else:
             print("222", flush=True)
+    except NoSuchElementException as msg:
+        status = False
+        print("Except: NoSuchElementException", flush=True)
     except:
         print("xxxx", flush=True)
     finally:
         driver.quit()
 
 if __name__ == "__main__":
-    test_get_inventory()
+    driver = webdriver.Chrome()
+    driver.set_page_load_timeout(60)
+    driver.set_script_timeout(60)
+    try:
+        driver.get("https://www.amazon.com/dp/B078H7VY19")
+        amazonasinpage = AmazonAsinPage(driver)
+        if amazonasinpage.is_element_exsist(FBA_FLAG):
+            print("product is fba...", flush=True)
+        else:
+            print("product is fbm or not exsist...", flush=True)
+
+        amazonasinpage.random_sleep(1000, 2000)
+        if amazonasinpage.is_element_exsist(QA_COUNT):
+            element = driver.find_element_by_id("askATFLink")
+            element.find_element_by_xpath(".//span")
+            print("aaa")
+            print(element.text)
+        else:
+            print("qa_count not exsist...", flush=True)
+
+        amazonasinpage.add_cart(8000, 10000)
+
+        NO_THANKS = (By.ID, 'attachSiNoCoverage')
+        VIEW_CART_BUTTON = (By.ID, 'attach-sidesheet-view-cart-button')
+        if amazonasinpage.is_element_exsist(NO_THANKS):
+            print("no thanks", flush=True)
+        else:
+            print("no no thanks")
+
+        amazonasinpage.random_sleep(1000, 2000)
+        if amazonasinpage.is_element_exsist(VIEW_CART_BUTTON):
+            print("llll", flush=True)
+        else:
+            print("222", flush=True)
+    except NoSuchElementException as msg:
+        status = False
+        print("Except: NoSuchElementException", flush=True)
+    except:
+        print("xxxx", flush=True)
+    finally:
+        driver.quit()
