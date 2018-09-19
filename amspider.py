@@ -71,6 +71,7 @@ def jp_node_gather():
                 tmp_symbol = TOP3_RATE_PREFIX + str(i + 1) + TOP_RATE_POSTFIX
                 element = driver.find_element_by_xpath(tmp_symbol)
                 print(element.get_attribute('title'), flush=True)
+                print((element.get_attribute('href')), flush=True)
         amazonpage.random_sleep(2000, 5000)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
