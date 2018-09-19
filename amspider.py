@@ -59,6 +59,8 @@ def test_get_inventory():
             print("product is fba...", flush=True)
         else:
             print("product is fbm or not exsist...", flush=True)
+
+        amazonasinpage.random_sleep(1000, 2000)
         if amazonasinpage.is_element_exsist(QA_COUNT):
             element = driver.find_element_by_id("askATFLink")
             element.find_element_by_xpath(".//span")
@@ -75,7 +77,8 @@ def test_get_inventory():
             print("no thanks", flush=True)
         else:
             print("no no thanks")
-
+        
+        amazonasinpage.random_sleep(1000, 2000)
         if amazonasinpage.is_element_exsist(VIEW_CART_BUTTON):
             print("llll", flush=True)
         else:
