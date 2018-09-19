@@ -48,7 +48,7 @@ def jp_node_gather():
     TOP3_CONTAINER = (By.ID, 'zg_critical')
     TOP3_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     TOP3_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
-    TOP3_REVIEWS_PREFIX = '//*[@id=\'zg_critical\']/div[position()=' \
+    TOP3_REVIEWS_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     TOP3_REVIEWS_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=2]'
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(60)
