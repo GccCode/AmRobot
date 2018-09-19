@@ -8,22 +8,14 @@ import io
 from selenium.webdriver.common.by import By
 from amazonasinpage import AmazonAsinPage
 from selenium.common.exceptions import NoSuchElementException
+from amazonpage import  AmazonPage
 
-
-item_prefix = "//*[@id=\'zg-ordered-list\']/li[position()="
-item_postfix = "]/span"
-price_symbol = ".//div/span/div[position()=2]/a[position()=1]/span/span"
-review_symbol = ".//div/span/div[position()=1]/a[position()=2]"
-href_symbol = ".//div/span/div[position()=2]/a[position()=1]"
-rate_symbol = ".//div/span/div[position()=1]/a"
 BUYER_COUNT = (By.XPATH, '//*[@id=\'olp_feature_div\']/div/span[position()=1]/a')
 QA_COUNT = (By.XPATH, '//*[@id=\'askATFLink\']/span')
 FBA_FLAG = (By.ID, "SSOFpopoverLink")
 NO_THANKS = (By.ID, 'attachSiNoCoverage')
 VIEW_CART_BUTTON = (By.ID, 'attach-sidesheet-view-cart-button')
 VIEW_CART_BUTTON1 = (By.ID, 'hlb-view-cart')
-PRODUCT_ITEM_US = (By.XPATH,
-                        '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]')
 ITEM_SELECT_US = (By.XPATH,
                            '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]/select')
 ITEM_INPUT_US = (By.XPATH,
@@ -52,12 +44,43 @@ def getasinfromhref(template):
     slotList = re.findall(rule, template)
     return slotList[0]
 
-def test_node_gather():
+def jp_node_gather():
+    TOP3_CONTAINER = (By.ID, 'zg_critical')
+    TOP3_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    TOP3_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
+    driver = webdriver.Chrome()
+    driver.set_page_load_timeout(60)
+    driver.set_script_timeout(60)
+    amazonpage = AmazonPage(driver)
+    try:
+        driver.get("https://www.amazon.co.jp/gp/bestsellers/electronics/2285178051")
+        if amazonpage.is_element_exsist(*TOP3_CONTAINER):
+            for i in range(0, 3):
+                tmp_symbol = TOP3_PRICE_PREFIX + str(i) + TOP3_PRICE_POSTFIX
+                element = driver.find_element_by_xpath(tmp_symbol)
+                print(element.text, flush=True)
+
+
+    except NoSuchElementException as msg:
+        print("Except: NoSuchElementException", flush=True)
+    except Exception as e:
+        print(e, flush=True)
+    finally:
+        driver.quit()
+
+def us_node_gather(url):
+    item_prefix = "//*[@id=\'zg-ordered-list\']/li[position()="
+    item_postfix = "]/span"
+    price_symbol = ".//div/span/div[position()=2]/a[position()=1]/span/span"
+    review_symbol = ".//div/span/div[position()=1]/a[position()=2]"
+    href_symbol = ".//div/span/div[position()=2]/a[position()=1]"
+    rate_symbol = ".//div/span/div[position()=1]/a"
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
     try:
-        driver.get("https://www.amazon.com/gp/bestsellers/electronics/297859")
+        #driver.get("https://www.amazon.com/gp/bestsellers/electronics/297859")
+        driver.get(url)
         for i in range(1, 50):
             item_symbol = item_prefix + str(i) + item_postfix
             element = driver.find_element_by_xpath(item_symbol)
@@ -71,8 +94,10 @@ def test_node_gather():
             rate_text = rate.get_attribute("title").split(" ")[0]
             tmp = asin_text + " " + price_text.strip('$') + " " + review_text.replace(',', '') + " " + rate_text
             print(tmp, flush=True)
-    except:
-        print("xxxxxxx")
+    except NoSuchElementException as msg:
+        print("Except: NoSuchElementException", flush=True)
+    except Exception as e:
+        print(e, flush=True)
     finally:
         driver.quit()
 
@@ -192,9 +217,9 @@ def test_get_inventory_jp():
     except Exception as e:
         print(e, flush=True)
     finally:
-        input("xxx")
+        input("waiting....")
         driver.quit()
 
 if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    test_get_inventory_us()
+    jp_node_gather()

@@ -11,8 +11,6 @@ class AmazonSignInPage(AmazonPage):
     def __init__(self, driver):
         self.driver = driver
         self.locator = AmazonSignInPageLocator
-        self.cf = configparser.ConfigParser()
-        self.cf.read("info.txt")
 
     def sign_in(self, begin, end):
         self.fill_in_form()
@@ -23,8 +21,10 @@ class AmazonSignInPage(AmazonPage):
         self.save_cookies()
 
     def fill_in_form(self):
-        emailname = self.cf.get("account", "email")
-        password = self.cf.get("account", "password")
+        cf = configparser.ConfigParser()
+        cf.read("info.txt")
+        emailname = cf.get("account", "email")
+        password = cf.get("account", "password")
         try:
             self.click(*self.locator.ACCOUNTSWITCHER)
             self.random_sleep(1000, 2000)
