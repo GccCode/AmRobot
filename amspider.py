@@ -150,7 +150,7 @@ if __name__ == "__main__":
                 amazonasinpage.input("999", *ITEM_INPUT)
                 amazonasinpage.random_sleep(8000, 10000)
                 ITEM_SUBMIT = (By.XPATH, '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/div/span/span')
-                AmazonAsinPage.click(*ITEM_SUBMIT)
+                amazonasinpage.click(*ITEM_SUBMIT)
         else:
             print("222", flush=True)
     except NoSuchElementException as msg:
