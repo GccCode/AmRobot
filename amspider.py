@@ -108,8 +108,9 @@ if __name__ == "__main__":
 
         amazonasinpage.random_sleep(1000, 2000)
         if amazonasinpage.is_element_exsist(QA_COUNT):
-            element = driver.find_element_by_id("askATFLink")
-            element.find_element_by_xpath(".//span")
+            # element = driver.find_element_by_id("askATFLink")
+            # element.find_element_by_xpath(".//span")
+            element = driver.find_element(QA_COUNT1)
             print("aaa")
             print(element.text)
         else:
