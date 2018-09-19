@@ -85,12 +85,14 @@ def jp_node_gather():
                 for i in range(0, 3):
                     tmp_symbol = CRITICAL_FBA_PREFIX + str(i + 1) + CRITICAL_FBA_POSTFIX
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                        print("FBA", flush=True)
                         tmp_symbol = CRITICAL_FBA_PRICE_PREFIX + str(i + 1) + CRITICAL_FBA_PRICE_POSTFIX
                     else:
+                        print("FBM", flush=True)
                         tmp_symbol = CRITICAL_FBM_PRICE_PREFIX + str(i + 1) + CRITICAL_FBM_PRICE_POSTFIX
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
-                        print(element.text, flush=True)
+                        print("Price is :" + element.text.strip('￥ ').replace(',', ''), flush=True)
                     tmp_symbol = CRITICAL_REVIEWS_PREFIX + str(i + 1) + CRITICAL_REVIEWS_POSTFIX
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
