@@ -112,7 +112,7 @@ if __name__ == "__main__":
             # element.find_element_by_xpath(".//span")
             element = driver.find_element(QA_COUNT1)
             print("aaa", flush=True)
-            print(element.text)
+            # print(element.text)
         else:
             print("qa_count not exsist...", flush=True)
 
