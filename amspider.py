@@ -92,7 +92,7 @@ def jp_node_gather():
                         tmp_symbol = CRITICAL_FBM_PRICE_PREFIX + str(i + 1) + CRITICAL_FBM_PRICE_POSTFIX
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
-                        print("Price is :" + element.text.strip('￥ ').replace(',', ''), flush=True)
+                        print("Price is :" + element.text, flush=True)
                     tmp_symbol = CRITICAL_REVIEWS_PREFIX + str(i + 1) + CRITICAL_REVIEWS_POSTFIX
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
@@ -112,6 +112,7 @@ def jp_node_gather():
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
                         print("Top Rank is: " + element.text.strip(), flush=True)
+                    print("** ------------------- **", flush=True)
         amazonpage.random_sleep(2000, 5000)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
