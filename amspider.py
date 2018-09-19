@@ -54,12 +54,14 @@ def jp_node_gather():
     TOP3_RATE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=1]'
     TOP3_IMGSRC_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     TOP3_IMGSRC_POSTFIX = ']/div[position()=1]/div/div[position()=1]/a/img'
+    TOP3_RANK_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    TOP3_RANK_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=1]/span[position()=2]'
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
     amazonpage = AmazonPage(driver)
     try:
-        for page in (0, 5):
+        for page in range(0, 5):
             url = "https://www.amazon.co.jp/gp/bestsellers/electronics/2285178051#" + str(page + 1)
             driver.get(url)
             amazonpage.random_sleep(3000, 5000)
@@ -79,6 +81,9 @@ def jp_node_gather():
                     tmp_symbol = TOP3_IMGSRC_PREFIX + str(i + 1) + TOP3_IMGSRC_POSTFIX
                     element = driver.find_element_by_xpath(tmp_symbol)
                     print(element.get_attribute('src'), flush=True)
+                    tmp_symbol = TOP3_RANK_PREFIX + str(i + 1) + TOP3_RANK_PREFIX
+                    element = driver.find_element_by_xpath(tmp_symbol)
+                    print(element.text.strip(), flush=True)
         amazonpage.random_sleep(2000, 5000)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
