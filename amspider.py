@@ -17,9 +17,35 @@ review_symbol = ".//div/span/div[position()=1]/a[position()=2]"
 href_symbol = ".//div/span/div[position()=2]/a[position()=1]"
 rate_symbol = ".//div/span/div[position()=1]/a"
 BUYER_COUNT = (By.XPATH, '//*[@id=\'olp_feature_div\']/div/span[position()=1]/a')
-QA_COUNT = (By.ID, "askATFLink")
-QA_COUNT1 = (By.XPATH, '//*[@id=\'askATFLink\']/span')
+QA_COUNT = (By.XPATH, '//*[@id=\'askATFLink\']/span')
 FBA_FLAG = (By.ID, "SSOFpopoverLink")
+NO_THANKS = (By.ID, 'attachSiNoCoverage')
+VIEW_CART_BUTTON = (By.ID, 'attach-sidesheet-view-cart-button')
+VIEW_CART_BUTTON1 = (By.ID, 'hlb-view-cart')
+PRODUCT_ITEM_US = (By.XPATH,
+                        '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]')
+ITEM_SELECT_US = (By.XPATH,
+                           '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]/select')
+ITEM_INPUT_US = (By.XPATH,
+                          '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/input')
+ITEM_SUBMIT_US = (By.XPATH,
+                           '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/div/span/span')
+INVENTORY_TIPS_US = (By.XPATH,
+                              '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div[position()=1]/div/div/div/span')
+ITEM_DELETE_US = (By.XPATH,
+                           '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div[position()=2]/div[position()=1]/div/div/div[position()=2]/div/span[position()=1]/span')
+
+PRODUCT_ITEM_JP = (By.XPATH,
+                        '//*[@id=\'activeCartViewForm\']/div[position()=1]/div[position()=1]/div[position()=2]/div/div/div[position()=1]')
+ITEM_SELECT_JP = (By.XPATH,
+                           '//*[@id=\'activeCartViewForm\']/div[position()=1]/div[position()=1]/div[position()=2]/div/div/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]/select[position()=1]')
+ITEM_INPUT_JP = (By.XPATH,
+                          '//*[@id=\'activeCartViewForm\']/div[position()=1]/div[position()=1]/div[position()=2]/div/div/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/input[position()=1]')
+ITEM_SUBMIT_JP = (By.ID, 'a-autoid-1')
+INVENTORY_TIPS_JP = (By.XPATH,
+                              '//*[@id=\'activeCartViewForm\']/div[position()=1]/div[position()=1]/div[position()=2]/div/div/div[position()=1]/div[position()=4]/div[position()=1]/div/div/div/span')
+ITEM_DELETE_JP = (By.XPATH,
+                           '//*[@id=\'activeCartViewForm\']/div[position()=1]/div[position()=1]/div[position()=2]/div/div/div[position()=1]/div[position()=4]/div[position()=2]/div[position()=1]/div/div/div[position()=2]/div/span[position()=1]')
 
 def getasinfromhref(template):
     rule = r'dp/(.*?)/ref'
@@ -55,46 +81,68 @@ def test_get_inventory():
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
     try:
-        driver.get("https://www.amazon.com/dp/B078H7VY19")
+        driver.get("https://www.amazon.co.jp/dp/B07BGXF6KF")
+        # driver.get("https://www.amazon.com/dp/B078H7VY19")
+        # driver.get("https://www.amazon.com/dp/B079NNC8N8")
         amazonasinpage = AmazonAsinPage(driver)
-        if amazonasinpage.is_element_exsist(FBA_FLAG):
+        if amazonasinpage.is_element_exsist(*FBA_FLAG):
             print("product is fba...", flush=True)
         else:
             print("product is fbm or not exsist...", flush=True)
 
         amazonasinpage.random_sleep(1000, 2000)
-        if amazonasinpage.is_element_exsist(QA_COUNT):
-            element = driver.find_element_by_id("askATFLink")
-            element.find_element_by_xpath(".//span")
-            print("aaa")
+        if amazonasinpage.is_element_exsist(*QA_COUNT):
+            element = driver.find_element(*QA_COUNT)
             print(element.text)
         else:
             print("qa_count not exsist...", flush=True)
 
+        if amazonasinpage.is_element_exsist(*BUYER_COUNT):
+            element = driver.find_element(*BUYER_COUNT)
+            print(element.text)
+        else:
+            print("buy count no no", flush=True)
+
         amazonasinpage.add_cart(8000, 10000)
 
-        NO_THANKS = (By.ID, 'attachSiNoCoverage')
-        VIEW_CART_BUTTON = (By.ID, 'attach-sidesheet-view-cart-button')
-        if amazonasinpage.is_element_exsist(NO_THANKS):
-            print("no thanks", flush=True)
-        else:
-            print("no no thanks")
+        if amazonasinpage.is_element_exsist(*NO_THANKS) == True:
+            amazonasinpage.click(*NO_THANKS)
 
         amazonasinpage.random_sleep(1000, 2000)
-        if amazonasinpage.is_element_exsist(VIEW_CART_BUTTON):
-            print("llll", flush=True)
-        else:
-            print("222", flush=True)
+        if amazonasinpage.is_element_exsist(*VIEW_CART_BUTTON):
+            amazonasinpage.click(*VIEW_CART_BUTTON)
+            amazonasinpage.random_sleep(8000, 10000)
+        elif amazonasinpage.is_element_exsist(*VIEW_CART_BUTTON1):
+            amazonasinpage.click(*VIEW_CART_BUTTON1)
+            amazonasinpage.random_sleep(8000, 10000)
+
+
+        if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_US):
+            print("product item ok..", flush=True)
+            element = driver.find_element(*PRODUCT_ITEM_US)
+
+            amazonasinpage.select(9, *ITEM_SELECT_US)
+            amazonasinpage.random_sleep(8000, 10000)
+
+            amazonasinpage.input("999", *ITEM_INPUT_US)
+            amazonasinpage.random_sleep(8000, 10000)
+
+            amazonasinpage.click(*ITEM_SUBMIT_US)
+            amazonasinpage.random_sleep(8000, 10000)
+
+            element = driver.find_element(*INVENTORY_TIPS_US)
+            print(element.text)
+
+            amazonasinpage.click(*ITEM_DELETE_US)
     except NoSuchElementException as msg:
-        status = False
         print("Except: NoSuchElementException", flush=True)
-    except:
-        print("xxxx", flush=True)
+    except Exception as e:
+        print(e, flush=True)
     finally:
+        input("xxx")
         driver.quit()
 
-if __name__ == "__main__":
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+def test_get_inventory_jp():
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
@@ -109,8 +157,8 @@ if __name__ == "__main__":
             print("product is fbm or not exsist...", flush=True)
 
         amazonasinpage.random_sleep(1000, 2000)
-        if amazonasinpage.is_element_exsist(*QA_COUNT1):
-            element = driver.find_element(*QA_COUNT1)
+        if amazonasinpage.is_element_exsist(*QA_COUNT):
+            element = driver.find_element(*QA_COUNT)
             print(element.text)
         else:
             print("qa_count not exsist...", flush=True)
@@ -119,13 +167,10 @@ if __name__ == "__main__":
             element = driver.find_element(*BUYER_COUNT)
             print(element.text)
         else:
-            print("buy count no no")
+            print("buy count no no", flush=True)
 
         amazonasinpage.add_cart(8000, 10000)
 
-        NO_THANKS = (By.ID, 'attachSiNoCoverage')
-        VIEW_CART_BUTTON = (By.ID, 'attach-sidesheet-view-cart-button')
-        VIEW_CART_BUTTON1 = (By.ID, 'hlb-view-cart')
         if amazonasinpage.is_element_exsist(*NO_THANKS) == True:
             amazonasinpage.click(*NO_THANKS)
 
@@ -137,31 +182,24 @@ if __name__ == "__main__":
             amazonasinpage.click(*VIEW_CART_BUTTON1)
             amazonasinpage.random_sleep(8000, 10000)
 
-        PRODUCT_ITEM = (By.XPATH,
-                        '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]')
-        if amazonasinpage.is_element_exsist(*PRODUCT_ITEM):
+
+        if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_JP):
             print("product item ok..", flush=True)
-            element = driver.find_element(*PRODUCT_ITEM)
-            print("12121", flush=True)
-            ITEM_SELECT = (By.XPATH,
-                           '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]/select')
-            amazonasinpage.select(9, *ITEM_SELECT)
+            element = driver.find_element(*PRODUCT_ITEM_JP)
+
+            amazonasinpage.select(9, *ITEM_SELECT_JP)
             amazonasinpage.random_sleep(8000, 10000)
-            ITEM_INPUT = (By.XPATH,
-                          '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/input')
-            amazonasinpage.input("999", *ITEM_INPUT)
+
+            amazonasinpage.input("999", *ITEM_INPUT_JP)
             amazonasinpage.random_sleep(8000, 10000)
-            ITEM_SUBMIT = (By.XPATH,
-                           '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/div/span/span')
-            amazonasinpage.click(*ITEM_SUBMIT)
+
+            amazonasinpage.click(*ITEM_SUBMIT_JP)
             amazonasinpage.random_sleep(8000, 10000)
-            INVENTORY_TIPS = (By.XPATH,
-                              '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div[position()=1]/div/div/div/span')
-            element = driver.find_element(*INVENTORY_TIPS)
+
+            element = driver.find_element(*INVENTORY_TIPS_JP)
             print(element.text)
-            ITEM_DELETE = (By.XPATH,
-                           '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div[position()=2]/div[position()=1]/div/div/div[position()=2]/div/span[position()=1]/span')
-            amazonasinpage.click(*ITEM_DELETE)
+
+            amazonasinpage.click(*ITEM_DELETE_JP)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
     except Exception as e:
@@ -169,3 +207,7 @@ if __name__ == "__main__":
     finally:
         input("xxx")
         driver.quit()
+
+if __name__ == "__main__":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    test_get_inventory_jp()
