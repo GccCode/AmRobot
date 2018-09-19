@@ -59,24 +59,26 @@ def jp_node_gather():
     driver.set_script_timeout(60)
     amazonpage = AmazonPage(driver)
     try:
-        driver.get("https://www.amazon.co.jp/gp/bestsellers/electronics/2285178051")
-        amazonpage.random_sleep(3000, 5000)
-        print("Start gathering....", flush=True)
-        if amazonpage.is_element_exsist(*TOP3_CONTAINER):
-            for i in range(0, 3):
-                tmp_symbol = TOP3_PRICE_PREFIX + str(i + 1) + TOP3_PRICE_POSTFIX
-                element = driver.find_element_by_xpath(tmp_symbol)
-                print(element.text, flush=True)
-                tmp_symbol = TOP3_REVIEWS_PREFIX + str(i + 1) + TOP3_REVIEWS_POSTFIX
-                element = driver.find_element_by_xpath(tmp_symbol)
-                print(element.text, flush=True)
-                tmp_symbol = TOP3_RATE_PREFIX + str(i + 1) + TOP3_RATE_POSTFIX
-                element = driver.find_element_by_xpath(tmp_symbol)
-                print(element.get_attribute('title'), flush=True)
-                print((element.get_attribute('href')), flush=True)
-                tmp_symbol = TOP3_IMGSRC_PREFIX + str(i + 1) + TOP3_IMGSRC_POSTFIX
-                element = driver.find_element_by_xpath(tmp_symbol)
-                print(element.get_attribute('src'), flush=True)
+        for page in (0, 5):
+            url = "https://www.amazon.co.jp/gp/bestsellers/electronics/2285178051#" + str(page + 1)
+            driver.get(url)
+            amazonpage.random_sleep(3000, 5000)
+            print("Start gathering page: " + str(page + 1), flush=True)
+            if amazonpage.is_element_exsist(*TOP3_CONTAINER):
+                for i in range(0, 3):
+                    tmp_symbol = TOP3_PRICE_PREFIX + str(i + 1) + TOP3_PRICE_POSTFIX
+                    element = driver.find_element_by_xpath(tmp_symbol)
+                    print(element.text, flush=True)
+                    tmp_symbol = TOP3_REVIEWS_PREFIX + str(i + 1) + TOP3_REVIEWS_POSTFIX
+                    element = driver.find_element_by_xpath(tmp_symbol)
+                    print(element.text, flush=True)
+                    tmp_symbol = TOP3_RATE_PREFIX + str(i + 1) + TOP3_RATE_POSTFIX
+                    element = driver.find_element_by_xpath(tmp_symbol)
+                    print(element.get_attribute('title'), flush=True)
+                    print((element.get_attribute('href')), flush=True)
+                    tmp_symbol = TOP3_IMGSRC_PREFIX + str(i + 1) + TOP3_IMGSRC_POSTFIX
+                    element = driver.find_element_by_xpath(tmp_symbol)
+                    print(element.get_attribute('src'), flush=True)
         amazonpage.random_sleep(2000, 5000)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
