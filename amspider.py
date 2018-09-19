@@ -155,6 +155,8 @@ if __name__ == "__main__":
                 INVENTORY_TIPS = (By.XPATH, '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div[position()=1]/div/div/div/span')
                 element = driver.find_element(*INVENTORY_TIPS)
                 print(element.text)
+                ITEM_DELETE = (By.XPATH, '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div[position()=2]/div[position()=1]/div/div/div[position()=2]/div/span[position()=1]/span')
+                amazonasinpage.click(*ITEM_DELETE)
         else:
             print("222", flush=True)
     except NoSuchElementException as msg:
