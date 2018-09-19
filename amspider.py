@@ -54,12 +54,13 @@ def jp_node_gather():
     amazonpage = AmazonPage(driver)
     try:
         driver.get("https://www.amazon.co.jp/gp/bestsellers/electronics/2285178051")
+        amazonpage.random_sleep(3000, 5000)
+        print("Start gathering....", flush=True)
         if amazonpage.is_element_exsist(*TOP3_CONTAINER):
             for i in range(0, 3):
                 tmp_symbol = TOP3_PRICE_PREFIX + str(i) + TOP3_PRICE_POSTFIX
                 element = driver.find_element_by_xpath(tmp_symbol)
                 print(element.text, flush=True)
-
 
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
