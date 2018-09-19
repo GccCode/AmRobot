@@ -59,6 +59,7 @@ def jp_node_gather():
         if amazonpage.is_element_exsist(*TOP3_CONTAINER):
             for i in range(1, 3):
                 tmp_symbol = TOP3_PRICE_PREFIX + str(i) + TOP3_PRICE_POSTFIX
+                print(tmp_symbol)
                 element = driver.find_element_by_xpath(tmp_symbol)
                 print(element.text, flush=True)
         amazonpage.random_sleep(2000, 5000)
