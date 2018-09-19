@@ -146,6 +146,9 @@ if __name__ == "__main__":
                 ITEM_SELECT = (By.XPATH, '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]/select')
                 amazonasinpage.select(9, *ITEM_SELECT)
                 amazonasinpage.random_sleep(8000, 10000)
+                ITEM_INPUT = (By.XPATH, '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/input')
+                amazonasinpage.input("999", *ITEM_INPUT)
+                amazonasinpage.random_sleep(8000, 10000)
         else:
             print("222", flush=True)
     except NoSuchElementException as msg:
