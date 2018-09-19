@@ -55,7 +55,7 @@ def jp_node_gather():
     CRITICAL_IMGSRC_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     CRITICAL_IMGSRC_POSTFIX = ']/div[position()=1]/div/div[position()=1]/a/img'
     CRITICAL_RANK_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
-    CRITICAL_RANK_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=1]/span[position()=2]'
+    CRITICAL_RANK_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=1]/span[position()='
     NON_CRITICAL_CONTAINER = (By.ID, 'zg_nonCritical')
     NON_CRITICAL_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     NON_CRITICAL_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
@@ -99,7 +99,6 @@ def jp_node_gather():
                     tmp_symbol = CRITICAL_RANK_PREFIX + str(i + 1) + CRITICAL_RANK_POSTFIX + '2]'
                     if page != 0:
                         tmp_symbol = CRITICAL_RANK_PREFIX + str(i + 1) + CRITICAL_RANK_POSTFIX + '1]'
-                    print("Rank symbol is: " + tmp_symbol, flush=True)
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
                         print("Top Rank is: " + element.text.strip(), flush=True)
