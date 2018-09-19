@@ -48,6 +48,8 @@ def jp_node_gather():
     TOP3_CONTAINER = (By.ID, 'zg_critical')
     TOP3_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     TOP3_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
+    TOP3_REVIEWS_PREFIX = '//*[@id=\'zg_critical\']/div[position()=' \
+    TOP3_REVIEWS_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=2]'
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
@@ -59,7 +61,9 @@ def jp_node_gather():
         if amazonpage.is_element_exsist(*TOP3_CONTAINER):
             for i in range(0, 3):
                 tmp_symbol = TOP3_PRICE_PREFIX + str(i + 1) + TOP3_PRICE_POSTFIX
-                print(tmp_symbol)
+                element = driver.find_element_by_xpath(tmp_symbol)
+                print(element.text, flush=True)
+                tmp_symbol = TOP3_REVIEWS_PREFIX + str(i + 1) + TOP3_REVIEWS_POSTFIX
                 element = driver.find_element_by_xpath(tmp_symbol)
                 print(element.text, flush=True)
         amazonpage.random_sleep(2000, 5000)
