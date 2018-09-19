@@ -46,12 +46,19 @@ def getasinfromhref(template):
 
 def jp_node_gather():
     CRITICAL_CONTAINER = (By.ID, 'zg_critical')
+
     CRITICAL_FBA_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     CRITICAL_FBA_POSTFIX = '2]/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
-    CRITICAL_FBA_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
-    CRITICAL_FBA_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
-    CRITICAL_FBM_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
-    CRITICAL_FBM_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a/span/span'
+
+    CRITICAL_HAS_REVIEW_FBA_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_HAS_REVIEW_FBA_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
+    CRITICAL_HAS_REVIEW_FBM_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_HAS_REVIEW_FBM_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a/span/span'
+    CRITICAL_NO_REVIEW_FBA_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_NO_REVIEW_FBA_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=1]/span/span'
+    CRITICAL_NO_REVIEW_FBM_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_NO_REVIEW_FBM_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a/span/span'
+
     CRITICAL_REVIEWS_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     CRITICAL_REVIEWS_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=2]'
     CRITICAL_RATE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
@@ -83,24 +90,40 @@ def jp_node_gather():
             print("Start gathering page: <" + str(page + 1) + "> ##########", flush=True)
             if amazonpage.is_element_exsist(*CRITICAL_CONTAINER):
                 for i in range(0, 3):
-                    tmp_symbol = CRITICAL_FBA_PREFIX + str(i + 1) + CRITICAL_FBA_POSTFIX
-                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
-                        print("FBA", flush=True)
-                        tmp_symbol = CRITICAL_FBA_PRICE_PREFIX + str(i + 1) + CRITICAL_FBA_PRICE_POSTFIX
-                    else:
-                        print("FBM", flush=True)
-                        tmp_symbol = CRITICAL_FBM_PRICE_PREFIX + str(i + 1) + CRITICAL_FBM_PRICE_POSTFIX
-                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
-                        element = driver.find_element_by_xpath(tmp_symbol)
-                        print("Price is :" + element.text, flush=True)
                     tmp_symbol = CRITICAL_REVIEWS_PREFIX + str(i + 1) + CRITICAL_REVIEWS_POSTFIX
-                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                    has_review = amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol))
+                    if has_review:
                         element = driver.find_element_by_xpath(tmp_symbol)
                         print("Review Count is: " + element.text, flush=True)
                         tmp_symbol = CRITICAL_RATE_PREFIX + str(i + 1) + CRITICAL_RATE_POSTFIX
                         if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                             element = driver.find_element_by_xpath(tmp_symbol)
                             print("Rate is: " + element.get_attribute('title'), flush=True)
+                    if has_review:
+                        tmp_symbol = CRITICAL_FBA_PREFIX + str(i + 1) + CRITICAL_FBA_POSTFIX
+                        if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                            print("FBA", flush=True)
+                            tmp_symbol = CRITICAL_HAS_REVIEW_FBA_PRICE_PREFIX + str(i + 1) + CRITICAL_HAS_REVIEW_FBA_PRICE_POSTFIX
+                        else:
+                            print("FBM", flush=True)
+                            tmp_symbol = CRITICAL_HAS_REVIEW_FBM_PRICE_PREFIX + str(i + 1) + CRITICAL_HAS_REVIEW_FBM_PRICE_POSTFIX
+                        if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                            element = driver.find_element_by_xpath(tmp_symbol)
+                            print("Price is :" + element.text, flush=True)
+                    else:
+                        tmp_symbol = CRITICAL_FBA_PREFIX + str(i + 1) + CRITICAL_FBA_POSTFIX
+                        if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                            print("FBA", flush=True)
+                            tmp_symbol = CRITICAL_NO_REVIEW_FBA_PRICE_PREFIX + str(
+                                i + 1) + CRITICAL_NO_REVIEW_FBA_PRICE_POSTFIX
+                        else:
+                            print("FBM", flush=True)
+                            tmp_symbol = CRITICAL_NO_REVIEW_FBM_PRICE_PREFIX + str(
+                                i + 1) + CRITICAL_NO_REVIEW_FBM_PRICE_POSTFIX
+                        if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                            element = driver.find_element_by_xpath(tmp_symbol)
+                            print("Price is :" + element.text, flush=True)
+
                     tmp_symbol = CRITICAL_IMGSRC_PREFIX + str(i + 1) + CRITICAL_IMGSRC_POSTFIX
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
