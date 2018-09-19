@@ -129,7 +129,7 @@ if __name__ == "__main__":
     except NoSuchElementException as msg:
         status = False
         print("Except: NoSuchElementException", flush=True)
-    except:
-        print("xxxx", flush=True)
+    except Exception as e:
+        print(e, flush=True)
     finally:
         driver.quit()
