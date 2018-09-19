@@ -71,13 +71,13 @@ def test_get_inventory():
 
         amazonasinpage.add_cart(8000, 10000)
 
-        NO_THANKS = (By.ID, "attachSiNoCoverage")
-        VIEW_CART_BUTTON = (By.ID, "attach-sidesheet-view-cart-button")
+        NO_THANKS = (By.ID, 'attachSiNoCoverage')
+        VIEW_CART_BUTTON = (By.ID, 'attach-sidesheet-view-cart-button')
         if amazonasinpage.is_element_exsist(NO_THANKS):
             print("no thanks", flush=True)
         else:
             print("no no thanks")
-        
+
         amazonasinpage.random_sleep(1000, 2000)
         if amazonasinpage.is_element_exsist(VIEW_CART_BUTTON):
             print("llll", flush=True)

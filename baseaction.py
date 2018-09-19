@@ -31,6 +31,7 @@ class BaseAction(object):
             self.driver.find_element(*locator)
         except NoSuchElementException as msg:
             status = False
+            print("Except: NoSuchElementException", flush=True)
         finally:
             return status
 
