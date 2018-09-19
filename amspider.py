@@ -45,7 +45,8 @@ def getasinfromhref(template):
     return slotList[0]
 
 def jp_node_gather():
-    CRITICAL_TITLE = (By.XPATH, '//*[@id=\'zg_critical\']/div[position()=1]/div[position()=1]/div/div[position()=2]/a[position()=1]')
+    CRITICAL_TITLE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_TITLE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/a[position()=1]'
 
     CRITICAL_FBA_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     CRITICAL_FBA_POSTFIX = '2]/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
@@ -68,7 +69,8 @@ def jp_node_gather():
     CRITICAL_RANK_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     CRITICAL_RANK_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=1]/span[position()='
 
-    NON_CRITICAL_TITLE = (By.XPATH, '//*[@id=\'zg_nonCritical\']/div[position()=1]/div[position()=1]/div/div[position()=2]/a[position()=1]')
+    NON_CRITICAL_TITLE_PREFIX = '//*[@id=\'zg_nonCritical\']/div[position()'
+    NON_CRITICAL_TITLE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/a[position()=1]'
 
     NON_CRITICAL_FBA_PREFIX = '//*[@id=\'zg_nonCritical\']/div[position()='
     NON_CRITICAL_FBA_POSTFIX = '2]/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
@@ -102,8 +104,9 @@ def jp_node_gather():
             print("Start gathering page: <" + str(page + 1) + "> ##########", flush=True)
 
             for i in range(0, 3):
-                if amazonpage.is_element_exsist(*CRITICAL_TITLE):
-                    element = driver.find_element(*CRITICAL_TITLE)
+                tmp_symbol = CRITICAL_TITLE_PREFIX + str(i + 1) + CRITICAL_TITLE_POSTFIX
+                if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                    element = driver.find_element_by_xpath(tmp_symbol)
                     print("Asin is: " + getasinfromhref(element.get_attribute('href')), flush=True)
 
                 tmp_symbol = CRITICAL_REVIEWS_PREFIX + str(i + 1) + CRITICAL_REVIEWS_POSTFIX
@@ -157,8 +160,9 @@ def jp_node_gather():
                 print("** ------------------- **", flush=True)
 
             for i in range(0, 17):
-                if amazonpage.is_element_exsist(*NON_CRITICAL_TITLE):
-                    element = driver.find_element(*NON_CRITICAL_TITLE)
+                tmp_symbol = NON_CRITICAL_TITLE_PREFIX + str(i + 1) + NON_CRITICAL_TITLE_POSTFIX
+                if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                    element = driver.find_element_by_xpath(tmp_symbol)
                     print("Asin is: " + getasinfromhref(element.get_attribute('href')), flush=True)
 
                 tmp_symbol = NON_CRITICAL_REVIEWS_PREFIX + str(i + 1) + NON_CRITICAL_REVIEWS_POSTFIX
