@@ -45,17 +45,28 @@ def getasinfromhref(template):
     return slotList[0]
 
 def jp_node_gather():
-    TOP3_CONTAINER = (By.ID, 'zg_critical')
-    TOP3_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
-    TOP3_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
-    TOP3_REVIEWS_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
-    TOP3_REVIEWS_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=2]'
-    TOP3_RATE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
-    TOP3_RATE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=1]'
-    TOP3_IMGSRC_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
-    TOP3_IMGSRC_POSTFIX = ']/div[position()=1]/div/div[position()=1]/a/img'
-    TOP3_RANK_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
-    TOP3_RANK_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=1]/span[position()=2]'
+    CRITICAL_CONTAINER = (By.ID, 'zg_critical')
+    CRITICAL_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
+    CRITICAL_REVIEWS_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_REVIEWS_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=2]'
+    CRITICAL_RATE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_RATE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=1]'
+    CRITICAL_IMGSRC_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_IMGSRC_POSTFIX = ']/div[position()=1]/div/div[position()=1]/a/img'
+    CRITICAL_RANK_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    CRITICAL_RANK_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=1]/span[position()=2]'
+    NON_CRITICAL_CONTAINER = (By.ID, 'zg_nonCritical')
+    NON_CRITICAL_PRICE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    NON_CRITICAL_PRICE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=3]/a[position()=1]/span/span'
+    NON_CRITICAL_REVIEWS_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    NON_CRITICAL_REVIEWS_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=2]'
+    NON_CRITICAL_RATE_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    NON_CRITICAL_RATE_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=2]/a[position()=1]'
+    NON_CRITICAL_IMGSRC_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    NON_CRITICAL_IMGSRC_POSTFIX = ']/div[position()=1]/div/div[position()=1]/a/img'
+    NON_CRITICAL_RANK_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
+    NON_CRITICAL_RANK_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=1]/span[position()=2]'
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
@@ -66,24 +77,29 @@ def jp_node_gather():
             driver.get(url)
             amazonpage.random_sleep(3000, 5000)
             print("Start gathering page: " + str(page + 1), flush=True)
-            if amazonpage.is_element_exsist(*TOP3_CONTAINER):
+            if amazonpage.is_element_exsist(*CRITICAL_CONTAINER):
                 for i in range(0, 3):
-                    tmp_symbol = TOP3_PRICE_PREFIX + str(i + 1) + TOP3_PRICE_POSTFIX
-                    element = driver.find_element_by_xpath(tmp_symbol)
-                    print(element.text, flush=True)
-                    tmp_symbol = TOP3_REVIEWS_PREFIX + str(i + 1) + TOP3_REVIEWS_POSTFIX
-                    element = driver.find_element_by_xpath(tmp_symbol)
-                    print(element.text, flush=True)
-                    tmp_symbol = TOP3_RATE_PREFIX + str(i + 1) + TOP3_RATE_POSTFIX
-                    element = driver.find_element_by_xpath(tmp_symbol)
-                    print(element.get_attribute('title'), flush=True)
-                    print((element.get_attribute('href')), flush=True)
-                    tmp_symbol = TOP3_IMGSRC_PREFIX + str(i + 1) + TOP3_IMGSRC_POSTFIX
-                    element = driver.find_element_by_xpath(tmp_symbol)
-                    print(element.get_attribute('src'), flush=True)
-                    tmp_symbol = TOP3_RANK_PREFIX + str(i + 1) + TOP3_RANK_POSTFIX
-                    element = driver.find_element_by_xpath(tmp_symbol)
-                    print(element.text.strip(), flush=True)
+                    tmp_symbol = CRITICAL_PRICE_PREFIX + str(i + 1) + CRITICAL_PRICE_POSTFIX
+                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                        element = driver.find_element_by_xpath(tmp_symbol)
+                        print(element.text, flush=True)
+                    tmp_symbol = CRITICAL_REVIEWS_PREFIX + str(i + 1) + CRITICAL_REVIEWS_POSTFIX
+                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                        element = driver.find_element_by_xpath(tmp_symbol)
+                        print(element.text, flush=True)
+                    tmp_symbol = CRITICAL_RATE_PREFIX + str(i + 1) + CRITICAL_RATE_POSTFIX
+                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                        element = driver.find_element_by_xpath(tmp_symbol)
+                        print(element.get_attribute('title'), flush=True)
+                        print((element.get_attribute('href')), flush=True)
+                    tmp_symbol = CRITICAL_IMGSRC_PREFIX + str(i + 1) + CRITICAL_IMGSRC_POSTFIX
+                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                        element = driver.find_element_by_xpath(tmp_symbol)
+                        print(element.get_attribute('src'), flush=True)
+                    tmp_symbol = CRITICAL_RANK_PREFIX + str(i + 1) + CRITICAL_RANK_POSTFIX
+                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                        element = driver.find_element_by_xpath(tmp_symbol)
+                        print(element.text.strip(), flush=True)
         amazonpage.random_sleep(2000, 5000)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
