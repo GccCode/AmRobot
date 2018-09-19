@@ -57,8 +57,8 @@ def jp_node_gather():
         amazonpage.random_sleep(3000, 5000)
         print("Start gathering....", flush=True)
         if amazonpage.is_element_exsist(*TOP3_CONTAINER):
-            for i in range(1, 3):
-                tmp_symbol = TOP3_PRICE_PREFIX + str(i) + TOP3_PRICE_POSTFIX
+            for i in range(0, 3):
+                tmp_symbol = TOP3_PRICE_PREFIX + str(i + 1) + TOP3_PRICE_POSTFIX
                 print(tmp_symbol)
                 element = driver.find_element_by_xpath(tmp_symbol)
                 print(element.text, flush=True)
