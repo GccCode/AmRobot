@@ -68,8 +68,20 @@ def test_get_inventory():
             print("qa_count not exsist...", flush=True)
 
         amazonasinpage.add_cart(8000, 10000)
+
+        NO_THANKS = (By.ID, "attachSiNoCoverage")
+        VIEW_CART_BUTTON = (By.ID, "attach-sidesheet-view-cart-button")
+        if amazonasinpage.is_element_exsist(NO_THANKS):
+            print("no thanks", flush=True)
+        else:
+            print("no no thanks")
+
+        if amazonasinpage.is_element_exsist(VIEW_CART_BUTTON):
+            print("llll", flush=True)
+        else:
+            print("222", flush=True)
     except:
-        print("xxxx")
+        print("xxxx", flush=True)
     finally:
         driver.quit()
 
