@@ -118,6 +118,7 @@ if __name__ == "__main__":
 
         NO_THANKS = (By.ID, 'attachSiNoCoverage')
         VIEW_CART_BUTTON = (By.ID, 'attach-sidesheet-view-cart-button')
+        VIEW_CART_BUTTON1 = (By.ID, 'hlb-view-cart')
         if amazonasinpage.is_element_exsist(*NO_THANKS):
             print("no thanks", flush=True)
         else:
@@ -126,6 +127,16 @@ if __name__ == "__main__":
         amazonasinpage.random_sleep(1000, 2000)
         if amazonasinpage.is_element_exsist(*VIEW_CART_BUTTON):
             amazonasinpage.click(*VIEW_CART_BUTTON)
+            amazonasinpage.random_sleep(8000, 10000)
+            PRODUCT_ITEM = (By.XPATH, '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]')
+            if amazonasinpage.is_element_exsist(*PRODUCT_ITEM):
+                print("product item ok..", flush=True)
+                element = driver.find_element(*PRODUCT_ITEM)
+                print("12121", flush=True)
+                ITEM_SELECT = (By.XPATH, './/select')
+                select = element.find_element(*ITEM_SELECT)
+        elif amazonasinpage.is_element_exsist(*VIEW_CART_BUTTON1):
+            amazonasinpage.click(*VIEW_CART_BUTTON1)
             amazonasinpage.random_sleep(8000, 10000)
             PRODUCT_ITEM = (By.XPATH, '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]')
             if amazonasinpage.is_element_exsist(*PRODUCT_ITEM):
