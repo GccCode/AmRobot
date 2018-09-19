@@ -3,6 +3,8 @@
 
 from selenium import webdriver
 import re
+import sys
+import io
 from selenium.webdriver.common.by import By
 from amazonasinpage import AmazonAsinPage
 from selenium.common.exceptions import NoSuchElementException
@@ -92,6 +94,7 @@ def test_get_inventory():
         driver.quit()
 
 if __name__ == "__main__":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
