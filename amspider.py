@@ -76,7 +76,7 @@ def jp_node_gather():
             url = "https://www.amazon.co.jp/gp/bestsellers/electronics/2285178051#" + str(page + 1)
             driver.get(url)
             amazonpage.random_sleep(3000, 5000)
-            print("Start gathering page: " + str(page + 1) + "##########", flush=True)
+            print("Start gathering page: <" + str(page + 1) + "> ##########", flush=True)
             if amazonpage.is_element_exsist(*CRITICAL_CONTAINER):
                 for i in range(0, 3):
                     # tmp_symbol = CRITICAL_PRICE_PREFIX + str(i + 1) + CRITICAL_PRICE_POSTFIX
@@ -99,6 +99,7 @@ def jp_node_gather():
                     tmp_symbol = CRITICAL_RANK_PREFIX + str(i + 1) + CRITICAL_RANK_POSTFIX + '2]'
                     if page != 0:
                         tmp_symbol = CRITICAL_RANK_PREFIX + str(i + 1) + CRITICAL_RANK_POSTFIX + '1]'
+                    print("Rank symbol is: " + tmp_symbol, flush=True)
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
                         print("Top Rank is: " + element.text.strip(), flush=True)
