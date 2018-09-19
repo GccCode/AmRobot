@@ -103,7 +103,7 @@ def jp_node_gather():
 
             for i in range(0, 3):
                 if amazonpage.is_element_exsist(*CRITICAL_TITLE):
-                    element = driver.find_element_by_xpath(*CRITICAL_TITLE)
+                    element = driver.find_element(*CRITICAL_TITLE)
                     print("Asin is: " + getasinfromhref(element.get_attribute('href')), flush=True)
 
                 tmp_symbol = CRITICAL_REVIEWS_PREFIX + str(i + 1) + CRITICAL_REVIEWS_POSTFIX
@@ -158,7 +158,7 @@ def jp_node_gather():
 
             for i in range(0, 17):
                 if amazonpage.is_element_exsist(*NON_CRITICAL_TITLE):
-                    element = driver.find_element_by_xpath(*NON_CRITICAL_TITLE)
+                    element = driver.find_element(*NON_CRITICAL_TITLE)
                     print("Asin is: " + getasinfromhref(element.get_attribute('href')), flush=True)
 
                 tmp_symbol = NON_CRITICAL_REVIEWS_PREFIX + str(i + 1) + NON_CRITICAL_REVIEWS_POSTFIX
