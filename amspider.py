@@ -193,9 +193,8 @@ def jp_node_gather():
                         element = driver.find_element_by_xpath(tmp_symbol)
                         print("ImgSrc is: " + element.get_attribute('src'), flush=True)
 
-                    tmp_symbol = NON_CRITICAL_RANK_PREFIX + str(i + 1) + NON_CRITICAL_RANK_POSTFIX + '2]'
-                    if page != 0:
-                        tmp_symbol = NON_CRITICAL_RANK_PREFIX + str(i + 1) + NON_CRITICAL_RANK_POSTFIX + '1]'
+
+                    tmp_symbol = NON_CRITICAL_RANK_PREFIX + str(i + 1) + NON_CRITICAL_RANK_POSTFIX + '1]'
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
                         print("Top Rank is: " + element.text.strip(), flush=True)
