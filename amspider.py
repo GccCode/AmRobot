@@ -76,14 +76,13 @@ def test_node_gather():
     finally:
         driver.quit()
 
-def test_get_inventory():
+def test_get_inventory_us():
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
     try:
-        driver.get("https://www.amazon.co.jp/dp/B07BGXF6KF")
         # driver.get("https://www.amazon.com/dp/B078H7VY19")
-        # driver.get("https://www.amazon.com/dp/B079NNC8N8")
+        driver.get("https://www.amazon.com/dp/B079NNC8N8")
         amazonasinpage = AmazonAsinPage(driver)
         if amazonasinpage.is_element_exsist(*FBA_FLAG):
             print("product is fba...", flush=True)
@@ -116,24 +115,19 @@ def test_get_inventory():
             amazonasinpage.click(*VIEW_CART_BUTTON1)
             amazonasinpage.random_sleep(8000, 10000)
 
+        amazonasinpage.select(9, *ITEM_SELECT_US)
+        amazonasinpage.random_sleep(8000, 10000)
 
-        if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_US):
-            print("product item ok..", flush=True)
-            element = driver.find_element(*PRODUCT_ITEM_US)
+        amazonasinpage.input("999", *ITEM_INPUT_US)
+        amazonasinpage.random_sleep(8000, 10000)
 
-            amazonasinpage.select(9, *ITEM_SELECT_US)
-            amazonasinpage.random_sleep(8000, 10000)
+        amazonasinpage.click(*ITEM_SUBMIT_US)
+        amazonasinpage.random_sleep(8000, 10000)
 
-            amazonasinpage.input("999", *ITEM_INPUT_US)
-            amazonasinpage.random_sleep(8000, 10000)
+        element = driver.find_element(*INVENTORY_TIPS_US)
+        print(element.text)
 
-            amazonasinpage.click(*ITEM_SUBMIT_US)
-            amazonasinpage.random_sleep(8000, 10000)
-
-            element = driver.find_element(*INVENTORY_TIPS_US)
-            print(element.text)
-
-            amazonasinpage.click(*ITEM_DELETE_US)
+        amazonasinpage.click(*ITEM_DELETE_US)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
     except Exception as e:
@@ -180,10 +174,6 @@ def test_get_inventory_jp():
             amazonasinpage.click(*VIEW_CART_BUTTON1)
             amazonasinpage.random_sleep(8000, 10000)
 
-        # if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_JP):
-        #     print("product item ok..", flush=True)
-        #     element = driver.find_element(*PRODUCT_ITEM_JP)
-
         amazonasinpage.select(9, *ITEM_SELECT_JP)
         amazonasinpage.random_sleep(8000, 10000)
 
@@ -207,4 +197,4 @@ def test_get_inventory_jp():
 
 if __name__ == "__main__":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    test_get_inventory_jp()
+    test_get_inventory_us()
