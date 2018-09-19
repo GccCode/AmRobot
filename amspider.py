@@ -55,8 +55,7 @@ def test_get_inventory():
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
     try:
-        driver.get("https://www.amazon.co.jp/dp/B07BGXF6KF")
-        # driver.get("https://www.amazon.com/dp/B078H7VY19")
+        driver.get("https://www.amazon.com/dp/B078H7VY19")
         amazonasinpage = AmazonAsinPage(driver)
         if amazonasinpage.is_element_exsist(FBA_FLAG):
             print("product is fba...", flush=True)
@@ -100,7 +99,8 @@ if __name__ == "__main__":
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
     try:
-        driver.get("https://www.amazon.com/dp/B078H7VY19")
+        driver.get("https://www.amazon.co.jp/dp/B07BGXF6KF")
+        # driver.get("https://www.amazon.com/dp/B078H7VY19")
         # driver.get("https://www.amazon.com/dp/B079NNC8N8")
         amazonasinpage = AmazonAsinPage(driver)
         if amazonasinpage.is_element_exsist(*FBA_FLAG):
