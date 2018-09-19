@@ -110,7 +110,7 @@ if __name__ == "__main__":
         if amazonasinpage.is_element_exsist(QA_COUNT):
             # element = driver.find_element_by_id("askATFLink")
             # element.find_element_by_xpath(".//span")
-            element = driver.find_element(QA_COUNT1)
+            element = driver.find_element(*QA_COUNT1)
             print("aaa", flush=True)
             # print(element.text)
         else:
