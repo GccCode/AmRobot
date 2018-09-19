@@ -105,7 +105,6 @@ def jp_node_gather():
 
             for i in range(0, 3):
                 tmp_symbol = CRITICAL_TITLE_PREFIX + str(i + 1) + CRITICAL_TITLE_POSTFIX
-                print(tmp_symbol)
                 if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                     element = driver.find_element_by_xpath(tmp_symbol)
                     print("Asin is: " + getasinfromhref(element.get_attribute('href')), flush=True)
@@ -162,7 +161,6 @@ def jp_node_gather():
 
             for i in range(0, 17):
                 tmp_symbol = NON_CRITICAL_TITLE_PREFIX + str(i + 1) + NON_CRITICAL_TITLE_POSTFIX
-                print(tmp_symbol)
                 if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                     element = driver.find_element_by_xpath(tmp_symbol)
                     print("Asin is: " + getasinfromhref(element.get_attribute('href')), flush=True)
