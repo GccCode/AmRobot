@@ -107,12 +107,11 @@ if __name__ == "__main__":
             print("product is fbm or not exsist...", flush=True)
 
         amazonasinpage.random_sleep(1000, 2000)
-        if amazonasinpage.is_element_exsist(QA_COUNT):
+        if amazonasinpage.is_element_exsist(QA_COUNT1):
             # element = driver.find_element_by_id("askATFLink")
             # element.find_element_by_xpath(".//span")
             element = driver.find_element(*QA_COUNT1)
-            print("aaa", flush=True)
-            # print(element.text)
+            print(element.text)
         else:
             print("qa_count not exsist...", flush=True)
 
@@ -127,7 +126,8 @@ if __name__ == "__main__":
 
         amazonasinpage.random_sleep(1000, 2000)
         if amazonasinpage.is_element_exsist(VIEW_CART_BUTTON):
-            print("llll", flush=True)
+            amazonasinpage.click(VIEW_CART_BUTTON)
+            amazonasinpage.random_sleep(8000, 10000)
         else:
             print("222", flush=True)
     except NoSuchElementException as msg:
