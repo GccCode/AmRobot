@@ -99,7 +99,8 @@ if __name__ == "__main__":
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
     try:
-        driver.get("https://www.amazon.com/dp/B078H7VY19")
+        #driver.get("https://www.amazon.com/dp/B078H7VY19")
+        driver.get("https://www.amazon.com/dp/B079NNC8N8")
         amazonasinpage = AmazonAsinPage(driver)
         if amazonasinpage.is_element_exsist(*FBA_FLAG):
             print("product is fba...", flush=True)
@@ -108,8 +109,6 @@ if __name__ == "__main__":
 
         amazonasinpage.random_sleep(1000, 2000)
         if amazonasinpage.is_element_exsist(*QA_COUNT1):
-            # element = driver.find_element_by_id("askATFLink")
-            # element.find_element_by_xpath(".//span")
             element = driver.find_element(*QA_COUNT1)
             print(element.text)
         else:
@@ -128,10 +127,16 @@ if __name__ == "__main__":
         if amazonasinpage.is_element_exsist(*VIEW_CART_BUTTON):
             amazonasinpage.click(*VIEW_CART_BUTTON)
             amazonasinpage.random_sleep(8000, 10000)
+            PRODUCT_ITEM = (By.XPATH, '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]')
+            if amazonasinpage.is_element_exsist(*PRODUCT_ITEM):
+                print("product item ok..", flush=True)
+                element = driver.find_element(*PRODUCT_ITEM)
+                print("12121", flush=True)
+                ITEM_SELECT = (By.XPATH, './//select')
+                select = element.find_element(*ITEM_SELECT)
         else:
             print("222", flush=True)
     except NoSuchElementException as msg:
-        status = False
         print("Except: NoSuchElementException", flush=True)
     except Exception as e:
         print(e, flush=True)
