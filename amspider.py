@@ -101,13 +101,13 @@ if __name__ == "__main__":
     try:
         driver.get("https://www.amazon.com/dp/B078H7VY19")
         amazonasinpage = AmazonAsinPage(driver)
-        if amazonasinpage.is_element_exsist(FBA_FLAG):
+        if amazonasinpage.is_element_exsist(*FBA_FLAG):
             print("product is fba...", flush=True)
         else:
             print("product is fbm or not exsist...", flush=True)
 
         amazonasinpage.random_sleep(1000, 2000)
-        if amazonasinpage.is_element_exsist(QA_COUNT1):
+        if amazonasinpage.is_element_exsist(*QA_COUNT1):
             # element = driver.find_element_by_id("askATFLink")
             # element.find_element_by_xpath(".//span")
             element = driver.find_element(*QA_COUNT1)
@@ -119,14 +119,14 @@ if __name__ == "__main__":
 
         NO_THANKS = (By.ID, 'attachSiNoCoverage')
         VIEW_CART_BUTTON = (By.ID, 'attach-sidesheet-view-cart-button')
-        if amazonasinpage.is_element_exsist(NO_THANKS):
+        if amazonasinpage.is_element_exsist(*NO_THANKS):
             print("no thanks", flush=True)
         else:
             print("no no thanks")
 
         amazonasinpage.random_sleep(1000, 2000)
-        if amazonasinpage.is_element_exsist(VIEW_CART_BUTTON):
-            amazonasinpage.click(VIEW_CART_BUTTON)
+        if amazonasinpage.is_element_exsist(*VIEW_CART_BUTTON):
+            amazonasinpage.click(*VIEW_CART_BUTTON)
             amazonasinpage.random_sleep(8000, 10000)
         else:
             print("222", flush=True)
