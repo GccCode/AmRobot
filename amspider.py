@@ -132,7 +132,7 @@ if __name__ == "__main__":
                 print("product item ok..", flush=True)
                 element = driver.find_element(*PRODUCT_ITEM)
                 print("12121", flush=True)
-                ITEM_SELECT = (By.XPATH, './//select')
+                ITEM_SELECT = (By.XPATH, './/select')
                 select = element.find_element(*ITEM_SELECT)
         else:
             print("222", flush=True)
