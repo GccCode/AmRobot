@@ -117,23 +117,23 @@ def test_get_inventory():
             amazonasinpage.random_sleep(8000, 10000)
 
 
-        # if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_US):
-        #     print("product item ok..", flush=True)
-        #     element = driver.find_element(*PRODUCT_ITEM_US)
+        if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_US):
+            print("product item ok..", flush=True)
+            element = driver.find_element(*PRODUCT_ITEM_US)
 
-        amazonasinpage.select(9, *ITEM_SELECT_US)
-        amazonasinpage.random_sleep(8000, 10000)
+            amazonasinpage.select(9, *ITEM_SELECT_US)
+            amazonasinpage.random_sleep(8000, 10000)
 
-        amazonasinpage.input("999", *ITEM_INPUT_US)
-        amazonasinpage.random_sleep(8000, 10000)
+            amazonasinpage.input("999", *ITEM_INPUT_US)
+            amazonasinpage.random_sleep(8000, 10000)
 
-        amazonasinpage.click(*ITEM_SUBMIT_US)
-        amazonasinpage.random_sleep(8000, 10000)
+            amazonasinpage.click(*ITEM_SUBMIT_US)
+            amazonasinpage.random_sleep(8000, 10000)
 
-        element = driver.find_element(*INVENTORY_TIPS_US)
-        print(element.text)
+            element = driver.find_element(*INVENTORY_TIPS_US)
+            print(element.text)
 
-        amazonasinpage.click(*ITEM_DELETE_US)
+            amazonasinpage.click(*ITEM_DELETE_US)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
     except Exception as e:
@@ -180,23 +180,23 @@ def test_get_inventory_jp():
             amazonasinpage.click(*VIEW_CART_BUTTON1)
             amazonasinpage.random_sleep(8000, 10000)
 
-        if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_JP):
-            print("product item ok..", flush=True)
-            element = driver.find_element(*PRODUCT_ITEM_JP)
+        # if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_JP):
+        #     print("product item ok..", flush=True)
+        #     element = driver.find_element(*PRODUCT_ITEM_JP)
 
-            amazonasinpage.select(9, *ITEM_SELECT_JP)
-            amazonasinpage.random_sleep(8000, 10000)
+        amazonasinpage.select(9, *ITEM_SELECT_JP)
+        amazonasinpage.random_sleep(8000, 10000)
 
-            amazonasinpage.input("999", *ITEM_INPUT_JP)
-            amazonasinpage.random_sleep(8000, 10000)
+        amazonasinpage.input("999", *ITEM_INPUT_JP)
+        amazonasinpage.random_sleep(8000, 10000)
 
-            amazonasinpage.click(*ITEM_SUBMIT_JP)
-            amazonasinpage.random_sleep(8000, 10000)
+        amazonasinpage.click(*ITEM_SUBMIT_JP)
+        amazonasinpage.random_sleep(8000, 10000)
 
-            element = driver.find_element(*INVENTORY_TIPS_JP)
-            print(element.text)
+        element = driver.find_element(*INVENTORY_TIPS_JP)
+        print(element.text)
 
-            amazonasinpage.click(*ITEM_DELETE_JP)
+        amazonasinpage.click(*ITEM_DELETE_JP)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
     except Exception as e:
