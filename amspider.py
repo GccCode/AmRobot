@@ -133,8 +133,25 @@ if __name__ == "__main__":
                 print("product item ok..", flush=True)
                 element = driver.find_element(*PRODUCT_ITEM)
                 print("12121", flush=True)
-                ITEM_SELECT = (By.XPATH, './/select')
-                select = element.find_element(*ITEM_SELECT)
+                ITEM_SELECT = (By.XPATH,
+                               '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/span[position()=1]/select')
+                amazonasinpage.select(9, *ITEM_SELECT)
+                amazonasinpage.random_sleep(8000, 10000)
+                ITEM_INPUT = (By.XPATH,
+                              '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/input')
+                amazonasinpage.input("999", *ITEM_INPUT)
+                amazonasinpage.random_sleep(8000, 10000)
+                ITEM_SUBMIT = (By.XPATH,
+                               '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div/div[position()=3]/div/div[position()=1]/div/span/span')
+                amazonasinpage.click(*ITEM_SUBMIT)
+                amazonasinpage.random_sleep(8000, 10000)
+                INVENTORY_TIPS = (By.XPATH,
+                                  '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div[position()=1]/div/div/div/span')
+                element = driver.find_element(*INVENTORY_TIPS)
+                print(element.text)
+                ITEM_DELETE = (By.XPATH,
+                               '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div[position()=2]/div[position()=1]/div/div/div[position()=2]/div/span[position()=1]/span')
+                amazonasinpage.click(*ITEM_DELETE)
         elif amazonasinpage.is_element_exsist(*VIEW_CART_BUTTON1):
             amazonasinpage.click(*VIEW_CART_BUTTON1)
             amazonasinpage.random_sleep(8000, 10000)
