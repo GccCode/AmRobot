@@ -67,7 +67,7 @@ def test_get_inventory():
         else:
             print("qa_count not exsist...", flush=True)
 
-        amazonasinpage.add_cart(5000, 8000)
+        amazonasinpage.add_cart(8000, 10000)
     except:
         print("xxxx")
     finally:
