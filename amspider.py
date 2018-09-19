@@ -154,7 +154,7 @@ if __name__ == "__main__":
                 amazonasinpage.random_sleep(8000, 10000)
                 INVENTORY_TIPS = (By.XPATH, '//*[@id=\'activeCartViewForm\']/div[position()=2]/div[position()=1]/div[position()=4]/div[position()=1]/div/div/div/span')
                 element.find_element(*INVENTORY_TIPS)
-                print(element)
+                print(element.text)
         else:
             print("222", flush=True)
     except NoSuchElementException as msg:
