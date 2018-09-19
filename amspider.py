@@ -10,15 +10,15 @@ from amazonasinpage import AmazonAsinPage
 from selenium.common.exceptions import NoSuchElementException
 
 
-item_prefix = "//*[@id='zg-ordered-list']/li[position()="
+item_prefix = "//*[@id=\'zg-ordered-list\']/li[position()="
 item_postfix = "]/span"
 price_symbol = ".//div/span/div[position()=2]/a[position()=1]/span/span"
 review_symbol = ".//div/span/div[position()=1]/a[position()=2]"
 href_symbol = ".//div/span/div[position()=2]/a[position()=1]"
 rate_symbol = ".//div/span/div[position()=1]/a"
-BUYER_COUNT = (By.XPATH, "//*[@id='olp_feature_div']/div/span[position()=1]/a")
+BUYER_COUNT = (By.XPATH, "//*[@id=\'olp_feature_div\']/div/span[position()=1]/a")
 QA_COUNT = (By.ID, "askATFLink")
-QA_COUNT1 = (By.XPATH, "//*[@id='askATFLink']/span")
+QA_COUNT1 = (By.XPATH, "//*[@id=\'askATFLink\']/span")
 FBA_FLAG = (By.ID, "SSOFpopoverLink")
 
 def getasinfromhref(template):
