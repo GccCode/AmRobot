@@ -66,7 +66,7 @@ def jp_node_gather():
     NON_CRITICAL_IMGSRC_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
     NON_CRITICAL_IMGSRC_POSTFIX = ']/div[position()=1]/div/div[position()=1]/a/img'
     NON_CRITICAL_RANK_PREFIX = '//*[@id=\'zg_critical\']/div[position()='
-    NON_CRITICAL_RANK_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=1]/span[position()=2]'
+    NON_CRITICAL_RANK_POSTFIX = ']/div[position()=1]/div/div[position()=2]/div[position()=1]/span[position()='
     driver = webdriver.Chrome()
     driver.set_page_load_timeout(60)
     driver.set_script_timeout(60)
@@ -76,7 +76,7 @@ def jp_node_gather():
             url = "https://www.amazon.co.jp/gp/bestsellers/electronics/2285178051#" + str(page + 1)
             driver.get(url)
             amazonpage.random_sleep(3000, 5000)
-            print("Start gathering page: " + str(page + 1), flush=True)
+            print("Start gathering page: " + str(page + 1) + "##########", flush=True)
             if amazonpage.is_element_exsist(*CRITICAL_CONTAINER):
                 for i in range(0, 3):
                     # tmp_symbol = CRITICAL_PRICE_PREFIX + str(i + 1) + CRITICAL_PRICE_POSTFIX
@@ -87,15 +87,18 @@ def jp_node_gather():
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
                         print("Review Count is: " + element.text, flush=True)
-                    tmp_symbol = CRITICAL_RATE_PREFIX + str(i + 1) + CRITICAL_RATE_POSTFIX
-                    if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
-                        element = driver.find_element_by_xpath(tmp_symbol)
-                        print("Rate is: " + element.get_attribute('title'), flush=True)
+                        tmp_symbol = CRITICAL_RATE_PREFIX + str(i + 1) + CRITICAL_RATE_POSTFIX
+                        if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
+                            element = driver.find_element_by_xpath(tmp_symbol)
+                            print("Rate is: " + element.get_attribute('title'), flush=True)
                     tmp_symbol = CRITICAL_IMGSRC_PREFIX + str(i + 1) + CRITICAL_IMGSRC_POSTFIX
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
                         print("ImgSrc is: " + element.get_attribute('src'), flush=True)
-                    tmp_symbol = CRITICAL_RANK_PREFIX + str(i + 1) + CRITICAL_RANK_POSTFIX
+                    if page == 0:
+                        tmp_symbol = CRITICAL_RANK_PREFIX + str(i + 1) + CRITICAL_RANK_POSTFIX + '2]'
+                    else:
+                        tmp_symbol = CRITICAL_RANK_PREFIX + str(i + 1) + CRITICAL_RANK_POSTFIX + '1]'
                     if amazonpage.is_element_exsist(*(By.XPATH, tmp_symbol)):
                         element = driver.find_element_by_xpath(tmp_symbol)
                         print("Top Rank is: " + element.text.strip(), flush=True)
