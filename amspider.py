@@ -117,23 +117,23 @@ def test_get_inventory():
             amazonasinpage.random_sleep(8000, 10000)
 
 
-        if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_US):
-            print("product item ok..", flush=True)
-            element = driver.find_element(*PRODUCT_ITEM_US)
+        # if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_US):
+        #     print("product item ok..", flush=True)
+        #     element = driver.find_element(*PRODUCT_ITEM_US)
 
-            amazonasinpage.select(9, *ITEM_SELECT_US)
-            amazonasinpage.random_sleep(8000, 10000)
+        amazonasinpage.select(9, *ITEM_SELECT_US)
+        amazonasinpage.random_sleep(8000, 10000)
 
-            amazonasinpage.input("999", *ITEM_INPUT_US)
-            amazonasinpage.random_sleep(8000, 10000)
+        amazonasinpage.input("999", *ITEM_INPUT_US)
+        amazonasinpage.random_sleep(8000, 10000)
 
-            amazonasinpage.click(*ITEM_SUBMIT_US)
-            amazonasinpage.random_sleep(8000, 10000)
+        amazonasinpage.click(*ITEM_SUBMIT_US)
+        amazonasinpage.random_sleep(8000, 10000)
 
-            element = driver.find_element(*INVENTORY_TIPS_US)
-            print(element.text)
+        element = driver.find_element(*INVENTORY_TIPS_US)
+        print(element.text)
 
-            amazonasinpage.click(*ITEM_DELETE_US)
+        amazonasinpage.click(*ITEM_DELETE_US)
     except NoSuchElementException as msg:
         print("Except: NoSuchElementException", flush=True)
     except Exception as e:
@@ -148,8 +148,6 @@ def test_get_inventory_jp():
     driver.set_script_timeout(60)
     try:
         driver.get("https://www.amazon.co.jp/dp/B07BGXF6KF")
-        # driver.get("https://www.amazon.com/dp/B078H7VY19")
-        # driver.get("https://www.amazon.com/dp/B079NNC8N8")
         amazonasinpage = AmazonAsinPage(driver)
         if amazonasinpage.is_element_exsist(*FBA_FLAG):
             print("product is fba...", flush=True)
@@ -181,7 +179,6 @@ def test_get_inventory_jp():
         elif amazonasinpage.is_element_exsist(*VIEW_CART_BUTTON1):
             amazonasinpage.click(*VIEW_CART_BUTTON1)
             amazonasinpage.random_sleep(8000, 10000)
-
 
         if amazonasinpage.is_element_exsist(*PRODUCT_ITEM_JP):
             print("product item ok..", flush=True)
